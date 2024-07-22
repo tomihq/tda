@@ -39,5 +39,68 @@
 \end{figure}
 
 \newpage
+\section*{Complejidad Computacional (repaso)}
+\subsection*{Problema}
+Descripción de los datos de entrada y la respuesta a proporcionar para cada uno de los datos de entrada.
+\subsection*{Instancia de un Problema}
+Es un juego válido de datos de entrada.
+\subsection*{Máquina RAM}
+Supongamos una Máquina RAM. 
+\begin{itemize}
+    \item La memoria está dada por una sucesión de celdas numeradas. Cada \textbf{celda} puede almacenar un valor de \textbf{b bits}. 
+    \item Supondremos habitualmente que esos \textbf{b bits} de cada celda están fijos, y suponemos que todos los datos que maneja el algoritmo se pueden almacenar con \textbf{b bits}. 
+    \textbf{Ej.}: Lo que quiere decir esto es que suponemos que todas las celdas son de 8 bits, y los datos que maneja el algoritmo también son de 8 bits.
+    \item Se tiene un programa imperativo que NO está almacenado en memoria que está compuesto por asignaciones y las estructuras de control habituales.
+    \item Las asignaciones acceden a las celdas de memoria y realizan las operaciones estándar sobre los tipos de datos primitivos habituales.
+\end{itemize}
+Cada una de las instrucciones que se ejecuten tienen un tiempo de ejecución asociado
+\begin{itemize}
+    \item El acceso a cualquier celda de memoria, tanto lectura como escritura es O(1).
+    \item Las asignaciones y el manejo de las estructuras de control se realiza en O(1).
+    \item Las operaciones entre valores lógicos son O(1).
+\end{itemize}
+Las operaciones entre enteros/reales dependen de b
+\begin{itemize}
+    \item Las sumas y restas son O(b).
+    \item Las multiplicaciones y divisiones son O(b log b)
+\end{itemize}
+\textbf{Nota}: Si b está fijo, entonces las operaciones entre enteros/reales es O(1).
+\subsection*{Tiempo de Ejecución de un Algoritmo}
+Sea A un algoritmo, su tiempo de ejecución es: $T_{A}(I)$ donde esto indica que es la suma de los tiempos de ejecución del algoritmo en una instancia dada I. \\
+\textbf{$\longitud{I}$}: Cantidad de bits necesarios para almacenar los datos de entrada de I. \\ \\
+\textbf{Nota}: Si \textbf{b está fijo} y la entrada ocupa n celdas de memoria entonces $\longitud{I} = bn = O(n)$
+\subsection*{Complejidad de un Algoritmo}
+Sea A un algoritmo, su complejidad es: $f_{A}(n) = max_{I:\longitud{I}=n} \ T_{A}(I)$ donde esto indica que la complejidad de un algoritmo A dado un n cualquiera, es el que de mayor tiempo de ejecución tiene en una instancia dada I. 
+\subsection*{Cotas}
+\textbf{Cota Superior (O)}: $f (n) \in O(g(n)) \iff \exists c \in R>0, n_{0} \in N \ tal \ que \
+\forall n \ge n_{0} : f(n) \le c \ast g(n)$  \\
+\textbf{Cota Inferior ($\Omega$)}: $f (n) \in \Omega(g(n)) \iff \exists c \in R>0, n_{0} \in N \ tal \ que \ \forall n \ge n_{0} : f(n) \ge c \ast g(n) $ \\
+\textbf{Cota Ajustada ($\theta$)}:  $f (n) \in \theta(g(n)) \iff f (n) \in O(g(n)) \ y \ f (n) \in \Omega(g(n)).\ Es \ decir, \ \theta(g(n)) = O(g(n)) \cap \Omega(g(n))$
+\subsection*{Tipos de Funciones}
+\begin{itemize}
+    \item O(n): lineal
+    \item $O(n^{2})$: cuadrático
+    \item $O(n^{3})$: cúbico
+    \item $O(n^{k}) \ k \in \nat$: polinomial. Ej.: $O(n^{4}), \ O(n^{5})$
+    \item $O(log \ n)$: logarítmico. 
+    \item $O(d^{n}) \ d \in \float_{>1}$: exponencial. Ej.: $ O(2^{n}), \ O(4^{n})$
+\end{itemize}
+\section*{Algoritmos Satisfactorios y No Satisfactorios}
+Un Algoritmo Satisfactorio es un algoritmo que tiene un costo menor a otro. \\
+Los algoritmos polinomiales se consideran satisfactorios (cuanto menor sea el grado, mejor). \\
+Los algoritmos supra-polinomiales se consideran no satisfactorios. 
+\section*{Problema de Optimización}
+Sea $x \in S$, un problema de optimización consiste en encontrar la mejor solución dentro de un conjunto: 
+\begin{itemize}
+    \item $z^{*} = max \ f(x)$
+    \item $z^{*} = min \ f(x)$
+\end{itemize}
+\textbf{Función Objetivo}: Es una función de la forma $f:S\implies \float$
+\begin{itemize}
+    \item El conjunto S es la \textbf{región factible}.
+    \item Los elementos $x \in S$ se llaman \textbf{soluciones factibles}.
+    \item El valor $z^{x} \in \float$ es el \textbf{valor óptimo} del problema, y cualquier solución factible $x^{*} \in S \ / \ f(x^{*}) = z^{x}$ se llama un \textbf{óptimo} del problema
+\end{itemize}
+\section*{Algoritmos de Fuerza Bruta}
 
 \end{document} 
