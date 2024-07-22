@@ -102,11 +102,26 @@ Sea $x \in S$, un problema de optimización consiste en encontrar la mejor soluc
     \item El valor $z^{x} \in \float$ es el \textbf{valor óptimo} del problema, y cualquier solución factible $x^{*} \in S \ / \ f(x^{*}) = z^{x}$ se llama un \textbf{óptimo} del problema
 \end{itemize}
 \section*{Algoritmos de Fuerza Bruta}
-También llamado búsqueda exhaustiva o generate and test. Genera todas las soluciones factibles y se queda con la mejor. Suele ser fácil de implementar y es un algoritmo exacto: si hay solución, siempre la encuentra. \\
-Lo malo es su complejidad (suele ser exponencial)
+También llamado búsqueda exhaustiva o generate and test. Genera todas las soluciones factibles y se queda con la mejor (la que cumpla las restricciones que necesitamos). Suele ser fácil de implementar y es un algoritmo exacto: si hay solución, siempre la encuentra. \\
+Lo malo es su complejidad (suele ser exponencial) \\
+\textbf{Ej.}: Imaginemos que tenemos un tablero de ajedrez y tenemos que buscar las soluciones en las cuales ninguna dama amenace a otra. Una solución por fuerza bruta sería buscar todas las soluciones que existen, y de ahí agarrar las que me sirvan. \\ 
+\textbf{Ej.}: Imaginemos que tenemos que resolver un Sudoku, si usaramos un casillero de 9x9 y quisieramos aplicar un algoritmo de fuerza bruta, es decir, primero buscar todas las posibles permutaciones 1966270504755529.... posibilidades y de todas estas posibilidades ver cual es solución. Esto es muy tedioso y lento, hay una mejor opción que la fuerza y bruta, y es el Backtracking.
 \section*{Backtracking}
-Es una técnica que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales. \\
-Cada posible extensión de la solución parcial se explora haciendo recursión sobre la nueva solución extendida, esto se puede ver como un árbol y que podemos podarlo (descartar configuraciones antes de explorarlas) al árbol para reducir el espacio de búsqueda. \\
+Es una técnica (de fuerza bruta) que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales \textbf{(las soluciones se van armando recursivamente, si llego a un paso donde veo que no me sirve, vuelvo atrás y hago las otras llamadas)}. \\
+\textbf{Cada posible extensión de la solución parcial se explora haciendo recursión sobre la nueva solución extendida}, esto se puede ver como un árbol de decisiones que podemos ir recorriendo nodo por nodo, y si veo que el siguiente nodo no me sirve, vuelvo hacia atrás y evalúo las demás. \\
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/backtracking_arbol1.png}
+\end{minipage}\]
+Comenzamos evaluando desde la raíz, el nodo de la izquierda cumple hasta ahora nuestra posible solución, nos movemos a ese nodo y luego, evaluando su nodo de la izquierda vemos que se rompe, es decir, alguna restricción que pusimos no se cumple, por lo tanto no tiene sentido seguir explorando las demás soluciones. \\
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/backtracking_arbol.png}
+\end{minipage}\]
+Vemos que efectivamente, habiendo vuelto a la raíz, ahora sí encontramos un camino mejor que el camino del nodo de la izquierda. Por lo tanto, podemos seguir evaluando hacia abajo. \\
+Cada vez que encontremos un nodo que no es solución, volvemos al nodo anterior y evaluamos los demás hijos. Si ningún nodo hijo cumple de ese nodo, entonces tenemos que volver más atrás todavía. \\
+\textbf{Podas por factibilidad}: Evito explorar nodos no factibles. \\
+\textbf{Podas por optimalidad}: Evito explorar nodos subóptimos. \\ 
+\textbf{Branch and bound}: Uso la solución más óptima para comparar y ver si exploro eso no. \\
+
 \textbf{Todas las soluciones}:
 \begin{lstlisting}
     algoritmo BT(a,k)
@@ -137,7 +152,5 @@ Cada posible extensión de la solución parcial se explora haciendo recursión s
     retornar
 \end{lstlisting}
 \textbf{Ej.}: Resolver un sudoku se resuelve en forma muy eficiente con un algoritmo de backtracking.
-\section*{Fuerza Bruta}
-Un algoritmo de fuerza bruta (también llamado búsqueda exhaustiva) analiza todas las posibles configuraciones. \\
-\textbf{Ej.}: Imaginemos que tenemos un tablero de ajedrez y tenemos que buscar las soluciones en las cuales ninguna dama amenace a otra. Una solución por fuerza bruta sería buscar todas las soluciones que existen, y de ahí agarrar las que me sirvan.
+
 \end{document} 
