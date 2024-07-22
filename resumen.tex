@@ -102,5 +102,42 @@ Sea $x \in S$, un problema de optimización consiste en encontrar la mejor soluc
     \item El valor $z^{x} \in \float$ es el \textbf{valor óptimo} del problema, y cualquier solución factible $x^{*} \in S \ / \ f(x^{*}) = z^{x}$ se llama un \textbf{óptimo} del problema
 \end{itemize}
 \section*{Algoritmos de Fuerza Bruta}
-
+También llamado búsqueda exhaustiva o generate and test. Genera todas las soluciones factibles y se queda con la mejor. Suele ser fácil de implementar y es un algoritmo exacto: si hay solución, siempre la encuentra. \\
+Lo malo es su complejidad (suele ser exponencial)
+\section*{Backtracking}
+Es una técnica que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales. \\
+Cada posible extensión de la solución parcial se explora haciendo recursión sobre la nueva solución extendida, esto se puede ver como un árbol y que podemos podarlo (descartar configuraciones antes de explorarlas) al árbol para reducir el espacio de búsqueda. \\
+\textbf{Todas las soluciones}:
+\begin{lstlisting}
+    algoritmo BT(a,k)
+        si a es solución entonces
+            procesar(a)
+            retornar
+        sino
+            para cada a' en Sucesores(a,k)
+            BT(a', k + 1)
+            fin para
+        fin si
+        retornar
+\end{lstlisting}
+\textbf{Una solución}:
+\begin{lstlisting}
+    algoritmo BT(a,k)
+    si a es solución entonces
+        sol <- a
+        encontro <- true
+    sino
+        para cada a' en Sucesores(a,k)
+            BT(a', k + 1)
+            si encontro entonces
+                retornar
+            fin si
+        fin para
+    fin si
+    retornar
+\end{lstlisting}
+\textbf{Ej.}: Resolver un sudoku se resuelve en forma muy eficiente con un algoritmo de backtracking.
+\section*{Fuerza Bruta}
+Un algoritmo de fuerza bruta (también llamado búsqueda exhaustiva) analiza todas las posibles configuraciones. \\
+\textbf{Ej.}: Imaginemos que tenemos un tablero de ajedrez y tenemos que buscar las soluciones en las cuales ninguna dama amenace a otra. Una solución por fuerza bruta sería buscar todas las soluciones que existen, y de ahí agarrar las que me sirvan.
 \end{document} 
