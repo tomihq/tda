@@ -197,8 +197,8 @@ Generalmente es iterativo, pero no siempre. Empieza resolviendo las partes más 
 \label{subsec:top_down_programacion_dinamica}
 \textbf{Importante}: Notar que estoy usando long long porque los números que puede tomar fibonacci son tan grandes, que evito correr riesgos con int. \\
 \textbf{Importante}: Notar que estoy envíando el vector por referencia. De lo contrario, se generaría uno nuevo en cada llamada. \\
-Con memorización
 \begin{lstlisting}
+Con memorización
     #include <iostream>
     #include <vector>
     #include <chrono>
@@ -244,8 +244,8 @@ Con memorización
     
 Fibo 50 (12586269025): 2887439 milisegundos.
 \end{lstlisting}
-Sin memorización
 \begin{lstlisting}
+Sin memorización
     #include <iostream>
     #include <vector>
     #include <chrono>
@@ -282,7 +282,6 @@ Sin memorización
 
         return 0;
     }
-\end{lstlisting}
 Fibo 50: ? milisegundos. No termina, se cuelga.
-
+\end{lstlisting}
 \end{document} 
