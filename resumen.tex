@@ -104,11 +104,23 @@ Sea $x \in S$, un problema de optimización consiste en encontrar la mejor soluc
 \section*{Algoritmos de Fuerza Bruta}
 También llamado búsqueda exhaustiva o generate and test. Genera todas las soluciones factibles y se queda con la mejor (la que cumpla las restricciones que necesitamos). Suele ser fácil de implementar y es un algoritmo exacto: si hay solución, siempre la encuentra. \\
 Lo malo es su complejidad (suele ser exponencial) \\
+
 \textbf{Ej.}: Imaginemos que tenemos un tablero de ajedrez y tenemos que buscar las soluciones en las cuales ninguna dama amenace a otra. Una solución por fuerza bruta sería buscar todas las soluciones que existen, y de ahí agarrar las que me sirvan. \\ 
-\textbf{Ej.}: Imaginemos que tenemos que resolver un Sudoku, si usaramos un casillero de 9x9 y quisieramos aplicar un algoritmo de fuerza bruta, es decir, primero buscar todas las posibles permutaciones 1966270504755529.... posibilidades y de todas estas posibilidades ver cual es solución. Esto es muy tedioso y lento, hay una mejor opción que la fuerza y bruta, y es el Backtracking.
+
+\textbf{Ej.}: Imaginemos que tenemos que resolver un Sudoku, si usaramos un casillero de 9x9 y quisieramos aplicar un algoritmo de fuerza bruta, es decir, primero buscar todas las posibles permutaciones 1966270504755529.... posibilidades y de todas estas posibilidades ver cual es solución. Esto es muy tedioso y lento, hay una mejor opción que la fuerza bruta, y es el Backtracking.
 \section*{Backtracking}
-Es una técnica (de fuerza bruta) que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales \textbf{(las soluciones se van armando recursivamente, si llego a un paso donde veo que no me sirve, vuelvo atrás y hago las otras llamadas)}. \\
-\textbf{Cada posible extensión de la solución parcial se explora haciendo recursión sobre la nueva solución extendida}, esto se puede ver como un árbol de decisiones que podemos ir recorriendo nodo por nodo, y si veo que el siguiente nodo no me sirve, vuelvo hacia atrás y evalúo las demás. \\
+Es una técnica (de fuerza bruta pero mas eficiente) que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales \textbf{(cuando noto que una solución parcial no me sirve, puedo descartarla e ir a la siguiente sin necesidad de perder más tiempo en esa o sus hijos.)}. \\
+
+Habitualmente se utiliza un vector $ a = (a_{1}, a_{2}, ..., a_{n})$ para representar una solución candidata, donde cada $a_{i} \in A_{i}$ donde $A_{i}$ es un conjunto ordenado y finito.  \\
+
+El espacio de soluciones final consiste en $ A_{1} \ x \ A_{2} \ x \dots \ x \ A_{n} $. \\
+
+En cada paso se extienden las soluciones parciales $a = (a_{1}, a_{2}, ..., a_{k})$ con $k<n$ agregando un elemento más que es $a_{k+1} \in S_{k+1} \subseteq A_{k+1}$ al final del vector a. Esto quiere decir que las nuevas soluciones parciales son sucesores directos de la anterior. Si llegamos a un $S_{k+1}$ que es vacío, retrocedemos a la solución parcial $(a_{1}, a_{2}, ..., a_{k-1})$. \\
+
+Esto último de retroceder podemos verlo como un árbol de decisiones, los cuales si un nodo ya de por sì no me sirve, sus hijos tampoco y vuelvo al nodo anterior para seguir evaluando los demás hijos. \\
+
+\textbf{Importante}: Se puede pensar al vector a como un árbol, donde los elementos que hay son vértices. Por lo tanto, cada vértice $y$ tendría vértices hijos $x$ sí y solo sí se puede llegar a $x$ yendo desde $y$.
+
 \[\begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\linewidth]{assets/backtracking_arbol1.png}
 \end{minipage}\]
@@ -117,7 +129,6 @@ Comenzamos evaluando desde la raíz, el nodo de la izquierda cumple hasta ahora 
     \includegraphics[width=\linewidth]{assets/backtracking_arbol.png}
 \end{minipage}\]
 Vemos que efectivamente, habiendo vuelto a la raíz, ahora sí encontramos un camino mejor que el camino del nodo de la izquierda. Por lo tanto, podemos seguir evaluando hacia abajo. \\
-Cada vez que encontremos un nodo que no es solución, volvemos al nodo anterior y evaluamos los demás hijos. Si ningún nodo hijo cumple de ese nodo, entonces tenemos que volver más atrás todavía. \\
 \textbf{Podas por factibilidad}: Evito explorar nodos no factibles. \\
 \textbf{Podas por optimalidad}: Evito explorar nodos subóptimos. \\ 
 \textbf{Branch and bound}: Uso la solución más óptima para comparar y ver si exploro eso no. \\
@@ -157,4 +168,108 @@ Cada vez que encontremos un nodo que no es solución, volvemos al nodo anterior 
     \item Problemas de Optimización: Encontrar la mejor solución.
     \item Problemas de Enumeración: Todas las soluciones factibles a un problema.
 \end{itemize}
+\section*{Programación Dinámica}
+Consiste en reutilizar valores previamente calculados para ahorrar tiempo. \textbf{¿Cuál es el costo?}, el costo es que acá \textbf{usamos más espacio de la memoria}. \\
+
+\textbf{Nota}: Si queremos sacar ventaja de la memorización \textbf{tenemos que acceder al valor guardado en la estructura de datos en O(1) o en un menor tiempo que lo que costaría calcularlo} otra vez. \\
+
+Aunque no lo parezca, guardar información que vamos a terminar reutilizando ahorra mucho tiempo. \\
+
+Normalmente, la programación dinámica se utiliza cuando de antemano ya sabemos que vamos a tener que terminar reutilizando valores que ya previamente calculamos para esos parámetros de entrada. A esto se le llama \textbf{superposición de estados} y ocurre cuando un árbol de llamadas recursivas resuelve el mismo problema para mismos parámetros de entrada. \\
+
+Veamos ahora dos formas de encarar un problema de programación dinámica 
+
+\subsection*{Enfoque Top-Down} 
+Se implementa recursivamente. La idea es ir guardando el resultado de cada llamada recursiva en una estructura de datos \textbf{(memorización)}. Si llegase a suceder que en una nueva llamada vemos que esa llamada ya ocurrió previamente con los mismos parámetros podemos devolver el valor previamente calculado almacenado en la estructura de datos.  \\ 
+
+Una forma de visualizarlo es con el árbol de llamados. Si tenemos una función $f(n, k)$ definida como $f(n, k) = f(n-1, k) + f(n, k-1)$ con $k<n$ podríamos representar el pensamiento top-down de la siguiente manera
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/top_down.png}
+\end{minipage}\]
+Claramente podemos observar como $f(n-1, k-1)$ se repite de ambos lados del árbol. Si esto fuese costoso de calcular, estaríamos perdiendo tiempo en algo que podríamos haber guardado. \\
+
+El nombre de Top-Down viene del lado que partimos del problema más grande y terminamos llegando a un caso base.
+Véase \hyperref[subsec:top_down_programacion_dinamica]{\underline{anexo}} para ver qué tanto mejora el tiempo de ejecución
+\subsection*{Enfoque Bottom-Up}
+Generalmente es iterativo, pero no siempre. Empieza resolviendo las partes más pequeñas y fundamentales del problema. Cada vez que resuelve un problema, almacena su solución en una estructura de datos auxiliar.
+\section*{Anexo}
+\subsection*{Programación Dinámica en C++ (Top-Down)}
+\label{subsec:top_down_programacion_dinamica}
+Con memorización
+\begin{lstlisting}
+    #include <iostream>
+    #include <vector>
+    #include <chrono>
+    using namespace std::chrono;
+
+    int fibonacci(int n, std::vector<int> memo){
+        if (memo[n] != -1) {
+            return memo[n];
+        }
+
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+
+        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+        return memo[n];
+    }
+
+    int main() {
+        auto start = high_resolution_clock::now();
+        int n = 0; 
+        std::cout << "Ingrese un numero para calcular fibonacci" << std::endl;
+        std::cin >> n;
+        std::vector<int> memo(n+1, -1);
+        int fibo = fibonacci(n, memo);
+        std::cout << "Fibonacci de " << n << " es " << fibo << std::endl;
+        
+        //chrono
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+        std::cout << "El tiempo de ejecucion es: " << duration.count() << " milisegundos" << std::endl;
+        
+        return 0; 
+    }
+Fibo 40: ? milisegundos.
+\end{lstlisting}
+Sin memorización
+\begin{lstlisting}
+    #include <iostream>
+    #include <vector>
+    #include <chrono>
+    using namespace std::chrono;
+
+
+    int fibonacci(int n){
+
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    int main() {
+        auto start = high_resolution_clock::now();
+        int n = 0; 
+        std::cout << "Ingrese un numero para calcular fibonacci" << std::endl;
+        std::cin >> n;
+        int fibo = fibonacci(n);
+        std::cout << "Fibonacci de " << n << " es " << fibo << std::endl;
+        
+        //chrono
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+        std::cout << "El tiempo de ejecucion es: " << duration.count() << " milisegundos" << std::endl;
+        
+        return 0; 
+    }
+\end{lstlisting}
+Fibo 40: ? milisegundos.
+
 \end{document} 
