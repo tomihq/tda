@@ -249,7 +249,7 @@ Es una técnica que consiste en elegir en cada paso la mejor opción sin conside
     \end{itemize}
     \item Un servidor tiene n clientes para atender, los puede atender en cualquier orden. El objetivo es determinar en que orden se deben atender los clientes para \textbf{minimizar la suma de los tiempos de espera} de los clientes. 
     \begin{itemize}
-        \item Supongamos que tenemos 1000 clientes. Tenemos 2 representantes, 2 de los clientes tienen problemas que se resuelven en 4hs. Los demás, tienen problemas pero se resuelven en poco tiempo. IDEA: Ordeno los clientes por tiempo de demora de sus trámites y voy resolviendo los más cortos. Esto producirá que los clientes se vayan contentos porque se los atiende rápido (pues sabemos que a la larga, la suma de los tiempos de los trámites de los clientes con trámites cortos, es igual o menor a atender a solo los 2 clientes).
+        \item Me pongo en situación: Supongamos que tenemos 1000 clientes. Tenemos 2 representantes, 2 de los clientes tienen problemas que se resuelven en 4hs. Los demás, tienen problemas pero se resuelven en poco tiempo. IDEA: Ordeno los clientes por tiempo de demora de sus trámites y voy resolviendo los más cortos. Esto producirá que los clientes se vayan contentos porque se los atiende rápido (pues sabemos que a la larga, la suma de los tiempos de los trámites de los clientes con trámites cortos, es igual o menor a atender a solo los 2 clientes).
         \item Mal camino: Si priorizaramos a los clientes que tienen trámites más largos tendríamos 998 clientes enojados. 
         \item Buen camino: Si priorizaramos a los 998 clientes aunque los otros dos hayan llegado antes, seguramente ellos estén enojados pero es mejor tener 998 felices que solo 2.
     \end{itemize}
