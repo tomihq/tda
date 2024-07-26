@@ -192,6 +192,72 @@ El nombre de Top-Down viene del lado que partimos del problema más grande y ter
 Véase \hyperref[subsec:top_down_programacion_dinamica]{\underline{anexo}} para ver qué tanto mejora el tiempo de ejecución
 \subsection*{Enfoque Bottom-Up}
 Generalmente es iterativo, pero no siempre. Empieza resolviendo las partes más pequeñas y fundamentales del problema. Cada vez que resuelve un problema, almacena su solución en una estructura de datos auxiliar.
+\section*{Divide \& Conquer}
+Esta técnica consiste en dividir \textbf{un problema en subproblemas
+ del mismo tipo} que en el original, resolver los subproblemas y luego combinar las soluciones. \\
+
+\textbf{Importante}: Cuando hablamos de subproblemas, hablamos de subproblemas necesariamente más chicos que el problema original; Deben ser todos del mismo tipo y no podemos resolver diferentes subproblemas. \\
+
+Ej.: Si tengo una pared enorme, la puedo pintar por partes. Si a la primera la pinté de arriba hacia abajo la segunda la voy a pintar igual y exactamente con los mismos movimientos. Al final de todo, veré que la pared quedó perfectamente pintada.
+El ejemplo representa claramente un problema de Divide \& Conquer pues
+\begin{itemize}
+    \item Al ser un problema grande, divido la tarea de pintar la pared enorme en partes iguales de una manera más sencilla y llevadera.
+    \item Las paredes las pinto a todas de arriba hacia abajo y con exactamente los mismos movimientos (subproblemas del mismo tipo).
+    \item Como sé que la porción de pared anterior quedó perfectamente pintada y la siguiente también lo estará, entonces terminaré pintando la pared entera.
+\end{itemize}
+
+\textbf{Importante}: Divide \& Conquer debería tener una complejidad parecida a resolver el problema original. Si resolver el problema original nos cuesta $O(n)$ y con esta técnica $O(n^{3})$ algo anda mal porque el tiempo de resolución debería ser igual (o menor) separando y resolviendo los subproblemas.
+\subsection*{Teorema Maestro}
+Nos permite calcular la complejidad temporal de un un algoritmo que involucra recursión.
+\[T(n) = \left\{ \begin{array}{lcc} a \ast T(n/c) + f(n) & si & n>1  \\ 1 & si & n=1 \end{array} \right.\]
+Donde: 
+\begin{itemize}
+    \item a: cantidad de subproblemas en los que el problema se divide.
+    \item n/c: es el tamaño de cada subproblema.
+    \item c: cantidad de problemas.
+    \item T(n/c): Es el tiempo de ejecución del algoritmo para un problema de tamaño n/c.
+    \item f(n): Costo de dividir el problema y combinar los resultados de los subproblemas.
+\end{itemize}
+\subsection*{Casos del Teorema Maestro}
+\begin{itemize}
+    \item Si $f(n) = O(n^{log_{c} a-\epsilon})$ con $\epsilon >$ 0, entonces $T(n) = \Theta(n^{log_{c} \ a})$
+    \item Si $f(n) = \Theta(n^{log_{c} a})$ entonces $T(n) = \Theta(n^{log_{c} a} \ log \ n)$
+    \item Si $f(n) = \Omega(n^{log_{c} \ a + \epsilon})$ para $\epsilon$ $>$ 0, y si $ af(\frac{n}{c}) < kf(n)$ para $k<1$ y para n suficientemente grandes, entonces $T(n) = \Theta(f(n))$
+\end{itemize}
+\subsection*{Qué no puede pasar en el Teorema Maestro}
+\begin{itemize}
+    \item f(n) no puede ser negativo porque es el tiempo que tarda el algoritmo. Siempre es positivo.
+    \item a es una constante positiva pues el número de subproblemas una vez que arranca la recursión es fija.
+\end{itemize}
+\section*{Heurísticas}
+Es un procedimiento computacional que intenta obtener soluciones de buena calidad para un problema y que su comportamiento sea preciso. \\
+Decimos que A es un algoritmo $\epsilon$-aproximado $(\epsilon \ge 0)$ para un problema si \[\longitud{\frac{X_{A} - X_{OPT}}{X_{OPT}}} \le \epsilon\]
+\section*{Algoritmos Golosos}
+Es una técnica que consiste en elegir en cada paso la mejor opción sin considerar lo que pueda pasar después.
+\begin{itemize}
+    \item Tengo monedas de 1, 5, 10 y 25 centavos. Debo dar $0.69$ de vuelto con la \textbf{menor cantidad de monedas}. 
+    \begin{itemize}
+        \item IDEA: La mejor elección en este caso que tengo que devolver menor cantidad de monedas, me conviene devolver más monedas de la moneda con mayor valor. 
+        \item Toma 1 moneda de 25 pues sumando lo que tengo sucede que $0.25<0.69$.
+        \item Toma 1 moneda de 25 pues sumando lo que tengo sucede que $0.50<0.69$
+        \item Toma 1 moneda de 25 $0.75<0.69$ es falso, por lo que sigo teniendo $0.50$.
+        \item Toma 1 moneda de 10 pues sumando lo que tengo sucede que $0.60<0.69$.
+        \item Toma 1 moneda de 10 $0.70<0.69$ es falso, por lo que sigo teniendo $0.60$.
+        \item Toma 1 moneda de 5 pues sumando lo que tengo sucede que $0.65<0.69$.
+        \item Toma 1 moneda de 5 $0.70<0.69$ es falso, por lo que sigo teniendo $0.65$.
+        \item Toma 1 moneda de 1 (4 veces) pues sumando lo que tengo sucede que $0.69<0.69$
+    \end{itemize}
+    \item Un servidor tiene n clientes para atender, los puede atender en cualquier orden. El objetivo es determinar en que orden se deben atender los clientes para \textbf{minimizar la suma de los tiempos de espera} de los clientes. 
+    \begin{itemize}
+        \item Supongamos que tenemos 1000 clientes. Tenemos 2 representantes, 2 de los clientes tienen problemas que se resuelven en 4hs. Los demás, tienen problemas pero se resuelven en poco tiempo. IDEA: Ordeno los clientes por tiempo de demora de sus trámites y voy resolviendo los más cortos. Esto producirá que los clientes se vayan contentos porque se los atiende rápido (pues sabemos que a la larga, la suma de los tiempos de los trámites de los clientes con trámites cortos, es igual o menor a atender a solo los 2 clientes).
+        \item Mal camino: Si priorizaramos a los clientes que tienen trámites más largos tendríamos 998 clientes enojados. 
+        \item Buen camino: Si priorizaramos a los 998 clientes aunque los otros dos hayan llegado antes, seguramente ellos estén enojados pero es mejor tener 998 felices que solo 2.
+    \end{itemize}
+\end{itemize}
+
+Esto demuestra que los Algoritmos Golosos nos dan solución para \textbf{minimizar el tiempo total de espera en un sistema atendiendo por menor tiempo de atención} y también \textbf{minimizar la cantidad de monedas que devolvemos, pero seguramente tendremos más monedas de mayor valor}.
+
+
 \section*{Anexo}
 \subsection*{Programación Dinámica en C++ (Top-Down)}
 \label{subsec:top_down_programacion_dinamica}
