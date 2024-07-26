@@ -233,7 +233,14 @@ Donde:
 Es un procedimiento computacional que intenta obtener soluciones de buena calidad para un problema y que su comportamiento sea preciso. \\
 Decimos que A es un algoritmo $\epsilon$-aproximado $(\epsilon \ge 0)$ para un problema si \[\longitud{\frac{X_{A} - X_{OPT}}{X_{OPT}}} \le \epsilon\]
 \section*{Algoritmos Golosos (Algoritmos Greedy)}
-Es una técnica que consiste en elegir en cada paso la mejor opción sin considerar lo que pueda pasar después.
+Es una técnica que consiste en elegir en cada paso la mejor opción sin considerar lo que pueda pasar después. \\
+Saber cual es la mejor opción depende de qué nos pidan como prioritario. \\
+\textbf{¿A qué me refiero como prioritario?}
+\begin{itemize}
+    \item Si te pido que de una lista de 100 películas, tomes la mayor cantidad de películas para que yo vea en 8hs: La idea sería que tomes las películas con menor duración (porque a menor duración, mas películas vas a elegir)
+    \item Si te pido que vayas a la panadería y traigas 4kg de pan: No se puede resolver con greedy, porque no te especifico cuál sería el pan ideal.
+\end{itemize}
+Veamos algunos ejemplos más
 \begin{itemize}
     \item Tengo monedas de 1, 5, 10 y 25 centavos. Debo dar $0.69$ de vuelto con la \textbf{menor cantidad de monedas}. 
     \begin{itemize}
