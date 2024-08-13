@@ -102,14 +102,19 @@ Sea $x \in S$, un problema de optimización consiste en encontrar la mejor soluc
     \item El valor $z^{x} \in \float$ es el \textbf{valor óptimo} del problema, y cualquier solución factible $x^{*} \in S \ / \ f(x^{*}) = z^{x}$ se llama un \textbf{óptimo} del problema
 \end{itemize}
 \section*{Algoritmos de Fuerza Bruta}
-También llamado búsqueda exhaustiva o generate and test. Genera todas las soluciones factibles y se queda con la mejor (la que cumpla las restricciones que necesitamos). Suele ser fácil de implementar y es un algoritmo exacto: si hay solución, siempre la encuentra. \\
-Lo malo es su complejidad (suele ser exponencial) \\
+También llamado búsqueda exhaustiva o generate and test. 
+\begin{itemize}
+    \item Genera todas las soluciones factibles y se queda con la mejor.
+    \item Fácil de implementar.
+    \item Algoritmo exacto. Si $\exists$ solución, la encuentra.
+    \item Complejidad: Exponencial.
+\end{itemize}
 
 \textbf{Ej.}: Imaginemos que tenemos un tablero de ajedrez y tenemos que buscar las soluciones en las cuales ninguna dama amenace a otra. Una solución por fuerza bruta sería buscar todas las soluciones que existen, y de ahí agarrar las que me sirvan. \\ 
 
 \textbf{Ej.}: Imaginemos que tenemos que resolver un Sudoku, si usaramos un casillero de 9x9 y quisieramos aplicar un algoritmo de fuerza bruta, es decir, primero buscar todas las posibles permutaciones 1966270504755529.... posibilidades y de todas estas posibilidades ver cual es solución. Esto es muy tedioso y lento, hay una mejor opción que la fuerza bruta, y es el Backtracking.
 \section*{Backtracking}
-Es una técnica (de fuerza bruta pero mas eficiente) que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales \textbf{(cuando noto que una solución parcial no me sirve, puedo descartarla e ir a la siguiente sin necesidad de perder más tiempo en esa o sus hijos.)}. \\
+Es una técnica (de fuerza bruta pero mas eficiente) que consiste en una exploración ordenada del espacio de soluciones por medio de la extensión de soluciones parciales \textbf{(cuando noto que una solución parcial (un camino) no me sirve, puedo descartarla e ir a la siguiente sin necesidad de perder más tiempo en esa o sus hijos.)}. \\
 
 Habitualmente se utiliza un vector $ a = (a_{1}, a_{2}, ..., a_{n})$ para representar una solución candidata, donde cada $a_{i} \in A_{i}$ donde $A_{i}$ es un conjunto ordenado y finito.  \\
 
@@ -129,9 +134,25 @@ Comenzamos evaluando desde la raíz, el nodo de la izquierda cumple hasta ahora 
     \includegraphics[width=\linewidth]{assets/backtracking_arbol.png}
 \end{minipage}\]
 Vemos que efectivamente, habiendo vuelto a la raíz, ahora sí encontramos un camino mejor que el camino del nodo de la izquierda. Por lo tanto, podemos seguir evaluando hacia abajo. \\
-\textbf{Podas por factibilidad}: Evito explorar nodos no factibles. \\
-\textbf{Podas por optimalidad}: Evito explorar nodos subóptimos. \\ 
-\textbf{Branch and bound}: Uso la solución más óptima para comparar y ver si exploro eso no. \\
+\subsection*{Podas}
+Nos permiten descartar configuraciones antes de explorarlas. \\
+\textbf{Podas por factibilidad}: Evito explorar nodos no factibles. Esto quiere decir que:
+\begin{itemize}
+    \item Si veo que al evaluar el próximo nodo del camino ya no es solución retrocedo inmediatamente al paso anterior.
+\end{itemize}
+\textbf{Podas por optimalidad}: Evito explorar nodos subóptimos. Esto quiere decir que: 
+\begin{itemize}
+    \item Si veo que al evaluar el próximo nodo del camino, ya no forma la mejor solución entonces retrocedo inmediatamente al paso anterior.
+    \item \textbf{Importante}: En las podas por optimalidad se necesita un criterio más para saber qué seria considerada una mejor solución que otra. Un ejemplo puede ser un problema de un viajante de comercio que debe encontrar el camino de menor costo para visitar todas las ciudades. A medida que encuentro una solución entera, puedo ir buscando otras y comparándolas. Si en algún momento veo que ya se pasó (tiene un costo mayor que la solución anterior encontrada) de la solución entera la descarto. Es algo más estimativo.
+\end{itemize}
+\textbf{Branch and bound} 
+\begin{itemize}
+    \item Separo en subproblemas con un límite inferior/superior del valor óptimo que puede obtenerse en ese subproblema.
+    \item La poda se realiza al comparar los límites inferior/superior de los subproblemas con el mejor valor óptimo conocido. Si el límite inferior/superior de un subproblema es peor que la mejor solución conocida, ese subproblema es podado.
+    \item El objetivo de branch and bound es encontrar la solución más óptima al problema.
+\end{itemize}
+Backtracking garantiza encontrar al menos una solución válida y luego optimiza, mientras que branch and bound está diseñado para encontrar la mejor solución posible de manera más eficiente desde el principio utilizando límites para podar ramas del espacio de búsqueda. \\
+\subsection*{Soluciones}
 \textbf{Todas las soluciones}:
 \begin{lstlisting}
     algoritmo BT(a,k)
