@@ -123,17 +123,28 @@ El espacio de soluciones final consiste en $ A_{1} \ x \ A_{2} \ x \dots \ x \ A
 En cada paso se extienden las soluciones parciales $a = (a_{1}, a_{2}, ..., a_{k})$ con $k<n$ agregando un elemento más que es $a_{k+1} \in S_{k+1} \subseteq A_{k+1}$ al final del vector a. Esto quiere decir que las nuevas soluciones parciales son sucesores directos de la anterior. Si llegamos a un $S_{k+1}$ que es vacío, retrocedemos a la solución parcial $(a_{1}, a_{2}, ..., a_{k-1})$. \\
 
 Esto último de retroceder podemos verlo como un árbol de decisiones, los cuales si un nodo ya de por sì no me sirve, sus hijos tampoco y vuelvo al nodo anterior para seguir evaluando los demás hijos. \\
-
-\textbf{Importante}: Se puede pensar al vector a como un árbol, donde los elementos que hay son vértices. Por lo tanto, cada vértice $y$ tendría vértices hijos $x$ sí y solo sí se puede llegar a $x$ yendo desde $y$.
+\newpage
+Entonces...
+\begin{itemize}
+    \item Conjunto de Soluciones Candidatas: Son todas las combinaciones posibles de los elementos. Pueden ser válidas o no. Son aquellas que habitan el último nivel del árbol (no se pueden extender más) pues no quedan más decisiones por tomar más que considerarlas válidas o inválidas en nuestro problema.
+    \item Conjunto de Soluciones Parciales: Son todas las combinaciones posibles de los elementos hasta el anteúltimo nivel (si fuese del último sería una solución candidata). Acá se consideran todos los subconjuntos que se van armando en cada paso. Si llegase a haber uno que excede o no cumple lo que necesitamos, no es una solución parcial.
+    \item Conjunto de Soluciones Válidas: Son aquellas Soluciones Candidatas que cumplen con lo que buscamos.
+\end{itemize}
+Preguntar: 
+\begin{itemize}
+    \item ¿El conjunto de soluciones parciales incluye a quien no es una solucion válida? 
+    \item ¿El conjunto de soluciones parciales incluye a las candidatas? En el ej. 1 parece que sí por como lo definen.
+\end{itemize}
 
 \[\begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\linewidth]{assets/backtracking_arbol1.png}
 \end{minipage}\]
-Comenzamos evaluando desde la raíz, el nodo de la izquierda cumple hasta ahora nuestra posible solución, nos movemos a ese nodo y luego, evaluando su nodo de la izquierda vemos que se rompe, es decir, alguna restricción que pusimos no se cumple, por lo tanto no tiene sentido seguir explorando las demás soluciones. \\
+Comenzamos evaluando desde la raíz, el nodo de la izquierda cumple hasta ahora nuestra posible solución, nos movemos a ese nodo y luego, evaluando su nodo de la izquierda vemos que se rompe, es decir, alguna restricción que pusimos no se cumple, por lo tanto no tiene sentido seguir explorando las demás soluciones. 
 \[\begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\linewidth]{assets/backtracking_arbol.png}
 \end{minipage}\]
 Vemos que efectivamente, habiendo vuelto a la raíz, ahora sí encontramos un camino mejor que el camino del nodo de la izquierda. Por lo tanto, podemos seguir evaluando hacia abajo. \\
+Véase \hyperref[subsec:backtracking_ex]{\underline{anexo}} para un ejemplo didáctico.
 \subsection*{Podas}
 Nos permiten descartar configuraciones antes de explorarlas. \\
 \textbf{Podas por factibilidad}: Evito explorar nodos no factibles. Esto quiere decir que:
@@ -286,6 +297,28 @@ Veamos algunos ejemplos más
 Esto demuestra que los Algoritmos Golosos nos dan solución para \textbf{minimizar el tiempo total de espera en un sistema atendiendo por menor tiempo de atención} y también \textbf{minimizar la cantidad de monedas que devolvemos, pero seguramente tendremos más monedas de mayor valor}.
 \section*{Grafos}
 \section*{Anexo}
+\subsection*{Backtracking}
+\label{subsec:backtracking_ex}
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/ex_backtracking_1.png}
+\end{minipage}\]
+El ejercicio nos plantea la idea de que necesitamos de alguna manera saber qué combinaciones de subconjuntos son válidas tal que la suma de sus elementos internos da k = 12. \\
+Por lo que se nos indica, cada una de estas combinaciones está formada de manera binaria, es decir, siendo $ C = \{6, 12, 6\}$ si yo tengo el subconjunto $\{1, 0, 0\}$ eso indicaría que la suma que da los elementos del subconjunto es 6. \\
+Lo primero que tenemos que hacer es plantear el árbol entero ¿por qué? porque necesitamos de alguna manera ver \textbf{todas} las soluciones candidatas que tenemos. \\
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/ex_backtracking_dibujo_arbol.jpg}
+\end{minipage}\]
+Así, las \textbf{Soluciones Candidatas} son las del último nivel: \\
+Por lo tanto $\{(1, 1, 1), (1, 1, 0), (1,0,1), (1,0,0), (0,1,1), (0,1,0), (0,0,1), (0,0,0)\}$ \\
+Luego, las \textbf{Soluciones Parciales} son aquellas que hasta el anteúltimo nivel son válidas: \\
+Por lo tanto $\{(0), (1), (1,0), (0,1), (0, 0), (1, 1)\}$ \\
+Por último, las \textbf{Soluciones Válidas} son aquellas que cumplen con nuestra condición en las Soluciones Candidatas. \\
+Por lo tanto $\{(0,1,0), (1,0,1)\}$ \\
+
+En este ejercicio hacemos podas por factibilidad pues, si la suma de los elementos excede 12 todo el camino que sigue es inválido.
+
+
+
 \subsection*{Programación Dinámica en C++ (Top-Down)}
 \label{subsec:top_down_programacion_dinamica}
 \textbf{Importante}: Notar que estoy usando long long porque los números que puede tomar fibonacci son tan grandes, que evito correr riesgos con int. \\
