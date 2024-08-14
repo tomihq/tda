@@ -5,7 +5,8 @@
 
 ########################
 # Archivos que NO ignora
-
+!ejercicios
+!*.cpp
 !LICENSE
 !license
 !*.jpg
