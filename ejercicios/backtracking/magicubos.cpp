@@ -28,10 +28,10 @@
 #include <iostream>
 #include <vector>
 
-void colocarEnPosicion(const std::vector<std::vector<int>>& matriz, int i, int j, int n){
-    if(i == n-1 && j == n-1) return; 
+void colocarEnPosicion(std::vector<std::vector<int>>& matriz, int i, int j, int n, int val){
+    if(i >= n && j >= n) return; 
 
-    matriz[i][j] = n; 
+    matriz[i][j] = val; 
     
     if(i == n-1){
        i = 0;
@@ -47,7 +47,7 @@ void colocarEnPosicion(const std::vector<std::vector<int>>& matriz, int i, int j
 
 }
 
-bool esCuadradoMagico(const std::vector<std::vector<int>>& matriz, int n){
+bool esCuadradoMagico(std::vector<std::vector<int>>& matriz, int n){
     int suma = 0; 
     //Chequeo todas filas -> Si la suma de toda la fila es mayor a la previamente calculada entonces arrojo false.
     for(int i = 0; i<n; i++){
@@ -103,12 +103,10 @@ int main(){
     int n = 0;
     std::cout << "Ingrese el orden del Cuadrado Mágico" << std::endl;
     std::cin >> n; 
-    std::vector<std::vector<int>> matriz = {
-        {2, 7, 6},
-        {9, 5, 1},
-        {4, 3, 8}
-    };
-    bool res = esCuadradoMagico(matriz, n);
-    std::cout << res << std::endl;
+    std::vector<std::vector<int>> matriz(n, std::vector<int>(n));
+    colocarEnPosicion(matriz, 3, 3, n, 10);
+    std::cout << matriz[1][1] << std::endl;
+   /*  bool res = esCuadradoMagico(matriz, n);
+    std::cout << res << std::endl; */
     return 0;
 }
