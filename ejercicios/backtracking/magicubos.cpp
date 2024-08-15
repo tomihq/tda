@@ -28,6 +28,25 @@
 #include <iostream>
 #include <vector>
 
+void colocarEnPosicion(const std::vector<std::vector<int>>& matriz, int i, int j, int n){
+    if(i == n-1 && j == n-1) return; 
+
+    matriz[i][j] = n; 
+    
+    if(i == n-1){
+       i = 0;
+    }else{
+        i++;
+    }
+
+    if(j == n-1){
+        j = 0;
+    }else{
+        j++; 
+    }
+
+}
+
 bool esCuadradoMagico(const std::vector<std::vector<int>>& matriz, int n){
     int suma = 0; 
     //Chequeo todas filas -> Si la suma de toda la fila es mayor a la previamente calculada entonces arrojo false.
