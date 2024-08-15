@@ -31,8 +31,6 @@
 void colocarEnPosicion(std::vector<std::vector<int>>& matriz, int i, int j, int n, int val){
     if(i >= n && j >= n) return; 
 
-    matriz[i][j] = val; 
-    
     if(i == n-1){
        i = 0;
     }else{
@@ -44,7 +42,7 @@ void colocarEnPosicion(std::vector<std::vector<int>>& matriz, int i, int j, int 
     }else{
         j++; 
     }
-
+    matriz[i][j] = val; 
 }
 
 bool esCuadradoMagico(std::vector<std::vector<int>>& matriz, int n){
@@ -104,8 +102,8 @@ int main(){
     std::cout << "Ingrese el orden del Cuadrado Mágico" << std::endl;
     std::cin >> n; 
     std::vector<std::vector<int>> matriz(n, std::vector<int>(n));
-    colocarEnPosicion(matriz, 3, 3, n, 10);
-    std::cout << matriz[1][1] << std::endl;
+    colocarEnPosicion(matriz, 1, 2, n, 10);
+    std::cout << matriz[2][0] << std::endl;
    /*  bool res = esCuadradoMagico(matriz, n);
     std::cout << res << std::endl; */
     return 0;
