@@ -21,7 +21,7 @@ int k = 150;
 int mejor_solucion = 0; 
 
 void sumasubconjuntos(int i, int suma, std::vector<int> &solucion_parcial){
-    if(i >= cant) return; 
+    if(i > cant) return; 
     if(suma > k) return; 
     if(suma == k){
         mejor_solucion = suma;
