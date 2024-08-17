@@ -115,6 +115,16 @@ También llamado búsqueda exhaustiva o generate and test.
 \textbf{Ej.}: Imaginemos que tenemos un tablero de ajedrez y tenemos que buscar las soluciones en las cuales ninguna dama amenace a otra. Una solución por fuerza bruta sería buscar todas las soluciones que existe a cada partida de ajedrez, y de ahí agarrar las que me sirvan. \\ 
 
 \textbf{Ej.}: Imaginemos que tenemos que resolver un Sudoku, si usaramos un casillero de 9x9 y quisieramos aplicar un algoritmo de fuerza bruta, es decir, primero buscar todas las posibles permutaciones 1966270504755529.... posibilidades y de todas estas posibilidades ver cual es solución. Esto es muy tedioso y lento, hay una mejor opción que la fuerza bruta, y es el Backtracking.
+\subsection*{Esquema de Fuerza Bruta}
+\begin{lstlisting}
+    para cada x en S hacer:
+        si P(x) entonces
+            procesar x
+\end{lstlisting}
+Básicamente la idea es primero buscar S, S es el conjunto de posibilidades (combinaciones) que hay. \\
+Cada x sería un elemento de S (x es un subconjunto), es decir, una combinación que es probable solución. \\
+P(x) verifica si la condición que buscamos se cumple dado el subconjunto de S.  \\
+Procesar x agrega el subconjunto como solución.
 \section*{Backtracking}
 Es una técnica (de fuerza bruta pero mas eficiente) que consiste en armar un árbol donde debemos extender soluciones parciales \textbf{(cuando noto que una solución parcial (un camino) no me sirve, puedo descartarla e ir a la siguiente sin necesidad de perder más tiempo en esa o sus hijos.)}. \\
 
@@ -198,6 +208,7 @@ Backtracking garantiza encontrar al menos una solución válida y luego optimiza
     retornar
 \end{lstlisting}
 \textbf{Ej.}: Resolver un sudoku se resuelve en forma muy eficiente con un algoritmo de backtracking.
+\textbf{Importante}: Recordar que casi siempre, para ir guardando las soluciones tenemos que crear un vector de igual longitud que la data que tenemos que evaluar, y ese vector de solucion parcial que se manda por parametros tenemos que ir colocando el caso que sea 1 (esta) y el caso 0 (no está).
 \subsection*{Casos de Uso de Backtracking}
 \begin{itemize}
     \item Problemas de Decisión.
