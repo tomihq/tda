@@ -94,15 +94,30 @@ bool esCuadradoMagico(std::vector<std::vector<int>>& matriz, int n){
     return true; 
 }
 
+void limpiarIndices(int *i, int *j){
+    if(i>n){
+        i = 0;
+    }
+
+    if(j>n){
+        j = 0;
+    }
+}
+
+void generarMagicuboDeOrdenN(int i, int j, std::vector<std::vector<int>>& matriz){
+  if(i == n) esCuadradoMagico(matriz);
 
 
+    
+}
 
 int main(){
     int n = 0;
     std::cout << "Ingrese el orden del Cuadrado Mágico" << std::endl;
     std::cin >> n; 
-    std::vector<std::vector<int>> matriz(n, std::vector<int>(n));
-    colocarEnPosicion(matriz, 1, 2, n, 10);
+    /* std::vector<std::vector<int>> matriz(n, std::vector<int>(n));
+    colocarEnPosicion(matriz, 1, 2, n, 10); */
+    generarMagicuboDeOrdenN(n);
     std::cout << matriz[2][0] << std::endl;
    /*  bool res = esCuadradoMagico(matriz, n);
     std::cout << res << std::endl; */
