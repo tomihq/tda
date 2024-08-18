@@ -14,11 +14,9 @@ void maxisubconjunto(int decisiones_tomadas, std::vector<int> &solucion_parcial)
         
          int acum = 0; 
          for(int i = 0; i<k; i++){
-            if(i == solucion_parcial[i]){ 
                 for(int j = i+1; j<k; j++){
                     acum += matriz_valores[solucion_parcial[i]][solucion_parcial[j]];
                 }
-            }
          }
          if(acum > mayor_suma){
             mayor_suma = acum;
