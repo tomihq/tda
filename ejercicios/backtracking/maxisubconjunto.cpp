@@ -2,9 +2,9 @@
 #include <vector>
 
 std::vector<int> maxi_conjunto; //Esto en realidad deberia ser mas dinamico, deberia ser de longitud k.
-int k = 2; 
-int n = 3; 
-std::vector<std::vector<int>> matriz_valores = {{0, 10, 1}, {1, 2, 0}, {10, 0, 2}};
+int k = 3; 
+int n = 4; 
+std::vector<std::vector<int>> matriz_valores = {{0, 10, 10, 1}, {0, 0, 5, 2}, {0, 0, 0, 1}, {0, 0, 0, 0}};
 int mayor_suma = 0; 
 
 //Si k = 2, n = 3 -> {{10, 0, 2}, {0, 10, 1}}
@@ -12,16 +12,16 @@ void maxisubconjunto(int decisiones_tomadas, std::vector<int> &solucion_parcial)
     if(decisiones_tomadas > k) return;
     if(decisiones_tomadas == k){
         
-         //entonces aca ya arme todos los posibles subconjuntos
          int acum = 0; 
          for(int i = 0; i<k; i++){
-            if(i == solucion_parcial[i]){ //Si i = al valor de la fila que esta en el posible subconjunto sumo los valores de esa fila.
-                for(int j = 0; j<n; j++){
-                    acum += matriz_valores[i][j];
+            if(i == solucion_parcial[i]){ 
+                for(int j = i+1; j<k; j++){
+                    acum += matriz_valores[solucion_parcial[i]][solucion_parcial[j]];
                 }
             }
          }
          if(acum > mayor_suma){
+            mayor_suma = acum;
             maxi_conjunto = solucion_parcial;
          }
     }else{
