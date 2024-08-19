@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+#include <math.h>
 bool esCuadradoMagico(std::vector<std::vector<int>> &matriz, int n)
 {
     int suma = 0;
@@ -65,7 +65,7 @@ bool esCuadradoMagico(std::vector<std::vector<int>> &matriz, int n)
     return true;
 }
 
-void generarCuadradoMagico(int n, int i, int j, std::vector<std::vector<int>> &matriz, std::vector<bool> &usado, int &mejorSuma)
+void generarCuadradoMagico(int n, int i, int j, std::vector<std::vector<int>> &matriz, std::vector<bool> &usado, int &mejorSuma, int sumaExacta)
 {
     if (i == n)
     {
@@ -93,6 +93,7 @@ void generarCuadradoMagico(int n, int i, int j, std::vector<std::vector<int>> &m
                 }
             }
         }
+        if(mejorSuma != sumaExacta) return; 
         return;
     }
 
@@ -105,7 +106,7 @@ void generarCuadradoMagico(int n, int i, int j, std::vector<std::vector<int>> &m
         { // si todavia no use el numero, lo utilizo.
             matriz[i][j] = num;
             usado[num - 1] = true;
-            generarCuadradoMagico(n, fila, columna, matriz, usado, mejorSuma);
+            generarCuadradoMagico(n, fila, columna, matriz, usado, mejorSuma, sumaExacta);
             usado[num - 1] = false;
         }
     }
@@ -116,12 +117,14 @@ int main()
     int n;
     std::cout << "Ingrese el orden del Cuadrado Mágico: ";
     std::cin >> n;
+    int solucion = (pow(n, 3) + n) / 2;
+    std::cout << "posible solucion" << std::endl;
 
     std::vector<std::vector<int>> matriz(n, std::vector<int>(n, 0));
     std::vector<bool> usado(n * n, false);
     int mejorSuma = 0;
 
-    generarCuadradoMagico(n, 0, 0, matriz, usado, mejorSuma);
+    generarCuadradoMagico(n, 0, 0, matriz, usado, mejorSuma, solucion);
 
     return 0;
 }
