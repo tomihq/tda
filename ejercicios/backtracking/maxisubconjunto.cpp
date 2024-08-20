@@ -1,44 +1,64 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int> maxi_conjunto; //Esto en realidad deberia ser mas dinamico, deberia ser de longitud k.
-int k = 3; 
-int n = 4; 
-std::vector<std::vector<int>> matriz_valores = {{0, 10, 10, 1}, {0, 0, 5, 2}, {0, 0, 0, 1}, {0, 0, 0, 0}};
-int mayor_suma = 0; 
+int k = 2; //O(log k) = O(1)
+int n = 3; //O(log n) = O(1)
+std::vector<std::vector<int>> matriz_valores = {
+    {1, 2, 3},
+    {0, 4, 2},
+    {0, 0, 6},
+}; //O(n^2)
 
-//Si k = 2, n = 3 -> {{10, 0, 2}, {0, 10, 1}}
-void maxisubconjunto(int decisiones_tomadas, std::vector<int> &solucion_parcial){
-    if(decisiones_tomadas > k) return;
-    if(decisiones_tomadas == k){
-        
-         int acum = 0; 
-         for(int i = 0; i<k; i++){
-                for(int j = i+1; j<k; j++){
-                    acum += matriz_valores[solucion_parcial[i]][solucion_parcial[j]];
-                }
-         }
-         if(acum > mayor_suma){
-            mayor_suma = acum;
-            maxi_conjunto = solucion_parcial;
-         }
-    }else{
-        
-        int inicio = decisiones_tomadas == 0 ? 0 : solucion_parcial[decisiones_tomadas - 1] + 1;
+int mayor_suma = 0; //O(log mayor_suma) => O(1)
+std::vector<int> maxi_conjunto;
 
-        for(int i = inicio; i<n; i++){
-            solucion_parcial[decisiones_tomadas] = i; 
-            maxisubconjunto(decisiones_tomadas+1, solucion_parcial);
+int calcular_suma_submatriz(const std::vector<int>& indices) {
+    int suma = 0; //O(1)
+    for (size_t i = 0; i < indices.size(); ++i) {    
+        for (size_t j = i; j < indices.size(); ++j) {
+            if (i == j) {
+                // Sumar el elemento diagonal una sola vez
+                suma += matriz_valores[indices[i]][indices[j]]; //O(1)
+            } else {
+                // Sumar una sola vez cada par de elementos simétricos
+                suma += matriz_valores[indices[i]][indices[j]] * 2; //O(1)
+            }
         }
     }
+    return suma;
 }
-int main(){
-    std::vector<int> solucion_parcial(k);
-    maxisubconjunto(0, solucion_parcial);
-     for (size_t i = 0; i < maxi_conjunto.size(); ++i) {
-                std::cout << maxi_conjunto[i] << " ";
-            }
-            std::cout << " " << std::endl;
-    
-    return 0; 
+
+
+void generar_combinaciones(int start, int depth, std::vector<int>& current_combination) {
+    if (depth == k) {
+        int suma_actual = calcular_suma_submatriz(current_combination);
+        if (suma_actual > mayor_suma) {
+            mayor_suma = suma_actual;
+            maxi_conjunto = current_combination;
+        }
+        return;
+    }
+
+    for (int i = start; i < n; ++i) { // 0 hasta n -> O(n^k * (n + n^2)) -> O(n^k)
+        current_combination[depth] = i;
+        generar_combinaciones(i + 1, depth + 1, current_combination);
+    }
 }
+
+int main() {
+    std::vector<int> current_combination(k); //O(k)
+    generar_combinaciones(0, 0, current_combination);
+
+    std::cout << "La combinación de filas que maximiza la suma es: ";
+    for (int i : maxi_conjunto) {
+        std::cout << i + 1 << " "; // +1 para representar filas en formato 1-indexado
+    }
+    std::cout << std::endl;
+
+    std::cout << "La mayor suma es: " << mayor_suma << std::endl;
+
+    return 0;
+}
+
+//Espacial: O(n^2 + k) = O(n^2).
+//Temporal: O(k^n)
