@@ -134,7 +134,6 @@ En cada paso, se extiende este \textbf{vector a} y se va formando una nueva \tex
 El espacio de soluciones final consiste en $ A_{1} \ x \ A_{2} \ x \dots \ x \ A_{n} $. \\
 
 Esto último de retroceder podemos verlo como un árbol de decisiones, los cuales si un nodo ya de por sì no me sirve, sus hijos tampoco y vuelvo al nodo anterior para seguir evaluando los demás hijos. \\
-\newpage
 Entonces...
 \begin{itemize}
     \item Conjunto de Soluciones Candidatas: Son todas las combinaciones posibles de los elementos. Pueden ser válidas o no. Son aquellas que habitan el último nivel del árbol (no se pueden extender más) pues no quedan más decisiones por tomar más que considerarlas válidas o inválidas en nuestro problema. Son las hojas del árbol.
@@ -216,15 +215,17 @@ Backtracking garantiza encontrar al menos una solución válida y luego optimiza
     \item Problemas de Enumeración: Todas las soluciones factibles a un problema.
 \end{itemize}
 \section*{Programación Dinámica}
-Consiste en reutilizar valores previamente calculados para ahorrar tiempo. \textbf{¿Cuál es el costo?}, el costo es que acá \textbf{usamos más espacio de la memoria}. \\
+La idea de la Programación Dinámica es dividir un problema en subproblemas de tamaños menores que son más fáciles de resolver. Una vez resueltos estos subproblemas, se combinan las soluciones obtenidas para generar la solución del problema original.
+\begin{itemize}
+    \item Es aplicado típicamente a problemas de optimización combinatoria.
+    \item Resulta adecuado para algunos problemas de naturaleza recursiva.
+    \item Consiste en reutilizar valores (resueltos por otros subproblemas) previamente calculados para ahorrar tiempo (es decir, evitamos repetir llamadas recursivas que tengan los mismos parámetros). \textbf{¿Cuál es el costo?}, el costo es que acá \textbf{usamos más espacio de la memoria}.
+    \item Esquema de \textbf{memoización}
+\end{itemize}
 
-\textbf{Nota}: Si queremos sacar ventaja de la memorización \textbf{tenemos que acceder al valor guardado en la estructura de datos en O(1) o en un menor tiempo que lo que costaría calcularlo} otra vez. \\
+\textbf{Nota}: Si queremos sacar ventaja de la memorización \textbf{tenemos que acceder al valor guardado en la estructura de datos en O(1) o en un menor tiempo que lo que costaría calcularlo} otra vez. Aunque no lo parezca, guardar información que vamos a terminar reutilizando ahorra mucho tiempo. \\
 
-Aunque no lo parezca, guardar información que vamos a terminar reutilizando ahorra mucho tiempo. \\
-
-Normalmente, la programación dinámica se utiliza cuando de antemano ya sabemos que vamos a tener que terminar reutilizando valores que ya previamente calculamos para esos parámetros de entrada. A esto se le llama \textbf{superposición de estados} y ocurre cuando un árbol de llamadas recursivas resuelve el mismo problema para mismos parámetros de entrada. \\
-
-Veamos ahora dos formas de encarar un problema de programación dinámica 
+\textbf{Importante}: No es necesario guardar todos los resultados de todos los subproblemas. Muchas veces podemos identificar cuales no serían necesarios reutilizar. \\
 
 \subsection*{Enfoque Top-Down} 
 Se implementa recursivamente. La idea es ir guardando el resultado de cada llamada recursiva en una estructura de datos \textbf{(memorización)}. Si llegase a suceder que en una nueva llamada vemos que esa llamada ya ocurrió previamente con los mismos parámetros podemos devolver el valor previamente calculado almacenado en la estructura de datos.  \\ 
@@ -236,9 +237,26 @@ Una forma de visualizarlo es con el árbol de llamados. Si tenemos una función 
 Claramente podemos observar como $f(n-1, k-1)$ se repite de ambos lados del árbol. Si esto fuese costoso de calcular, estaríamos perdiendo tiempo en algo que podríamos haber guardado. \\
 
 El nombre de Top-Down viene del lado que partimos del problema más grande y terminamos llegando a un caso base.
-Véase \hyperref[subsec:top_down_programacion_dinamica]{\underline{anexo}} para ver qué tanto mejora el tiempo de ejecución
+Véase \hyperref[subsec:top_down_programacion_dinamica]{\underline{anexo}} para ver qué tanto mejora el tiempo de ejecución \\
+
+Veamos un ejercicio para calcular el número combinatorio, y resolvamoslo Top-Down y Bottom-up. \\
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/combinatorio.png}
+\end{minipage}\]
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/combinatorio_top_down.png}
+\end{minipage}\]
+En este enfoque, lo malo que tenemos es que vamos memorizando todos los resultados que no tengo guardados y toma mucho más espacio, y ni siquiera sabemos si en algún momento lo vamos a reutilizar.
 \subsection*{Enfoque Bottom-Up}
-Generalmente es iterativo, pero no siempre. Empieza resolviendo las partes más pequeñas y fundamentales del problema. Cada vez que resuelve un problema, almacena su solución en una estructura de datos auxiliar.
+Generalmente es iterativo, pero no siempre. Empieza resolviendo las partes más pequeñas y fundamentales del problema. Cada vez que resuelve un problema, almacena su solución en una estructura de datos auxiliar. \\
+La imagen de abajo representa una solución al problema del número combinatorio resuelto por Bottom-Up. Es mucho más eficiente que Top-Down porque vemos que solo nos basta conocer la fila anterior (los últimos 2 valores) para determinar la siguiente fila. \\
+Esto es mucho más óptimo que hacerlo de manera Top-Down.
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/bottom_up.png}
+\end{minipage}\]
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/combinatorio_bottom_up.png}
+\end{minipage}\]
 \section*{Divide \& Conquer}
 Esta técnica consiste en dividir \textbf{un problema en subproblemas
  del mismo tipo} que en el original, resolver los subproblemas y luego combinar las soluciones. \\
