@@ -3,9 +3,9 @@
 #include <chrono>
 using namespace std; 
 using namespace std::chrono; 
-long long nroCombinatorio(int n, int k, vector<vector<long long>>& memo){
+long long nroCombinatorio(int n, int k){
     if(k == 0 || k == n) return 1; 
-    return nroCombinatorio(n-1, k-1, memo) + nroCombinatorio(n-1, k, memo);
+    return nroCombinatorio(n-1, k-1) + nroCombinatorio(n-1, k);
 }
 
 int main() {
@@ -17,8 +17,7 @@ int main() {
     cin >> n; 
     cout << "Ingrese k" << endl;
     cin >> k; 
-    vector<vector<long long>> memo(n+1, vector<long long>(k+1, -1));
-    long long res = nroCombinatorio(n, k, memo);
+    long long res = nroCombinatorio(n, k);
     cout << res; 
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
