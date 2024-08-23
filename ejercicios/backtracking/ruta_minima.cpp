@@ -33,12 +33,12 @@ void rutaMinima(int i, std::vector<int>& solucion_parcial, std::vector<bool>& us
     
     for(int k = 0; k < n; k++){
         if(!usados[k]){
-            usados[k] = true; 
-            solucion_parcial[i] = k;
+            usados[k] = true; //armo la rama del 0 -> lo coloco como usado para que en la proxima llamada recursiva no lo pueda usar.
+            solucion_parcial[i] = k; //guardo en la permutacion el valor de k -> al principio guardaria la primera fila.
             
-            rutaMinima(i + 1, solucion_parcial, usados);
+            rutaMinima(i + 1, solucion_parcial, usados); //llamado recursivo para seguir llenando el camino que comienza con fila 1.
 
-            usados[k] = false;
+            usados[k] = false; //borro todo para que el camino del 1 pueda usar cualquier valor en cualquier otro llamado recursivo.
         }
         
     }
