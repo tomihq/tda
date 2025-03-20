@@ -102,4 +102,30 @@ Lo definimos formalmente de la siguiente manera: $e_{i}^{f} = e_{i+1}^{0} \ \for
 Importa quién se relaciona con quien. Ej.: $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}\}$
 \subsubsection*{Camino en un Grafo no Dirigido}
 No importa quién se relaciona con quien. Ej.: $E = \{(A, B), (B, C)\}$. El camino podría ser en cualquier sentido. 
+\subsection*{Ciclos}
+Los ciclos son caminos tal que $v_{0} = v_{r}$. Solo existe en grafos no simples. 
+\begin{itemize}
+    \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}, (C, A)_{\rightarrow} \}$ es un ciclo.
+\end{itemize}
+Una forma sencilla de pensarlo es lo siguiente: todo vértice recibe a un vértice, y todo vértice emite a un vértice. En algún momento se cierra la relación y los junta a todos.
+\subsection*{Grafo Conexo}
+Un Grafo Conexo es un Grafo que tiene la particularidad donde todos sus vértices están conectados entre sí. 
+\begin{itemize}
+    \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}, \}$ es un grafo conexo.
+    \item $E = \{(A, B)_{\rightarrow}, (C, D)_{\rightarrow}\}$ no es un grafo conexo.
+\end{itemize}
+\subsubsection*{Grafo fuertemente Conexo}
+Un Grafo fuertemente conexo es un grafo dirigido y conexo. Todos los nodos deben tener una relación simétrica entre ellos.
+\begin{itemize}
+    \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}\}$ es un grafo conexo.
+    \item $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}, (C, B)_{\rightarrow}, (B, A)_{\rightarrow},\}$ es un grafo fuertemente conexo.
+\end{itemize}
+\subsection*{Grafo T}
+Es un árbol que cumple con las siguientes propiedades
+\begin{itemize}
+    \item Es conexo.
+    \item No tiene ciclos. 
+\end{itemize}
+\subsection*{Grafo Bosque}
+Es un árbol que cumple con la propiedad de que \textbf{no tiene ciclos}.
 \end{document} 
