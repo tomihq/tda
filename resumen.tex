@@ -65,4 +65,41 @@ Un Grafo no Simple es un grafo que no tiene ninguna restricción con respecto a 
 \end{itemize}
 \textbf{Good to Know}: Los grafos simples, son subconjuntos de grafos no simples. Por ende, si tenemos un grafo no simple que cumple las propiedades de un grafo simple, consideramos que es un \textbf{grafo simple} al ser más restrictivo. \\
 En los ejemplos anteriores, entonces, $E = \{(A,B)\}$ sería mejor considerado como Grafo Simple.
+\subsection*{Grado de un vértice (nodo)}
+El grado de un vértice no es más que la cantidad de conexiones que tiene un nodo. \\
+Definimos formalmente al grado de un vértice como $deg(v) = \#\{e \in E : v \in e\}$ \\
+\textbf{Good to Know}: deg refiere a degree. \\
+\textbf{Good to Know 2}: \textbf{e} es una arista particular $e = (v, w)$.
+\subsection*{Grafo Dirigido}
+Un Grafo Dirigido es un tipo de grafo (que puede ser simple o no simple) pero importa quién se relaciona con quién, es decir, el orden en que guardamos la relación. En dibujos, lo notamos con una flecha. 
+\begin{itemize}
+    \item $E = \{(A,B)_{\rightarrow}, (B, A)_{\leftarrow} \}$ es un grafo dirigido, esto quiere decir que $(A,B) \neq (B, A)$
+\end{itemize}
+\textbf{Good to Know}: A nivel estructura de datos, parece que E es igual en un Grafo Dirigido que un Grafo No Dirigido. No obstante, optamos, a nivel de notación incluir una fecha para indicar la relación entre ambos. A nivel código, deberías manejar alguna información extra para entender si es dirigido o no.
+\subsubsection*{Grado de un vértice en un Grafo Dirigido}
+En un Grafo Dirigido, el grado de un vértice se calcula como $deg(v) = indeg(v) + outdeg(v)$ \\
+¿A qué nos referimos con indeg(v) y outdeg(v)? Como es un grafo dirigido, la relación entre los vértices importa. Por lo tanto, aquellas aristas entrantes al nodo v origen las agrupamos en indeg(v) mientras que aquellas aristas salientes desde el nodo v las agrupamos en outdeg(v).
+\begin{itemize}
+    \item $E = \{(A,B)_{\rightarrow}, (B, A)_{\leftarrow}, (A, C)_{\rightarrow} \}$ es un grafo dirigido. Siendo indeg(A) = 1, outdeg(A) = 2 $\implies deg(A) = 3$ 
+\end{itemize}
+\subsection*{Grafo No Dirigido}
+Un Grafo No Dirigido es un grafo el cual no existe la dirección en una relación entre dos vértices.
+\begin{itemize}
+    \item $E = \{(A,B), (B, A) \}$ es un grafo no dirigido, esto quiere decir que $(A,B) = (B, A)$
+\end{itemize}
+\textbf{Good to Know}: Los Grafos Dirigidos o Grafos no Dirigidos pueden ser Grafos Simples o no Simples.
+\subsubsection*{Cantidad de Aristas de un Grafo Simple no Dirigido}
+Como no importa la relación entre los vértices pues $(A,B) = (B,A)$, contamos solo una vez esa arista \[0 \leq |E| \leq \frac{n(n-1)}{2} = \binom{n}{2}\]
+\subsubsection*{Grado de un vértice en un Grafo No Dirigido}
+Es la misma cuenta que hacemos en un grafo dirigido, pero sin distinguir en grupos a las aristas \textbf{(porque no tienen dirección)}.
+\subsection*{Grafo Completo}
+Llamamos Grafo Completo a un Grafo que tiene todos sus nodos conectados.
+\subsection*{Camino}
+Un camino en un grafo es una sucesión de aristas. \\
+Lo definimos formalmente de la siguiente manera: $e_{i}^{f} = e_{i+1}^{0} \ \forall i \ (v = e^{0}_{i}, w = e^{f}_{r})$ \\
+\textbf{Good to Know}: El $0$ indica desde donde comienza el camino.
+\subsubsection*{Camino en un Grafo Dirigido}
+Importa quién se relaciona con quien. Ej.: $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}\}$
+\subsubsection*{Camino en un Grafo no Dirigido}
+No importa quién se relaciona con quien. Ej.: $E = \{(A, B), (B, C)\}$. El camino podría ser en cualquier sentido. 
 \end{document} 
