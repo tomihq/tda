@@ -19,7 +19,7 @@
 }
 \input{AEDmacros}
 \newcommand{\notimplies}{\;\not\!\!\!\implies}
-\title{Algoritmos y Estructuras de Datos III}
+\title{Técnicas y Diseños de Algoritmos}
 \author{Tomás Agustín Hernández}
 \date{}
 
@@ -45,10 +45,28 @@ Definimos un grafo como: $G = (V, E)$ donde $E \subseteq V X V$.
 \[\begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\linewidth]{assets/graph.png}
 \end{minipage}\]
-Nótese que tiene sentido que el conjunto de aristas E esté formado por un par $V X V$. De lo contrario no existiría una arista.
+Nótese que tiene sentido que el conjunto de aristas E esté formado por un par $V X V$. De lo contrario no existiría una arista. \\
+\textbf{Good to Know} 
+\begin{itemize}
+    \item Si dos vértices están conectados por una arista, entonces estos se llaman \textbf{adyacentes}.
+    \item La relación entre dos vértices define a $e = (u,v) \in E$. En este caso, decimos que \textbf{e} es incidente a \textbf{u} y \textbf{v}.
+    \item La cantidad de vértices la notamos con la letra \textbf{n} y la cantidad de aristas con la letra \textbf{m}.
+\end{itemize}
+\subsection*{¿Por qué le decimos vértices a los nodos?}
+Porque los grafos tienen un fundamento mucho más matemático.
+\subsection*{Self Loop}
+En un grafo, hablamos de self loop cuando un vértice se relaciona consigo mismo.
 \subsection*{Cantidad de vertices y cantidad de aristas}
 Definimos la cantidad de vértices de un grafo como $\longitud{V} = n$ y la cantidad de aristas como $\longitud{E} = m$. \\
 \textbf{Good to Know}: En un grafo T (árbol) \textbf{siempre} sucede que $\longitud{V} > \longitud{E}$ en una unidad. Lo veremos más adelante, pero está bueno notarlo.
+\subsection*{Vecindad de un vértice}
+Llamamos vecindad de un vértice v a todos los vértices adyacentes de v. \\
+Formalmente, lo definimos como: $N(v) = \{u \in V : (v, u) \in E\}$ 
+\[\begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{assets/vecindad.png}
+\end{minipage}\]
+Ej.: $N(2) = \{1, 3, 7, 6\}$ \\
+\textbf{Good to Know}: Se utiliza la letra N de Neighbor (vecino) en inglés.
 \subsection*{Grafo Simple}
 Un Grafo Simple es un grafo que no tiene más de una arista entre dos mismos nodos. Nótese que aquí no importa la relación entre ellos, sino que, no debería estar repetido el mismo par (sin importar el orden).
 \begin{itemize}
@@ -65,12 +83,36 @@ Un Grafo no Simple es un grafo que no tiene ninguna restricción con respecto a 
 \end{itemize}
 \textbf{Good to Know}: Los grafos simples, son subconjuntos de grafos no simples. Por ende, si tenemos un grafo no simple que cumple las propiedades de un grafo simple, consideramos que es un \textbf{grafo simple} al ser más restrictivo. \\
 En los ejemplos anteriores, entonces, $E = \{(A,B)\}$ sería mejor considerado como Grafo Simple.
+\subsection*{Multigrafo}
+Un Multigrafo es un tipo de \textbf{grafo no simple} el cual puede haber más de una arista entre el mismo par de vértices. 
+\[\begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{assets/multigrafo.png}
+\end{minipage}\]
+En el gráfico anterior, se definió el siguiente multigrafo: $G = \{\textbf{(1, 2), (1, 2), (1, 2)}, (2, 3), (3, 4), (3, 2), (4, 3) ...\}$
+\subsection*{Pseudografo}
+Un Pseudografo es un tipo de \textbf{grafo no simple} el cual tiene la particularidad de que puede haber más de una arista entre el mismo par de vértices, y, además, los vértices pueden tener self-loops. \\
+\textbf{Good to Know}: Puede haber más de un self-loop de un vértice.
 \subsection*{Grado de un vértice (nodo)}
-El grado de un vértice no es más que la cantidad de conexiones que tiene un nodo. \\
+El grado de un vértice es la cantidad de conexiones que tiene un nodo. \\
 Definimos formalmente al grado de un vértice como $deg(v) = \#\{e \in E : v \in e\}$ \\
 \textbf{Good to Know}: deg refiere a degree. \\
-\textbf{Good to Know 2}: \textbf{e} es una arista particular $e = (v, w)$.
-\subsection*{Grafo Dirigido}
+\textbf{Good to Know 2}: \textbf{e} es una arista particular $e = (v, w)$.\\
+\textbf{Good to Know 3}: En un grafo G, al grado mínimo lo notamos como $\delta(G)$ mientras que al grado máximo lo notamos como $\triangle(G)$
+\[\begin{minipage}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{assets/max_min_grado.png}
+\end{minipage}\]
+En este caso particular, tenemos que $\delta(G) = 2$ y $\triangle(G) = 4$, y, a modo de ejemplo, $deg(2) = 4$ \\
+\textbf{Good to Know 4}: Por cada par de vértices, tenemos una suma de grado 2. Ej.: $\{(1,2)\}$ nos da $deg(1) + deg(2) = 2$
+\subsubsection*{Grado de un vértice en un Multigrafo}
+Exactamente igual que en un Grafo, pero acá hay que aclarar que como podemos tener una relación entre dos vértices más de una vez tenemos que contar cada arista. Por ejemplo, si tenemos $\{(1,2), (1,2)\}$ entonces $deg(1) = 2$.
+\subsubsection*{Grado de un vértice en un Pseudografo}
+Exactamente igual que en un Grafo, pero acá el self-loop cuenta 2 veces. Por ejemplo, si tenemos $\{(1,2), (1,2), (1, 1), (1, 1)\}$ entonces $deg(1) = 6$. Si en algún momento te maréas, el self-loop vale dos porque tenés el mismo número en el par.
+\subsection*{Suma de los grados de los vértices}
+Dado un grafo G = (V, E) la \textbf{la suma de los grados} de sus vértices es igual a 2 veces el número de aristas. Es decir, 
+\[\sum_{v \in V} deg(v) = 2 \times \#\{e \in E = 2m\}\]
+Para ver acerca de cómo demostrarlo, véase \hyperref[subsubsec:suma_grados_vertices]{\textbf{anexo}} \\
+\textbf{Corolario}: En un grafo, siempre hay una cantidad par de vértices que tienen grado impar. Ej.: $\{(1, 2), (2, 3)\}, deg(1) = 1, deg(2) = 2, deg(3) = 1$
+\subsection*{Grafo Dirigido (Digrafo)}
 Un Grafo Dirigido es un tipo de grafo (que puede ser simple o no simple) pero importa quién se relaciona con quién, es decir, el orden en que guardamos la relación. En dibujos, lo notamos con una flecha. 
 \begin{itemize}
     \item $E = \{(A,B)_{\rightarrow}, (B, A)_{\leftarrow} \}$ es un grafo dirigido, esto quiere decir que $(A,B) \neq (B, A)$
@@ -82,18 +124,34 @@ En un Grafo Dirigido, el grado de un vértice se calcula como $deg(v) = indeg(v)
 \begin{itemize}
     \item $E = \{(A,B)_{\rightarrow}, (B, A)_{\leftarrow}, (A, C)_{\rightarrow} \}$ es un grafo dirigido. Siendo indeg(A) = 1, outdeg(A) = 2 $\implies deg(A) = 3$ 
 \end{itemize}
+\subsubsection*{Cantidad de Aristas de un Grafo Dirigido Simple}
+Como acá importa la relación los vértices pues contamos todas las aristas pues $(A,B) \neq (B,A)$ \[0 \leq |E| \leq n(n-1)\]
+\subsubsection*{Cantidad de Aristas de un Grafo Dirigido NO Simple}
+No hay límite, pueden ser infinitas. No hay fórmula concreta.
 \subsection*{Grafo No Dirigido}
 Un Grafo No Dirigido es un grafo el cual no existe la dirección en una relación entre dos vértices.
 \begin{itemize}
     \item $E = \{(A,B), (B, A) \}$ es un grafo no dirigido, esto quiere decir que $(A,B) = (B, A)$
 \end{itemize}
 \textbf{Good to Know}: Los Grafos Dirigidos o Grafos no Dirigidos pueden ser Grafos Simples o no Simples.
-\subsubsection*{Cantidad de Aristas de un Grafo Simple no Dirigido}
+\subsubsection*{Cantidad de Aristas de un Grafo NO Dirigido Simple}
 Como no importa la relación entre los vértices pues $(A,B) = (B,A)$, contamos solo una vez esa arista \[0 \leq |E| \leq \frac{n(n-1)}{2} = \binom{n}{2}\]
+\subsubsection*{Cantidad de Aristas de un Grafo NO Dirigido NO Simple}
+No hay límite, pueden ser infinitas. No hay fórmula concreta.
 \subsubsection*{Grado de un vértice en un Grafo No Dirigido}
 Es la misma cuenta que hacemos en un grafo dirigido, pero sin distinguir en grupos a las aristas \textbf{(porque no tienen dirección)}.
 \subsection*{Grafo Completo}
-Llamamos Grafo Completo a un Grafo que tiene todos sus nodos conectados.
+Llamamos Grafo Completo a un Grafo que tiene todos sus vértices están conectados entre sí. \\
+Formalmente, lo notamos como $K_{n}$ donde \textbf{n} es la cantidad de vértices que tiene el grafo.
+\[\begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\linewidth]{assets/grafo_completo.png}
+\end{minipage}\]
+\subsection*{Grafo Complemento}
+Un Grafo Complemento ($G^{C}$) es el Grafo que tiene todas las aristas que no estaban en G. \\
+Ej.: $G = \{(1, 2), (3, 2)\}$ entonces $ G^{c} = \{(1, 3), (2, 3)\}$
+\subsubsection*{Cantidad de aristas de un Grafo Complemento}
+\[m_{\overline{G}} = \frac{n(n-1)}{2} - m\]
+\textbf{Creo que es necesario que sea un Grafo simple no dirigido}
 \subsection*{Camino}
 Un camino en un grafo es una sucesión de aristas. \\
 Lo definimos formalmente de la siguiente manera: $e_{i}^{f} = e_{i+1}^{0} \ \forall i \ (v = e^{0}_{i}, w = e^{f}_{r})$ \\
@@ -128,4 +186,12 @@ Es un árbol que cumple con las siguientes propiedades
 \end{itemize}
 \subsection*{Grafo Bosque}
 Es un árbol que cumple con la propiedad de que \textbf{no tiene ciclos}.
+\section*{Anexo}
+\subsection*{Demostraciones de Grafos}
+Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
+Lo más común es tener un caso base del tipo $n=1, m=0$ o $n=2, m=1$.
+\textbf{Good to Know}: Usar a favor las propiedades.
+\subsubsection*{Suma de los grados de los vértices}
+\label{subsubsec:suma_grados_vertices}
+
 \end{document} 
