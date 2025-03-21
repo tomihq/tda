@@ -153,27 +153,64 @@ Ej.: $G = \{(1, 2), (3, 2)\}$ entonces $ G^{c} = \{(1, 3), (2, 3)\}$
 \[m_{\overline{G}} = \frac{n(n-1)}{2} - m\]
 \textbf{Creo que es necesario que sea un Grafo simple no dirigido}
 \subsection*{Recorrido}
-Sucesión de vértices y aristas de un grafo, tal que 
+Un recorrido es una \textbf{sucesión de vértices} y \textbf{aristas} de un grafo, tal que $e_{i}$ sea incidente a $v_{i-1}$ y $v_{i}$ para todo $i = 1...k : P = v_{0}e_{1}v_{1}e_{2}...e_{k}v_{k}$ (vértice, par de vértices, vértice, par de vértices, vértice...). \\
+Ej.: $P = 1 \rightarrow (1,2) \rightarrow 2 \rightarrow (2,3) \rightarrow 3 \rightarrow (3,4) \rightarrow 4 \rightarrow (4,6) \rightarrow 6 \rightarrow (2,6) \rightarrow 2 ...$
+\subsubsection*{Longitud}
+La longitud de un recorrido P, l(p), es la \textbf{cantidad de aristas} que tiene. \\
+$Ej.: P = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 2 \rightarrow 7$ donde $l(P) = 6$
 \subsection*{Camino}
-Un camino en un grafo es una sucesión de aristas. \\
-Lo definimos formalmente de la siguiente manera: $e_{i}^{f} = e_{i+1}^{0} \ \forall i \ (v = e^{0}_{i}, w = e^{f}_{r})$ \\
-\textbf{Good to Know}: El $0$ indica desde donde comienza el camino.
+Un camino es un recorrido que no pasa dos veces por el mismo vértice. \\
+Ej.: $P = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 6 \rightarrow 7 \rightarrow 8 \rightarrow 9$
+\[\begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\linewidth]{assets/camino.png}
+\end{minipage}\]
+\subsubsection*{Distancia entre dos vértices}
+La distancia entre dos vértices u y v se define como la \textbf{longitud del camino más corto} (cantidad de aristas) entre u y v. Se denota $d(u,v)$ \\
+Ej.: $P = 1 \rightarrow 2 \rightarrow 7$ entonces $d(1,7) = 2$
+\[\begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\linewidth]{assets/distancia_vertices.png}
+\end{minipage}\]
+\textbf{Good to Know}
+\begin{itemize}
+    \item Si no existe un recorrido entre u y v se define la distancia como infinito, $d(u,v) = \infty$
+    \item La distanica de un vértice consigo mismo es 0, $d(u, u) = 0$
+\end{itemize}
 \subsubsection*{Camino en un Grafo Dirigido}
 Importa quién se relaciona con quien. Ej.: $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}\}$
 \subsubsection*{Camino en un Grafo no Dirigido}
 No importa quién se relaciona con quien. Ej.: $E = \{(A, B), (B, C)\}$. El camino podría ser en cualquier sentido. 
-\subsection*{Ciclos}
-Los ciclos son caminos tal que $v_{0} = v_{r}$. Solo existe en grafos no simples. 
-\begin{itemize}
-    \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}, (C, A)_{\rightarrow} \}$ es un ciclo.
-\end{itemize}
-Una forma sencilla de pensarlo es lo siguiente: todo vértice recibe a un vértice, y todo vértice emite a un vértice. En algún momento se cierra la relación y los junta a todos.
+\subsection*{Sección}
+Una sección es un tramo del recorrido P, se nota $P_{v_{i}}{v_{j}}$. \\
+Ej.: $P_{2,6} = 2 \rightarrow 3 \rightarrow 4 \rightarrow 6$ \\
+Nótese que aquí $v_{i} = 2$ y $v_{j} = 6$ pero desconozco en base al dibujo qué posición (índice) toman el 2 y el 6.
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/sección.png}
+\end{minipage}\]
+\subsection*{Circuito}
+Un circuito es un recorrido que empieza y termina en el mismo vértice, se nota $P_{v_{i}}{v_{j}}$ \\
+Ej.: $P_{1,1} = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 2 \rightarrow 1$
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/circuito.png}
+\end{minipage}\]
+\subsection*{Ciclo (o circuito simple)}
+Un ciclo o circuito simple es un circuito (de tres o más vértices) que no repite vértices, se nota $P_{v_{i}}{v_{j}}$.
+Ej.: $P_{1,1} = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 7 \rightarrow 8 \rightarrow 9 \rightarrow 1$
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/ciclo.png}
+\end{minipage}\]
+\subsection*{Subgrafo}
+
 \subsection*{Grafo Conexo}
 Un Grafo Conexo es un Grafo que tiene la particularidad donde todos sus vértices están conectados entre sí. 
 \begin{itemize}
     \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}, \}$ es un grafo conexo.
     \item $E = \{(A, B)_{\rightarrow}, (C, D)_{\rightarrow}\}$ no es un grafo conexo.
 \end{itemize}
+\subsubsection*{Componente Conexa}
+Una componente conexa es un subgrafo conexo maximal (no está incluído estrictamente en otro grafo)
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/componente_conexa.png}
+\end{minipage}\]
 \subsubsection*{Grafo fuertemente Conexo}
 Un Grafo fuertemente conexo es un grafo dirigido y conexo. Todos los nodos deben tener una relación simétrica entre ellos.
 \begin{itemize}
