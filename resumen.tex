@@ -154,82 +154,206 @@ Ej.: $G = \{(1, 2), (3, 2)\}$ entonces $ G^{c} = \{(1, 3), (2, 3)\}$
 \textbf{Creo que es necesario que sea un Grafo simple no dirigido}
 \subsection*{Recorrido}
 Un recorrido es una \textbf{sucesión de vértices} y \textbf{aristas} de un grafo, tal que $e_{i}$ sea incidente a $v_{i-1}$ y $v_{i}$ para todo $i = 1...k : P = v_{0}e_{1}v_{1}e_{2}...e_{k}v_{k}$ (vértice, par de vértices, vértice, par de vértices, vértice...). \\
-Ej.: $P = 1 \rightarrow (1,2) \rightarrow 2 \rightarrow (2,3) \rightarrow 3 \rightarrow (3,4) \rightarrow 4 \rightarrow (4,6) \rightarrow 6 \rightarrow (2,6) \rightarrow 2 ...$
-\subsubsection*{Longitud}
-La longitud de un recorrido P, l(p), es la \textbf{cantidad de aristas} que tiene. \\
-$Ej.: P = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 2 \rightarrow 7$ donde $l(P) = 6$
+Ej.: $P = 1 \rightarrow (1,2) \rightarrow 2 \rightarrow (2,3) \rightarrow 3 \rightarrow (3,4) \rightarrow 4 \rightarrow (4,6) \rightarrow 6 \rightarrow (2,6) \rightarrow 2 ...$ \\
+Es decir, el nodo anterior (si hay) debe estar en la siguiente arista en alguna de las posiciones.
 \subsection*{Camino}
-Un camino es un recorrido que no pasa dos veces por el mismo vértice. \\
+Un camino es un recorrido \textbf{que no pasa dos veces} por el mismo vértice. \\
 Ej.: $P = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 6 \rightarrow 7 \rightarrow 8 \rightarrow 9$
 \[\begin{minipage}[b]{0.4\textwidth}
     \includegraphics[width=\linewidth]{assets/camino.png}
 \end{minipage}\]
-\subsubsection*{Distancia entre dos vértices}
-La distancia entre dos vértices u y v se define como la \textbf{longitud del camino más corto} (cantidad de aristas) entre u y v. Se denota $d(u,v)$ \\
-Ej.: $P = 1 \rightarrow 2 \rightarrow 7$ entonces $d(1,7) = 2$
-\[\begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[width=\linewidth]{assets/distancia_vertices.png}
-\end{minipage}\]
-\textbf{Good to Know}
-\begin{itemize}
-    \item Si no existe un recorrido entre u y v se define la distancia como infinito, $d(u,v) = \infty$
-    \item La distanica de un vértice consigo mismo es 0, $d(u, u) = 0$
-\end{itemize}
-\subsubsection*{Camino en un Grafo Dirigido}
-Importa quién se relaciona con quien. Ej.: $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}\}$
-\subsubsection*{Camino en un Grafo no Dirigido}
-No importa quién se relaciona con quien. Ej.: $E = \{(A, B), (B, C)\}$. El camino podría ser en cualquier sentido. 
-\subsection*{Sección}
-Una sección es un tramo del recorrido P, se nota $P_{v_{i}}{v_{j}}$. \\
-Ej.: $P_{2,6} = 2 \rightarrow 3 \rightarrow 4 \rightarrow 6$ \\
-Nótese que aquí $v_{i} = 2$ y $v_{j} = 6$ pero desconozco en base al dibujo qué posición (índice) toman el 2 y el 6.
+\subsection*{Sección (subconjunto/parte de un recorrido)}
+Una sección es un tramo del recorrido P, se nota $P_{v_{i}}{v_{j}}$. Nótese que P es el recorrido, y los subíndices es aquello que acota al mismo. \\
+Ej.: $P_{2,6} = 2 \rightarrow 3 \rightarrow 4 \rightarrow 6$. En este ejemplo, $v_{i} = 2$ y $v_{j} = 6$.
 \[\begin{minipage}[b]{0.6\textwidth}
     \includegraphics[width=\linewidth]{assets/sección.png}
 \end{minipage}\]
+\textbf{Good to Know}
+\begin{itemize}
+    \item Una sección es un subconjunto de un recorrido P.
+\end{itemize}
 \subsection*{Circuito}
 Un circuito es un recorrido que empieza y termina en el mismo vértice, se nota $P_{v_{i}}{v_{j}}$ \\
 Ej.: $P_{1,1} = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 2 \rightarrow 1$
 \[\begin{minipage}[b]{0.6\textwidth}
     \includegraphics[width=\linewidth]{assets/circuito.png}
 \end{minipage}\]
+\textbf{Good to Know}:
+\begin{itemize}
+    \item Un circuito es un tipo de recorrido. 
+    \item Un circuito es opuesto a un camino. Porque un camino no tiene repetidos.
+\end{itemize}
 \subsection*{Ciclo (o circuito simple)}
 Un ciclo o circuito simple es un circuito (de tres o más vértices) que no repite vértices, se nota $P_{v_{i}}{v_{j}}$.
 Ej.: $P_{1,1} = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 7 \rightarrow 8 \rightarrow 9 \rightarrow 1$
 \[\begin{minipage}[b]{0.6\textwidth}
     \includegraphics[width=\linewidth]{assets/ciclo.png}
 \end{minipage}\]
+\subsubsection*{Longitud}
+La longitud de un recorrido P denotada l(P), es la \textbf{cantidad de aristas} que tiene. \\
+$Ej.: P = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 2 \rightarrow 7$ donde $l(P) = 6$
+\textbf{Good to Know}: Esta definición es muy importante, porque tranquilamente podría haber dos recorridos diferentes entre cada par de vértices.
+\subsubsection*{Distancia entre dos vértices}
+La distancia entre dos vértices u y v se define como la \textbf{longitud del recorrido más corto} entre u y v. Se denota $d(u,v)$ 
+\[\begin{minipage}[b]{0.7\textwidth}
+    \includegraphics[width=\linewidth]{assets/distancia.png}
+\end{minipage}\]
+\textbf{Good to Know} 
+\begin{itemize}
+    \item Precondiciones
+    \begin{itemize}
+        \item Tener dos vectores: u y v que pertenezcan a un grafo G.
+        \item Tener uno o más recorridos, que incluyan los nodos de G.
+    \end{itemize}
+    \item Postcondiciones
+    \begin{itemize}
+        \item d(u,v) es el recorrido más corto desde u a v.
+        \item Si $u=v \iff d(u,v) = 0$
+        \item Si no existe un recorrido entre u y v entonces $d(u,v) = \infty$
+    \end{itemize}
+\end{itemize}
+Véase \hyperref[subsubsec:distancia_demostracion]{\textbf{anexo}} para ver como demostrarlo por absurdo.
+\subsubsection*{Camino en un Grafo Dirigido}
+Importa quién se relaciona con quien. Ej.: $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}\}$
+\subsubsection*{Camino en un Grafo no Dirigido}
+No importa quién se relaciona con quien. Ej.: $E = \{(A, B), (B, C)\}$. El camino podría ser en cualquier sentido. 
 \subsection*{Subgrafo}
-
+Sea $G = (V_{G}, E_{G})$ y $H = (V_{H}, E_{H})$ 
+\subsubsection*{Subgrafo (base)}
+H es un subgrafo de G si todos los vértices y aristas de H están en G. \\
+Esto quiere decir que con que no haya aristas (conexiones entre vértices) o vértices que no estén en G, H es un subgrafo de G.
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/subgrafo_base.png}
+\end{minipage}\]
+\textbf{A partir de acá, los demás subgrafos cumplen mínimamente estas condiciones}
+\subsubsection*{Subgrafo propio}
+H es un subgrafo propio de G si todos los vértices y aristas de H están en G siempre y cuando \textbf{no sea la totalidad}. Es decir, no debe suceder que sea exactamente $H = G$.
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/subgrafo_propio.png}
+\end{minipage}\]
+\subsubsection*{Subgrafo Generador}
+H es un subgrafo generador de G si H \textbf{tiene exactamente los mismos vértices} que G. 
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/subgrafo_generador.png}
+\end{minipage}\]
+\textbf{Un subgrafo generador es más fuerte que un subgrafo propio porque nos hacen usar todos los nodos pero conectarlos como queramos (siempre y cuando esas conexiones existan en el grafo original). Un subgrafo propio solo tiene una condición, no ser igual al grafo original.}
+\subsubsection*{Subgrafo Inducido}
+No sé por qué siento que este es trivial, o quizá lo estoy entendiendo mal. \\
+H es un subgrafo inducido de G si todos los nodos de H, forman aristas que están en G y por consecuente, esas mismas aristas están en H. \\
+Entiendo que es un subgrafo normal, solo que acá se obliga a que todos los nodos de H, tengan aristas que estén en G (subgrafo común), y por lo tanto están en H. \\
+Lo que no entiendo es, ¿no es obvio que si hay aristas en H, deben estar sí o sí en G? ¿O acá lo que está obligando a que si están en G están si o sí en H?
 \subsection*{Grafo Conexo}
-Un Grafo Conexo es un Grafo que tiene la particularidad donde todos sus vértices están conectados entre sí. 
+Un Grafo Conexo es un grafo el cual existe un \textbf{camino} que conecta todos los vértices entre sí. 
 \begin{itemize}
     \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}, \}$ es un grafo conexo.
     \item $E = \{(A, B)_{\rightarrow}, (C, D)_{\rightarrow}\}$ no es un grafo conexo.
 \end{itemize}
 \subsubsection*{Componente Conexa}
-Una componente conexa es un subgrafo conexo maximal (no está incluído estrictamente en otro grafo)
-\[\begin{minipage}[b]{0.6\textwidth}
+Una componente conexa es un subgrafo.
+\[\begin{minipage}[b]{0.9\textwidth}
     \includegraphics[width=\linewidth]{assets/componente_conexa.png}
 \end{minipage}\]
+Normalmente se consiguen cuando desconectás alguna arista de un grafo conexo. Entonces, te quedan subgrafos. La cantidad de subgrafitos son los componentes conexos.
 \subsubsection*{Grafo fuertemente Conexo}
 Un Grafo fuertemente conexo es un grafo dirigido y conexo. Todos los nodos deben tener una relación simétrica entre ellos.
 \begin{itemize}
     \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}\}$ es un grafo conexo.
     \item $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}, (C, B)_{\rightarrow}, (B, A)_{\rightarrow},\}$ es un grafo fuertemente conexo.
 \end{itemize}
+\subsection*{Árboles}
+\subsubsection*{Base}
+Es un grafo conectado, sin ciclos (circuitos simples).
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/arbol_grafo.png}
+\end{minipage}\]
+\subsubsection*{Quitar Arista}
+Si quitamos una arista cualquiera de un árbol, tenemos dos subgrafos conexos. Esto porque inicialmente un árbol no tiene ninguna componente suelta en el aire. 
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/arbol_quitar_arista.png}
+\end{minipage}\]
+\subsubsection*{Agregar Arista}
+Si agrego una arista cualquiera se forma un ciclo (circuito simple).
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/arbol_agregar_arista.png}
+\end{minipage}\]
 \subsection*{Grafo T}
 Es un árbol que cumple con las siguientes propiedades
 \begin{itemize}
     \item Es conexo.
     \item No tiene ciclos. 
 \end{itemize}
-\subsection*{Grafo Bosque}
-Es un árbol que cumple con la propiedad de que \textbf{no tiene ciclos}.
+\subsection*{Grafo Pesado}
+Definimos un Grafo Pesado G como $G = (V, E, W)$ donde W es una función que recibe dos vértices y devuelve el peso. \\
+Ahora, en cada arista almacenamos ambos vértices y el resultado del peso. 
+\[E_{i} = (v_{i}, v_{j}, w(v_{i},v_{j}))\]
+\subsection*{Grafo Acíclico Dirigido (DAG)}
+Un Grafo Acíclico Dirigido es un grafo dirigido que no tiene ciclos. Es decir, no existe ningún vértice que es capaz de empezar y terminar un recorrido. \\
+Ej.: Una Single Linked List es un caso particular de un DAG.
+\subsection*{Grafos Bipartito}
+Dado un grafo $G = (V, E)$, G es bipartito si
+\begin{itemize}
+    \item Existe $V_{1}$ y $V_{2}$ tal que $V_{1} \cup V_{2} = V$
+    \item $V_{1} \cap V_{2} = \emptyset$
+    \item $e = (u,v) \in E, u \in V_{1}, v \in V_{2}$. Esto significa que el vértice de $V_{1}$ se relaciona con el de $V_{2}$ o en el otro sentido. 
+    \item La única restricción es que no podés conectar un vértice de $V_{1}$ con otro de $V_{1}$ ni tampoco uno de $V_{2}$ con otro de $V_{2}$
+\end{itemize}
+\subsection*{Grafo Bipartito Completo}
+Lo mismo que un Grafo Bipartito pero acá todos los vértices de $V_{1}$ están conectados con los de $V_{2}$ y viceversa. \\
+Básicamente, el producto cartesiano.
+\subsubsection*{Cosas a releer / preguntar}
+\begin{itemize}
+    \item Un grafo es bipartito, $V = (V_{1}, V_{2}) \iff$ no tiene ciclos de longitud impar.
+    \item Un grafo es bipartito $\iff$ todas sus c.c. lo son 
+    \item Un grafo no tiene ciclos impares $\iff$ cada una de sus c.c. no tienen ciclos impares.
+\end{itemize}
+\subsection*{Isomorfismo de Grafos}
+Dados  $G = (V, E)$ y $G' = (V', E')$. $G$ y $G'$ son isomorfos si existe una función biyectiva $f: V \rightarrow V$ tal que $\forall u,v \in V$ 
+\[(u,v) \in E \iff (f(u), f(v)) \in E'\]
+Es decir, \textbf{si parto desde E y agarro el par que está en una arista, puedo poner cada componente en una función f y me lo transforma en una arista que está en E'}. \\
+Lo mismo con el caso opuesto.
+\subsubsection*{Propiedades}
+Si dos grafos $G = (V,E)$ y $G' = (V', E')$ son isomorfos entonces
+\begin{itemize}
+    \item Tienen el mismo número de vértices (sí, porque en la biyectividad se cumple la inyectividad y la sobreyectividad).
+    \item Tienen el mismo número de aristas (sí, porque cada una debería traducirse a una única específica, de lo contrario no sería inyectiva).
+    \item Para todo $k$, $1 \le k \le n-1$, tienen el mismo número de vértices de grado k (la misma distribución de grado).
+    \item Tienen la misma cantidad de componentes conexas.
+    \item Para todo k, $1 \le k \le n-1$, tienen el mismo número de caminos simples de longitud k.
+\end{itemize}
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/isomorfos.png}
+\end{minipage}\]
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
 Lo más común es tener un caso base del tipo $n=1, m=0$ o $n=2, m=1$.
 \textbf{Good to Know}: Usar a favor las propiedades.
+\subsubsection*{Distancia entre dos vértices}
+\label{subsubsec:distancia_demostracion}
+Si P es el recorrido entre u y v tiene longitud d(u,v) $\implies$ P es un camino. \\
+Recordemos algunas definiciones
+\begin{itemize}
+    \item Un recorrido es una sucesión de vértices y aristas, que no tiene ninguna limitación.
+    \item d(u, v) es el recorrido más corto entre u y v. Por lo que, podría haber otros. 
+    \item P es un camino: Un camino es un subconjunto de un recorrido donde no puede haber vértices repetidos.
+\end{itemize}
+Probando por el absurdo: 
+\[\neg Q \implies R\]
+En este caso
+\begin{itemize}
+    \item $\neg Q$ = P no es un camino
+    \item $R$ = P es el recorrido entre u y v y tiene longitud d(u,v)
+\end{itemize}
+La idea es llegar a algo falso.  
+\[V \implies F = F\]
+Suponemos que P NO es un camino $\neg Q = V$, entonces hay, al menos un vértice en P que se repite.  \\
+Recorrido P \[u \rightarrow z \rightarrow z \rightarrow v\]
+¿Podemos encontrar algún camino que sea más corto que P? (esto haría falso el consecuente). \\
+Defino un camino T \[u \rightarrow z \rightarrow v\] 
+Luego, la distancia mínima entre ambos recorridos
+\[min(dP(u,v), dT(u,v)) = min(3, 2) = 2 = dT(u,v)\]
+Finalmente, llegamos a un absurdo, porque la distancia mínima la tenemos con el recorrido T y no con P. \\
+Si hubiesemos llegado a que con $\neg Q$, P es el camino más corto, hicimos mal la demostración.
 \subsubsection*{Suma de los grados de los vértices}
 \label{subsubsec:suma_grados_vertices}
 
