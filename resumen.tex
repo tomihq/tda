@@ -324,6 +324,7 @@ Si dos grafos $G = (V,E)$ y $G' = (V', E')$ son isomorfos entonces
     \includegraphics[width=\linewidth]{assets/isomorfos.png}
 \end{minipage}\]
 \subsection*{Representación de grafos}
+\textbf{Good to Know}: En las diapositivas se usa la $d$ para representar tanto como el grado de un vértice o la distancia entre dos vértices. Acá, optamos por usar $deg$ para el grado y $d$ para distancia entre dos vértices.
 \subsubsection*{Lista de Adyacencia}
 Es la más común y la más eficiente. \\
 Es una lista de listas, donde cada lista corresponde al vértice y las aristas con las que se conecta se representa con una lista de diccionarios. 
@@ -340,8 +341,36 @@ Ej.: El nodo 3 (fila 3), está relacionado con todos los nodos que están en la 
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/adj_matrix.png}
 \end{minipage}\]
-\textbf{Good to Know}: En el dibujo vemos que empieza todo desde el índice 1 pero en realidad empezamos desde el 0. \textbf{Lo que todavía no entiendo es, qué pasaría si los nodos guardan información compleja, como elijo cual va en el índice 0, cual en el 1, etc.} \\
+\textbf{Good to Know}
+\begin{itemize}
+    \item En el dibujo vemos que empieza todo desde el índice 1 pero en realidad empezamos desde el 0. 
+    \item \textbf{Lo que todavía no entiendo es, qué pasaría si los nodos guardan información compleja, como elijo cual va en el índice 0, cual en el 1, etc.} 
+    \item La matriz es simétrica si el grafo es no dirigido. Es decir, ver desde fila/columna o columna/fila es lo mismo. 
+\end{itemize}
 Esta forma de trabajar con grafos es \textbf{súper ineficiente}. 
+\subsubsection*{Algunas propiedades útiles (solo grafos no dirigidos)}
+\begin{itemize}
+    \item 1. La suma de los elementos de la fila i (o columna j) es igual a $deg(u_{i})$, es decir: \textbf{$\sum_{i=0}^{j} a[i][0] = \sum_{j=0}^{i} a[j][0]$}
+    \item 2. Los elementos de la diagonal principal de $A^{2}$ indican los grados de los vértices $a^{2}_{ii} = deg(u_{i})$. \textbf{Nota}: usa ${ii}$ porque hay misma cantidad de filas que de columnas, de lo contrario, se podría decir ${ij}$ con $i=j$. Esto es más que nada para hablar de los índices de la diagonal principal de una matriz.
+\end{itemize}
+1. Nótese que en la columna $a_{i, ultColumna + 1}$ o en la fila $a_{ultFila + 1, j}$ se encuentran las sumas de esa fila o columna.
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/suma_matriz_ady.png}
+\end{minipage}\]
+2. Nótese que ahora lo que estaban en la fila / columna extra, ahora se pasaron al $a_{ii}$ (o $a_{ij}$ con $i=j$)  correspondiente.
+\[\begin{minipage}[b]{0.6\textwidth}
+    \includegraphics[width=\linewidth]{assets/diagonal_principal_ady.png}
+\end{minipage}\]
+\subsection*{Matriz de Adyacencia con Grafos Dirigidos}
+\begin{itemize}
+    \item La matriz de adyacencia de un grafo dirigido NO es simétrica como sí pasaba con un grafo común.
+    \item G = (V, E) donde E es un conjunto de pares ordenados. Esto significa que el \textbf{orden de los elementos del par} importan.
+    \item $e=(u,v)$ también se llama \textbf{arco}. A $u$ se le llama \textbf{cola} y a $v$ se le llama \textbf{cabeza}. (medio raro, pero bueno).
+    \item Los digrafos tienen grados de entrada $(deg_{in})$ y grados de salida $(deg_{out})$
+    \item El grafo subyacente $(G^{s})$ es el que resulta de remover las direcciones.
+    \item La suma de los elementos de la fila i es igual a $d_{OUT(u_{i})}$.
+    \item la suma de los elementos de la columna j es igual a $d_{IN(u_{j})}$
+\end{itemize} 
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
