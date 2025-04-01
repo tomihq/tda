@@ -425,8 +425,8 @@ Cuando podemos ver que una solución parcial no nos llevará a una solución vá
 \begin{itemize}
     \item Poda por factibilidad: Ninguna extensión de la solución parcial derivará en una solución valida del problema. 
     \begin{itemize}
-        \item Digamos que quiero llegar a armar subconjuntos que sumen 9, si con el nodo actual la suma es 10, entonces no me sirve seguir hacia adelante. Podo de una.
-        \item \textbf{¿Qué pasaría, si llegase a haber algún caso donde capaz nuestra solución parcial ya no es válida, pero si seguíamos adelante capaz teníamos un factor que la volvía a hacer válida? Por ej.: En un conjunto que tenes números positivos y negativos tenés que armar subconjuntos que sumen k. Si te pasaste de k, no te sirve podar de una porque capaz encontrás algun negativo que te ayude a llegar a k de vuelta.}
+        \item Digamos que quiero llegar a armar subconjuntos que sumen 9, si con el nodo actual la suma es 10, entonces no me sirve seguir hacia adelante. Podo de una. Esto se llama \textbf{propiedad dominó}, si una solución parcial no vale, la generada a partir de ella menos todavía. 
+        \item \textbf{¿Qué pasaría, si llegase a haber algún caso donde capaz nuestra solución parcial ya no es válida, pero si seguíamos adelante capaz teníamos un factor que la volvía a hacer válida? Por ej.: En un conjunto que tenes números positivos y negativos tenés que armar subconjuntos que sumen k. Si te pasaste de k, no te sirve podar de una porque capaz encontrás algun negativo que te ayude a llegar a k de vuelta.}. Respuesta: No te sirve esa poda para ese problema. 
     \end{itemize}
     \item Poda por optimalidad (problemas de optimización): Ninguna extensión de la solución parcial derivará en una solución del problema óptima.
 \end{itemize}
