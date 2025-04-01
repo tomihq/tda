@@ -414,9 +414,11 @@ Las soluciones candidatas se representan con un \textbf{vector a = $(a_{1}, a_{2
         \item Cada nodo es una solución parcial.
         \item La raíz del árbol es el vector vacío (solución parcial vacía).
     \end{itemize}
-    \item Soluciones candidatas: Serían las hojas del árbol, es decir, todas las posibles respuestas. 
-    \item Soluciones válidas: Son aquellas soluciones que cumplen con todas las características que buscamos (las hojas que cumplan).
+    \item Soluciones candidatas: Depende el problema. A veces son todas las hojas (si necesitás gastar todos los elementos), a veces te basta con cumplir X cosa y no necesitás recorrer todo el árbol. 
+    \item Soluciones válidas: Son aquellas soluciones que cumplen con todas las características que buscamos. A veces son las hojas del árbol, a veces no es necesario llegar hasta las hojas, porque capaz se cumple en uno, o dos pasos tempranos.
 \end{itemize}
+¿Todas las soluciones candidatas son soluciones parciales? Porque si una posible solución válida llegás en el primer nivel del árbol, entonces esa solución era candidata, pero también era parcial. \\
+Ej.: Ejercicio de armar subconjuntos que sumen n.  
 \subsection*{Podas}
 En el backtracking, recorremos el árbol en profundidad. \\
 Cuando podemos ver que una solución parcial no nos llevará a una solución válida, no es necesario seguir explorando esa rama del árbol de búsqueda (se poda el árbol) y se retrocede hasta encontrar un vértice con un hijo válida por donde seguir. 
