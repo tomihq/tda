@@ -417,7 +417,7 @@ Las soluciones candidatas se representan con un \textbf{vector a = $(a_{1}, a_{2
     \item Soluciones candidatas: Depende el problema. A veces son todas las hojas (si necesitás gastar todos los elementos), a veces te basta con cumplir X cosa y no necesitás recorrer todo el árbol. 
     \item Soluciones válidas: Son aquellas soluciones que cumplen con todas las características que buscamos. A veces son las hojas del árbol, a veces no es necesario llegar hasta las hojas, porque capaz se cumple en uno, o dos pasos tempranos.
 \end{itemize}
-¿Todas las soluciones candidatas son soluciones parciales? Porque si una posible solución válida llegás en el primer nivel del árbol, entonces esa solución era candidata, pero también era parcial. \\
+\textbf{¿Todas las soluciones candidatas son soluciones parciales? Porque si una posible solución válida llegás en el primer nivel del árbol, entonces esa solución era candidata, pero también era parcial.} \\
 Ej.: Ejercicio de armar subconjuntos que sumen n.  
 \subsection*{Podas}
 En el backtracking, recorremos el árbol en profundidad. \\
@@ -426,6 +426,7 @@ Cuando podemos ver que una solución parcial no nos llevará a una solución vá
     \item Poda por factibilidad: Ninguna extensión de la solución parcial derivará en una solución valida del problema. 
     \begin{itemize}
         \item Digamos que quiero llegar a armar subconjuntos que sumen 9, si con el nodo actual la suma es 10, entonces no me sirve seguir hacia adelante. Podo de una.
+        \item \textbf{¿Qué pasaría, si llegase a haber algún caso donde capaz nuestra solución parcial ya no es válida, pero si seguíamos adelante capaz teníamos un factor que la volvía a hacer válida? Por ej.: En un conjunto que tenes números positivos y negativos tenés que armar subconjuntos que sumen k. Si te pasaste de k, no te sirve podar de una porque capaz encontrás algun negativo que te ayude a llegar a k de vuelta.}
     \end{itemize}
     \item Poda por optimalidad (problemas de optimización): Ninguna extensión de la solución parcial derivará en una solución del problema óptima.
 \end{itemize}
