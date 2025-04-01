@@ -37,7 +37,6 @@
         };
     \end{tikzpicture}
 \end{figure}
-
 \newpage
 \section*{Grafos}
 Un grafo es una estructura de datos compuesta por \textbf{V un conjunto de vértices (nodos)} y \textbf{E un conjunto de aristas que conectan pares de vértices}. \\
@@ -369,12 +368,75 @@ Esta forma de trabajar con grafos es \textbf{súper ineficiente}.
     \item Los digrafos tienen grados de entrada $(deg_{in})$ y grados de salida $(deg_{out})$
     \item El grafo subyacente $(G^{s})$ es el que resulta de remover las direcciones.
     \item La suma de los elementos de la fila i es igual a $d_{OUT(u_{i})}$.
-    \item la suma de los elementos de la columna j es igual a $d_{IN(u_{j})}$
+    \item La suma de los elementos de la columna j es igual a $d_{IN(u_{j})}$
 \end{itemize} 
+\section*{BFS}
+Breadth-First Search o mejor conocido como BFS es un algoritmo de búsqueda para grafos. \\
+Casos de uso: 
+\begin{itemize}
+    \item Se usa en grafos no ponderados (no tiene peso en aristas).
+    \item Se usa para encontrar el camino más corto desde un nodo a otro. 
+    \item Se usa para asegurarnos que siempre pasamos por todos los nodos del mismo nivel antes de pasar a otro. 
+    \item Explora el grafo o árbol nivel a nivel, primero horizontalmente y luego verticalmente. Es decir, primero agarra todos los vecinos, después del primer vecino baja al siguiente nivel, después del segundo vecino baja al siguiente nivel y así sucesivamente. 
+    \item A nivel estructura de datos se implementa con una \textbf{queue} (FIFO).
+    \item Se almacena en una lista los nodos visitados para no repetirlos. Es decir, que antes de pasar por uno hay que chequear si ya está.
+\end{itemize}
+\subsection*{Complejidad temporal de BFS}
+La complejidad temporal de BFS es $O(\longitud{V} + \longitud{E})$. 
+\section*{DFS}
+Depth-First Search o mejor conocido como DFS es un algoritmo de búsqueda para grafos. \\
+Casos de uso: 
+\begin{itemize}
+    \item Explora todos los nodos a profundidad, primero verticalmente y luego horizontalmente.
+    \item A nivel estructura de datos se implementa con un \textbf{stack} (LIFO).
+    \item Se usa en grafos no ponderados (no tiene peso en aristas).
+\end{itemize}
+Un ejemplo claro de DFS sería buscar la altura de un árbol porque tendrías que buscar la rama más larga.
+\subsection*{Complejidad temporal de DFS}
+La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$.
+\section*{Fuerza Bruta}
+Consiste en analizar y listar todas las posibilidades y quedarme con las que me interesan. \\
+En la fuerza bruta, existen problemas de factibilidad y optimalidad. 
+\begin{itemize}
+    \item En los problemas de factibilidad lo que queremos son soluciones que cumplan ciertas características. 
+    \item En los problemas de optimizaciones combinatorias, teniendo todas las soluciones factibles me quedo con la mejor (según el criterio que considero qué es mejor). 
+\end{itemize}
+Los algoritmos por fuerza bruta son muy fáciles de implementar pero son muy ineficientes; son útiles cuando tenemos instancias súmamente pequeñas. \\
+
+Ej.: Si tenemos que completar un tablero de ajedrez tendríamos que poner todas las posibilidades en todos los casilleros y si hay pocas soluciones válidas estaríamos tardando demasiado tiempo por nada.
+\section*{Backtracking}
+Es una modificación de la técnica de fuerza bruta que aprovecha propiedades del problema para evitar analizar todas las configuraciones. \\
+Para que el algoritmo sea correcto debemos estar seguros de no dejar de examinar configuraciones que estamos buscando. \\
+Las soluciones candidatas se representan con un \textbf{vector a = $(a_{1}, a_{2}, \dots, a_{n})$}
+\begin{itemize}
+    \item Soluciones parciales: Son las soluciones que se van armando en cada paso. 
+    \begin{itemize}
+        \item Cada nodo es una solución parcial.
+        \item La raíz del árbol es el vector vacío (solución parcial vacía).
+    \end{itemize}
+    \item Soluciones candidatas: Serían las hojas del árbol, es decir, todas las posibles respuestas. 
+    \item Soluciones válidas: Son aquellas soluciones que cumplen con todas las características que buscamos (las hojas que cumplan).
+\end{itemize}
+\subsection*{Podas}
+En el backtracking, recorremos el árbol en profundidad. \\
+Cuando podemos ver que una solución parcial no nos llevará a una solución válida, no es necesario seguir explorando esa rama del árbol de búsqueda (se poda el árbol) y se retrocede hasta encontrar un vértice con un hijo válida por donde seguir. 
+\begin{itemize}
+    \item Poda por factibilidad: Ninguna extensión de la solución parcial derivará en una solución valida del problema. 
+    \begin{itemize}
+        \item Digamos que quiero llegar a armar subconjuntos que sumen 9, si con el nodo actual la suma es 10, entonces no me sirve seguir hacia adelante. Podo de una.
+    \end{itemize}
+    \item Poda por optimalidad (problemas de optimización): Ninguna extensión de la solución parcial derivará en una solución del problema óptima.
+\end{itemize}
+Un problema de backtracking que no tiene podas es un problema de fuerza bruta.
+\subsection*{Correctitud en Backtracking}
+Para demostrar la correctitud de un algoritmo de backtracking, debemos demostrar que se enumeran todas las configuraciones válidas. Si hacés una poda, me tenés que garantizar que aunque el rendimiento haya mejorado, me sigas trayendo las mismas soluciones válidas. \\
+Ej.: Si lo hacemos por fuerza bruta, podemos conseguir todas las soluciones válidas. Luego, si lo hacemos por backtracking y añadimos podas, nos fijamos que tengamos los mismos resultados que si lo hacemos por fuerza bruta.
+\subsection*{Complejidad en Backtracking}
+Consideramos el costo de procesar cada nodo. Cada nodo aparece cada vez que hacemos un llamado recursivo.  
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
-Lo más común es tener un caso base del tipo $n=1, m=0$ o $n=2, m=1$.
+Lo más común es tener un caso base del tipo $n=1, m=0$ o $n=2, m=1$. \\
 \textbf{Good to Know}: Usar a favor las propiedades.
 \subsubsection*{Distancia entre dos vértices}
 \label{subsubsec:distancia_demostracion}
