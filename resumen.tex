@@ -108,7 +108,7 @@ Exactamente igual que en un Grafo, pero acá hay que aclarar que como podemos te
 Exactamente igual que en un Grafo, pero acá el self-loop cuenta 2 veces. Por ejemplo, si tenemos $\{(1,2), (1,2), (1, 1), (1, 1)\}$ entonces $deg(1) = 6$. Si en algún momento te maréas, el self-loop vale dos porque tenés el mismo número en el par.
 \subsection*{Suma de los grados de los vértices}
 Dado un grafo G = (V, E) la \textbf{la suma de los grados} de sus vértices es igual a 2 veces el número de aristas. Es decir, 
-\[\sum_{v \in V} deg(v) = 2 \times \#\{e \in E = 2m\}\]
+\[\sum_{v \in V} deg(v) = 2 \times \#\{e \in E\} = 2m\] 
 Para ver acerca de cómo demostrarlo, véase \hyperref[subsubsec:suma_grados_vertices]{\textbf{anexo}} \\
 \textbf{Corolario}: En un grafo, siempre hay una cantidad par de vértices que tienen grado impar. Ej.: $\{(1, 2), (2, 3)\}, deg(1) = 1, deg(2) = 2, deg(3) = 1$
 \subsection*{Grafo Dirigido (Digrafo)}
@@ -142,11 +142,11 @@ Es la misma cuenta que hacemos en un grafo dirigido, pero sin distinguir en grup
 \subsection*{Grafo Completo}
 Llamamos Grafo Completo a un Grafo que tiene todos sus vértices están conectados entre sí. \\
 Formalmente, lo notamos como $K_{n}$ donde \textbf{n} es la cantidad de vértices que tiene el grafo.
-\[\begin{minipage}[b]{0.4\textwidth}
+\[\begin{minipage}[b]{0.4\textwidth} 
     \includegraphics[width=\linewidth]{assets/grafo_completo.png}
 \end{minipage}\]
 \subsection*{Grafo Complemento}
-Un Grafo Complemento ($G^{C}$) es el Grafo que tiene todas las aristas que no estaban en G. \\
+Un Grafo Complemento ($G^{C}$) es el Grafo que tiene todas las \textbf{aristas} que no estaban en G. \\
 Ej.: $G = \{(1, 2), (3, 2)\}$ entonces $ G^{c} = \{(1, 3), (2, 3)\}$
 \subsubsection*{Cantidad de aristas de un Grafo Complemento}
 \[m_{\overline{G}} = \frac{n(n-1)}{2} - m\]
@@ -237,10 +237,8 @@ H es un subgrafo generador de G si H \textbf{tiene exactamente los mismos vérti
 \end{minipage}\]
 \textbf{Un subgrafo generador es más fuerte que un subgrafo propio porque nos hacen usar todos los nodos pero conectarlos como queramos (siempre y cuando esas conexiones existan en el grafo original). Un subgrafo propio solo tiene una condición, no ser igual al grafo original.}
 \subsubsection*{Subgrafo Inducido}
-No sé por qué siento que este es trivial, o quizá lo estoy entendiendo mal. \\
-H es un subgrafo inducido de G si todos los nodos de H, forman aristas que están en G y por consecuente, esas mismas aristas están en H. \\
-Entiendo que es un subgrafo normal, solo que acá se obliga a que todos los nodos de H, tengan aristas que estén en G (subgrafo común), y por lo tanto están en H. \\
-Lo que no entiendo es, ¿no es obvio que si hay aristas en H, deben estar sí o sí en G? ¿O acá lo que está obligando a que si están en G están si o sí en H?
+H es un subgrafo inducido de G si todos los nodos que están en H tienen todas las aristas de G que contienen exactamente a los nodos de H. 
+Ej.: $G = ((1, 2, 3), \{(1,3), (1,2)\})$ si $H = (1,2)$ entonces está obligado a tener las aristas que contengan exactamente a los elementos 1 y 2. Por lo tanto serían: $\{1, 2\}$ 
 \subsection*{Grafo Conexo}
 Un Grafo Conexo es un grafo el cual existe un \textbf{camino} que conecta todos los vértices entre sí. 
 \begin{itemize}
@@ -309,7 +307,8 @@ Básicamente, el producto cartesiano.
 Dados  $G = (V, E)$ y $G' = (V', E')$. $G$ y $G'$ son isomorfos si existe una función biyectiva $f: V \rightarrow V$ tal que $\forall u,v \in V$ 
 \[(u,v) \in E \iff (f(u), f(v)) \in E'\]
 Es decir, \textbf{si parto desde E y agarro el par que está en una arista, puedo poner cada componente en una función f y me lo transforma en una arista que está en E'}. \\
-Lo mismo con el caso opuesto.
+Lo mismo con el caso opuesto. \\
+\textbf{Good to Know}: En nuestro caso, si G y G' son isomorfos los vamos a notar como $G = G'$ porque son lo mismo pero cambian la forma en que se nombran los nodos y el orden de las aristas.
 \subsubsection*{Propiedades}
 Si dos grafos $G = (V,E)$ y $G' = (V', E')$ son isomorfos entonces
 \begin{itemize}
