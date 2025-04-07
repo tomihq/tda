@@ -443,14 +443,65 @@ Consideramos el costo de procesar cada nodo. Cada nodo aparece cada vez que hace
     \end{minipage}\]
 \end{itemize}
 \section*{Programación Dinámica (DP)}
-Se basa en memorizar subproblemas que se vayan a repetir para ahorrar tiempo. \\
+Se basa en solucionar y memorizar subproblemas que se repetirán para ahorrar tiempo. \\
 Como se basa fundamentalmente en recursividad, seguramente haya casos donde la salida sea la misma para el mismo input en los distintos llamados. \\
 Esa \textbf{superposición de problemas} es que estamos llamando recursivamente a algo que \textbf{ya resolvimos anteriormente}, entonces, para evitar calcular todo nuevamente, usamos la información almacenada para esos input en memoria. \\
-Es \textbf{bastante común} usar este tipo de estrategias para afrontar problemas con matrices, o casos recursivos para cosas altamente costosas de calcular. 
+Es \textbf{bastante común} usar este tipo de estrategias para afrontar problemas con matrices, o casos recursivos para cosas altamente costosas de calcular. \\
+\textbf{Importante}: ¿Cuándo hay veces que la entrada no es exactamente igual pero vale la memorización para ese subproblema? \\
+Cuando la dirección de los argumentos no importa, se puede utilizar ese subproblema memorizado, es decir, en casos donde, por ejemplo $(a, b) = (b, a)$.
 \subsection*{Fibonacci y su relación con la Programación Dinámica}
-\[\begin{minipage}[b]{0.9\textwidth}
+\[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/fib_dp.png}
 \end{minipage}\]
+¿Donde está la superposición de problemas acá? Bueno, veamos que para \textbf{fib 5} se encuentra repetida una vez. \\
+Entonces, la idea, es que guardemos el resultado para el primer \textbf{fib} que salga, y luego reutilizarla. \\
+Nótese que al ser \textbf{fib(n-1)} + \textbf{fib(n-2)} en algún momento, indudablemente el \textbf{n-1} va a llegar a ser el valor que fue \textbf{n-2}, y ahí justamente, entra la memorización. \\
+A nivel código, no es más que guardar en un array, map o una estructura eficiente. \\ 
+Sin ningún tipo de memorización, la complejidad que da en tiempo es $O(n^{2})$ mientras que en espacio da $O(n)$. \\
+\textbf{En espacio da $O(n)$} porque a nivel stack, lo más profundo que baja en una rama es n veces. 
+\subsubsection*{Con Programación Dinámica}
+Sabiendo que tenemos superposición de problemas basado en n, optimizado quedaría así
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/fib_dp_finish.png}
+\end{minipage}\]
+¿Cómo quedó la complejidad temporal y espacial? Bueno, espacialmente seguimos teniendo $O(n)$ porque bajamos hasta el caso base, al menos una vez, pero temporalmente ahora también tenemos $O(n)$
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/fib_dp_finish_o.png}
+\end{minipage}\]
+\subsection*{Llegando a un punto particular en una grilla}
+Digamos que queremos movernos a un punto particular fijo y solo podemos movernos a la derecha y para abajo. Es sabido que van a existir muchas formas de llegar a ese punto. \\
+Ahora bien, a medida que nos vamos acercando, el problema se achica. Así que, seguramente, vaya a existir algún otro camino por el que lleguemos al punto (o no). 
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/gridTraveler.png}
+\end{minipage}\]
+Sin ningún tipo de memorización, la complejidad que da en tiempo es $O(2^{n+m})$ porque para cada caso, tengo dos opciones que dependen de dos variables mientras que en complejidad espacial da $O(n+m)$ que es lo que nos cuesta bajar hasta el caso base gastando todas las opciones.
+\subsubsection*{Con Programación Dinámica}
+¿Cómo hacemos para guardar en una estructura de memorización algo que tiene más de un argumento? Normalmente, lo ideal es guardar algo de la especie \textbf{m + ', ' + n}. \\
+Es realmente importante NO guardar todos de forma continua y sí distinguirlos por algún símbolo \textbf{(,)} por si en algún momento, tenemos que considerar los elementos separados pero que valgan por simetría.
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/gridTraveler_2.png}
+\end{minipage}\]
+Por último, veamos como mejoró nuestra solución\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/grid_traveler_op.png}
+\end{minipage}\]
+\subsection*{Receta de Programación Dinámica}
+\begin{itemize}
+    \item Hacer que la solución sin programación dinámica funcione
+    \begin{itemize}
+        \item Visualizar el problema como un árbol.
+        \item Implementar ese árbol usando recursión.
+        \item Testear si la solución funciona. 
+    \end{itemize}
+    \item Optimizarlo
+    \begin{itemize}
+        \item Agregar un objeto de memo.
+        \item El objeto memo debe pasarse a todos los llamados recursivos. Normalmente lo pasamos por referencia o usamos variables globales.
+        \item Agregar casos base para los valores memorizados.
+        \item Guardar los valores de los return dentro del objeto memo.
+    \end{itemize}
+\end{itemize}
+Para resolver problemas de programación dinámica se recomienda ser meticuloso, hacer dibujos, armar buenas soluciones de fuerza bruta y recién luego pensar la estrategia de memorización. Memorizar es sencillo, qué memorizar es complicado. \\
+No traten de implementar una solución óptima desde el principio. Make it work first.
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
