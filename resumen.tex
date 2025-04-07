@@ -444,8 +444,7 @@ Consideramos el costo de procesar cada nodo. Cada nodo aparece cada vez que hace
 \end{itemize}
 \section*{Programación Dinámica (DP)}
 Se basa en solucionar y memorizar subproblemas que se repetirán para ahorrar tiempo. \\
-Como se basa fundamentalmente en recursividad, seguramente haya casos donde la salida sea la misma para el mismo input en los distintos llamados. \\
-Esa \textbf{superposición de problemas} es que estamos llamando recursivamente a algo que \textbf{ya resolvimos anteriormente}, entonces, para evitar calcular todo nuevamente, usamos la información almacenada para esos input en memoria. \\
+Esa \textbf{superposición de problemas} es que estamos llamando usando algo que \textbf{ya resolvimos anteriormente}, entonces, para evitar calcular todo nuevamente, usamos la información almacenada en memoria. \\
 Es \textbf{bastante común} usar este tipo de estrategias para afrontar problemas con matrices, o casos recursivos para cosas altamente costosas de calcular. \\
 \textbf{Importante}: ¿Cuándo hay veces que la entrada no es exactamente igual pero vale la memorización para ese subproblema? \\
 Cuando la dirección de los argumentos no importa, se puede utilizar ese subproblema memorizado, es decir, en casos donde, por ejemplo $(a, b) = (b, a)$.
@@ -460,7 +459,8 @@ En Top-Down hablamos de \textbf{memorización} mientras que en Bottom-Up hablamo
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/topdown_bottomup.png}
 \end{minipage}\]
-\subsection*{Fibonacci y su relación con la Programación Dinámica}
+\subsection*{Programación Dinámica Top-Down}
+\subsubsection*{Fibonacci y su relación con la Programación Dinámica}
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/fib_dp.png}
 \end{minipage}\]
@@ -479,7 +479,7 @@ Sabiendo que tenemos superposición de problemas basado en n, optimizado quedar�
 \[\begin{minipage}[b]{0.9\textwidth}
     \includegraphics[width=\linewidth]{assets/fib_dp_finish_o.png}
 \end{minipage}\]
-\subsection*{Llegando a un punto particular en una grilla}
+\subsubsection*{Llegando a un punto particular en una grilla}
 Digamos que queremos movernos a un punto particular fijo y solo podemos movernos a la derecha y para abajo. Es sabido que van a existir muchas formas de llegar a ese punto. \\
 Ahora bien, a medida que nos vamos acercando, el problema se achica. Así que, seguramente, vaya a existir algún otro camino por el que lleguemos al punto (o no). 
 \[\begin{minipage}[b]{0.9\textwidth}
@@ -495,7 +495,7 @@ Es realmente importante NO guardar todos de forma continua y sí distinguirlos p
 Por último, veamos como mejoró nuestra solución\[\begin{minipage}[b]{0.9\textwidth}
     \includegraphics[width=\linewidth]{assets/grid_traveler_op.png}
 \end{minipage}\]
-\subsection*{Receta de Programación Dinámica}
+\subsubsection*{Receta de Programación Dinámica (Top-Down)}
 \begin{itemize}
     \item Hacer que la solución sin programación dinámica funcione
     \begin{itemize}
@@ -513,15 +513,14 @@ Por último, veamos como mejoró nuestra solución\[\begin{minipage}[b]{0.9\text
 \end{itemize}
 Para resolver problemas de programación dinámica se recomienda ser meticuloso, hacer dibujos, armar buenas soluciones de fuerza bruta y recién luego pensar la estrategia de memorización. Memorizar es sencillo, qué memorizar es complicado. \\
 No traten de implementar una solución óptima desde el principio. Make it work first.
-\subsection*{canSum problem}
+\subsubsection*{canSum problem}
 La idea es que dado un array, se diga si existe algún subconjunto de elementos que suman un valor n particular. \\
 \textbf{Tip importante}: En problemas donde hay que llegar a determinado valor k, siempre, pero siempre conviene disminuir ese valor de target y no ir sumando.
 \[\begin{minipage}[b]{1\textwidth}
     \includegraphics[width=\linewidth]{assets/canSum.png}
 \end{minipage}\]
 Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor, el árbol siempre va a tener el mismo comportamiento para ese valor. Nótese que acá, en este problema particular tampoco nos interesa qué numeros suman nuestro target, sino, simplemente si hay un camino o no.
-\subsection*{howSum problem}
-Es similar al anterior, pero acá hay que dar una solución que sume el valor. Nótese que acá podrían ser los mismos elementos pero en diferente orden, o ser una solución con elementos diferentes.
+
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
