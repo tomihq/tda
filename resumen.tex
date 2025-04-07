@@ -449,6 +449,17 @@ Esa \textbf{superposición de problemas} es que estamos llamando recursivamente 
 Es \textbf{bastante común} usar este tipo de estrategias para afrontar problemas con matrices, o casos recursivos para cosas altamente costosas de calcular. \\
 \textbf{Importante}: ¿Cuándo hay veces que la entrada no es exactamente igual pero vale la memorización para ese subproblema? \\
 Cuando la dirección de los argumentos no importa, se puede utilizar ese subproblema memorizado, es decir, en casos donde, por ejemplo $(a, b) = (b, a)$.
+\subsection*{Formas de realizar programación dinámica}
+Se puede hacer tanto de forma Top-Down (recursivamente) o Bottom-Up (iterativamente). \\
+En Top-Down hablamos de \textbf{memorización} mientras que en Bottom-Up hablamos de \textbf{tabulación}. 
+\subsubsection*{Bottom-Up vs Top-Down}
+\begin{itemize}
+    \item Top Down (memorización): Usamos recursión, guardamos los resultados en una caché (generalmente diccionario o array). Solo resolvemos los subproblemas que necesitamos.
+    \item Bottom Up (tabulación): Usamos un enfoque iterativo, contruimos la solución desde los casos base hacia arriba mientras que llenamos una tabla paso a paso. 
+\end{itemize}
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/topdown_bottomup.png}
+\end{minipage}\]
 \subsection*{Fibonacci y su relación con la Programación Dinámica}
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/fib_dp.png}
@@ -502,6 +513,15 @@ Por último, veamos como mejoró nuestra solución\[\begin{minipage}[b]{0.9\text
 \end{itemize}
 Para resolver problemas de programación dinámica se recomienda ser meticuloso, hacer dibujos, armar buenas soluciones de fuerza bruta y recién luego pensar la estrategia de memorización. Memorizar es sencillo, qué memorizar es complicado. \\
 No traten de implementar una solución óptima desde el principio. Make it work first.
+\subsection*{canSum problem}
+La idea es que dado un array, se diga si existe algún subconjunto de elementos que suman un valor n particular. \\
+\textbf{Tip importante}: En problemas donde hay que llegar a determinado valor k, siempre, pero siempre conviene disminuir ese valor de target y no ir sumando.
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/canSum.png}
+\end{minipage}\]
+Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor, el árbol siempre va a tener el mismo comportamiento para ese valor. Nótese que acá, en este problema particular tampoco nos interesa qué numeros suman nuestro target, sino, simplemente si hay un camino o no.
+\subsection*{howSum problem}
+Es similar al anterior, pero acá hay que dar una solución que sume el valor. Nótese que acá podrían ser los mismos elementos pero en diferente orden, o ser una solución con elementos diferentes.
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
