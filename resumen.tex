@@ -442,6 +442,15 @@ Consideramos el costo de procesar cada nodo. Cada nodo aparece cada vez que hace
     \includegraphics[width=\linewidth]{assets/backtracking_half_search.png}
     \end{minipage}\]
 \end{itemize}
+\section*{Programación Dinámica (DP)}
+Se basa en memorizar subproblemas que se vayan a repetir para ahorrar tiempo. \\
+Como se basa fundamentalmente en recursividad, seguramente haya casos donde la salida sea la misma para el mismo input en los distintos llamados. \\
+Esa \textbf{superposición de problemas} es que estamos llamando recursivamente a algo que \textbf{ya resolvimos anteriormente}, entonces, para evitar calcular todo nuevamente, usamos la información almacenada para esos input en memoria. \\
+Es \textbf{bastante común} usar este tipo de estrategias para afrontar problemas con matrices, o casos recursivos para cosas altamente costosas de calcular. 
+\subsection*{Fibonacci y su relación con la Programación Dinámica}
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/fib_dp.png}
+\end{minipage}\]
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
