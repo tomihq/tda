@@ -322,6 +322,7 @@ Si dos grafos $G = (V,E)$ y $G' = (V', E')$ son isomorfos entonces
     \includegraphics[width=\linewidth]{assets/isomorfos.png}
 \end{minipage}\]
 \subsection*{Representación de grafos}
+\textbf{Good to Know}: Si busca uso de grafos en la práctica, y cómo representarlos véase \hyperref[subsec:representacion_grafos_practica]{\textbf{anexo}}.
 \textbf{Good to Know}: En las diapositivas se usa la $d$ para representar tanto como el grado de un vértice o la distancia entre dos vértices. Acá, optamos por usar $deg$ para el grado y $d$ para distancia entre dos vértices.
 \subsubsection*{Lista de Adyacencia}
 Es la más común y la más eficiente. \\
@@ -553,7 +554,55 @@ Luego, la distancia mínima entre ambos recorridos
 \[min(dP(u,v), dT(u,v)) = min(3, 2) = 2 = dT(u,v)\]
 Finalmente, llegamos a un absurdo, porque la distancia mínima la tenemos con el recorrido T y no con P. \\
 Si hubiesemos llegado a que con $\neg Q$, P es el camino más corto, hicimos mal la demostración.
-\subsubsection*{Suma de los grados de los vértices}
-\label{subsubsec:suma_grados_vertices}
+\subsection*{Representación de grafos en la práctica}
+\label{subsec:representacion_grafos_practica}
+Tenemos dos formas de utilizar grafos, o usamos a través del conjunto de aristas (V, E) o a través del conjunto de vecindarios (N, V). Exploremos las ventajas de cada una y cuando usamos una y cuando la otra. \\
+Hay diversos ítems que pueden contribuir a esta decisión, y la forma de es viendo si el grafo tiene algo especial. 
+\subsubsection*{¿Qué cataloga a un grafo como especial?}
+¿Qué necesito para que un grafo sea considerado como especial? Si el grafo tiene al menos una de las siguientes propiedades.
+\begin{itemize}
+    \item Es un árbol.
+    \begin{itemize}
+        \item No tiene ciclos. 
+        \item Todos los vértices están conectados.
+        \item Tiene exactamente \textbf{n-1} aristas y \textbf{n} nodos.
+        \item Se puede representar solo con un padre por nodo, sin guardar todas las aristas.
+    \end{itemize}
+    \item Es denso o completo
+    \item Tiene pesos o el peso se calcula con una fórmula 
+    \item Es ralo y dirigido.
+    \item Tiene simetrías o propiedades algebraicas conocidas
+    \begin{itemize}
+        \item Grafo cíclico, red de tipo grilla.
+        \item Se puede describir con una fórmula o regla en vez de listar cada arista.
+    \end{itemize}
+    \item Es estático y accedés mucho a los vecinos.
+\end{itemize}
+\subsubsection*{Conjunto de Aristas (V, E)}
+Es muy común cuando no conocemos \textbf{nada especial} sobre la estructura del grafo que podamos aprovechar. Es compacta y directa.  
+\subsubsection*{Conjunto de vecindarios (V, N)}
+N es una función que te dice, para cada vértice v, con qué otros vértices está conectado. La forma de utilizarlo varía si es un grafo dirigido o no dirigido. 
+\begin{itemize}
+    \item N(v): Devuelve los vecinos de v.
+    \item En digrafos:
+    \begin{itemize}
+        \item $N^{+}(v)$ (vecindario de salida): a dónde puede ir v.
+        \item $N^{-}(v)$ (vecindario de entrada): de dónde puede venir v.
+    \end{itemize}
+\end{itemize}
+Esta representación es útil cuando \textbf{queremos recorrer el grafo desde los vértices}.
+\subsubsection*{Numeración de los vértices}
+Numeramos los vértices desde 0 hasta n-1 (donde n es la cantidad de vértices). Esto hace que sea más fácil de trabajar con arrays y matrices.
+\subsubsection*{¿Qué representación usar? ¿Cuál es más eficiente?}
+Si el grafo no tiene una estructura especial, usamos el conjunto de aristas (V, E) porque 
+\begin{itemize}
+    \item No ocupa más espacio del necesario.
+    \item No asume nada: es la forma neutra de representar el grafo. 
+\end{itemize}
+Ahora, si el grafo tiene una estructura especial, usamos el conjunto de vecindarios (V, N) porque 
+\begin{itemize}
+    \item Es más eficiente.
+    \item Permite recorrer el grafo de una forma más sencilla.
+\end{itemize}
 
 \end{document} 
