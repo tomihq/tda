@@ -604,5 +604,138 @@ Ahora, si el grafo tiene una estructura especial, usamos el conjunto de vecindar
     \item Es más eficiente.
     \item Permite recorrer el grafo de una forma más sencilla.
 \end{itemize}
-
+Decimos que la representación más fiel del conjunto de vecindarios es a través de las listas de adyacencias. Veamos un ejemplo a continuación. 
+\subsection*{Ejemplo 1}
+Queremos ver si podemos llegar desde la ciudad A hasta la ciudad D. Un cliente nos trae la siguiente información donde la primer letra corresponde al saliente y la segunda el destino. \\
+\begin{lstlisting}
+{
+  "rutas": [
+    ["A", "B"],
+    ["B", "C"],
+    ["C", "D"],
+    ["A", "E"],
+    ["E", "F"]
+  ],
+  "origen": "A",
+  "destino": "D"
+}
+\end{lstlisting}
+Acá es donde tenemos que pensar cómo armamos nuestro grafo. \\ 
+\subsubsection*{Forma 1 (Lista de Adyacencia)}
+Sabemos que tenemos que ir desde una ciudad a otra, asì que estarìa bueno tener la lista de conexiones de una ciudad con todas las demás. Es decir, meter todas las ciudades con las que se conecta una en una lista. \\
+En este caso, nos conviene una lista de adyacencia (conjunto vecindario) y ahora veremos por qué.\\
+Nos quedaría entonces, algo así 
+\begin{lstlisting}
+    graph = {
+        "A": ["B", "E"],
+        "B: ["C"],
+        "C": ["D"],
+        "E": ["F"],
+    }
+\end{lstlisting}
+El problema entonces sería algo así: 
+\begin{itemize}
+    \item Empiezo en A, tomo cada vecino de él y me fijo con quién se conectan.
+    \begin{itemize}
+        \item Llegué a B
+        \begin{itemize}
+            \item B se conecta con C, C se conecta con D, entonces A se conecta con D. 
+            \item B se conecta con E, E se conecta con F y F no se conecta con nadie.
+        \end{itemize}
+        \item Respuesta final: Sí existe un camino, y ese es A -> B -> C -> D y es un circuito simple.
+    \end{itemize}
+\end{itemize}
+¿Cómo quedaría de esta manera, la complejidad temporal y espacial en el armado del grafo? 
+\begin{itemize}
+    \item Temporal:O(E) porque el input inicial es una lista de aristas y recorremos toda esa lista.
+    \item Espacial: O(N + E) porque por cada nodo, guardamos una lista de sus vecinos.
+\end{itemize}
+¿Y en la búsqueda? 
+\begin{itemize}
+    \item Espacial: O(N) que es lo que cuesta ir guardando los nodos visitados. 
+    \item Temporal: O(N + E) porque por cada nodo, vemos todas sus aristas.
+\end{itemize}
+¿Cuál es la complejidad total del algoritmo? En tiempo es O(N + E) y en espacio O(N + E). \\
+\textbf{¿Cuando usar listas de adyacencias?}
+\begin{itemize}
+    \item El grafo es disperso, es decir, tiene más aristas que nodos.
+    \item Es importante optimizar el espacio.
+    \item Buscás los vecinos frecuentemente.
+\end{itemize}
+\subsubsection*{Forma 2 (Conjunto de Aristas)}
+Si representaríamos el grafo como un conjunto de aristas, sería algo así:
+\begin{lstlisting}
+    graph = [(A, B), (B, C), (C, D), (A, E), (E, F)]
+\end{lstlisting}
+Y esto, es mucho más costoso que lo anterior. ¿Por qué? Porque acá no tenemos las claves de los nodos, y eso implica que para buscar todos los vecinos de un nodo tenemos que recorrer en tiempo O(E) \\
+¿Cómo quedaría de esta manera, la complejidad temporal y espacial en el armado del grafo? 
+\begin{itemize}
+    \item Temporal: O(E) porque el input inicial es una lista de aristas y recorremos toda esa lista.
+    \item Espacial: O(E) porque por cada nodo, guardamos una lista de sus vecinos.
+\end{itemize}
+¿Y en la búsqueda? 
+\begin{itemize}
+    \item Buscar todos los vecinos de A - Tiempo: O(E), Espacio: O(k) si los almacenamos en un array pero hay que recordar que en el peor caso, A es vecino de todos. Entonces sería O(E).
+    \item Buscar todos los vecinos de B y E - Tiempo: O(E), Espacio O(E). 
+    \item Buscar todos los vecinos de C y F - Tiempo: O(E), Espacio O(E).
+    \item Encontramos la respuesta, porque C está conectado con D. 
+\end{itemize}
+¿Cuál es la complejidad total del algoritmo? En tiempo y espacio es O(E).
+\textbf{¿Cuando usar conjuntos de aristas?}
+\begin{itemize}
+    \item El grafo dinámico y se modifican frecuentemente las aristas.
+    \item Si necesitás buscar o contar la cantidad total de aristas.
+    \item No necesitamos almacenar información sobre los vecinos de los nodos y quiero manipular aristas de manera eficiente.
+\end{itemize}
+\subsubsection*{Forma 3 (Matriz)}
+Es importante recordar que en la matriz, la dimensión es siempre como si todos los nodos estarían relacionados con todos. \\
+En este caso tenemos 6 nodos, y en el peor caso se conectan todos con todos. Así que la matriz sería de 6x6. \\
+\begin{lstlisting}
+    matrix = [
+    [0, 1, 0, 0, 1, 0],  //A
+    [0, 0, 1, 0, 0, 0],  //B
+    [0, 0, 0, 1, 0, 0],  //C
+    [0, 0, 0, 0, 0, 0],  //D
+    [0, 0, 0, 0, 0, 1],  //E 
+    [0, 0, 0, 0, 0, 0],  //F 
+]
+\end{lstlisting}
+¿Cómo quedaría de esta manera, la complejidad temporal y espacial en el armado del grafo? 
+\begin{itemize}
+    \item Temporal: O($N^{2}$).
+    \item Espacial: O($N^{2}$).
+\end{itemize}
+¿Y en la búsqueda? 
+\begin{itemize}
+    \item Buscar todos los vecinos de A - Tiempo: O(N).
+    \begin{itemize}
+        \item Buscar todos los vecinos B - Tiempo: O(N). Buscar todos los vecinos de C - Tiempo: O(N). 
+        \item Buscar todos los vecinos de E - Tiempo: O(N). Buscar todos los vecinos de F - Tiempo: O(N).
+    \end{itemize}
+\end{itemize}
+Como esto se hace varias veces, sería algo de O(cantVecinosNodo * N) = O(N). \\
+¿Cuál es la complejidad total del algoritmo? En tiempo y espacio es O($N^{2}$). \\
+\textbf{¿Cuando usar matrices de adyacencia?}
+\begin{itemize}
+    \item El grafo es denso.
+    \item Necesitás verificar si existe rápidamente una conexión entre dos nodos.
+    \item El grafo es estático, es decir, no se agregan ni se quitan aristas frecuentemente.
+\end{itemize}
+\subsubsection*{Comparación de las tres estructuras que vimos}
+Si bien la complejidad parece ser mejor usando el conjunto de aristas, esto no es del todo cierto. ¿Por qué? Porque si necesitamos rápidamente los vecinos de un nodo particular, con listas de adyacencia los encontramos en O(1) y no en O(E). Esa es la diferencia sustancial que en grafos gigantes se nota la diferencia. 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Operación}                        & \textbf{Lista de Adyacencia}          & \textbf{Matriz de Adyacencia}      & \textbf{Conjunto de Aristas}     \\ \hline
+    \textbf{Espacio (Construcción)}           & O(N + E)                             & O(N²)                              & O(E)                             \\ \hline
+    \textbf{Tiempo (Construcción)}            & O(N + E)                             & O(E)                               & O(E)                             \\ \hline
+    \textbf{Acceder a los Vecinos (por Nodo)} & O(1)                                 & O(N)                               & O(E)                             \\ \hline
+    \textbf{Tiempo para Buscar Camino}       & O(N + E) (DFS/BFS)                   & O(N²)                              & O(E * k)                         \\ \hline
+    \textbf{Espacio Temporal (Búsqueda)}      & O(N)                                 & O(N)                               & O(N)                             \\ \hline
+    \textbf{Acceder a la existencia de una Arista} & O(k) (conjunto de vecinos)    & O(1)                               & O(E)                             \\ \hline
+    \end{tabular}
+    \caption{Comparativa de complejidad temporal y espacial de las representaciones de grafos.}
+    \end{table}
 \end{document} 
+
