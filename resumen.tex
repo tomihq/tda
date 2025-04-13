@@ -428,7 +428,16 @@ Se basa en el uso de Programación Dinámica de forma bottom-up.
     \item Se arma una matriz, donde la distancia de un nodo a sí mismo es 0. 
     \item Por cada nodo, se buscan las aristas que los conectan con los demás nodos, y se coloca en esa relación (ij), el peso de la arista.
     \item Se crean 3 for anidados. k, i, j que comienzan desde $i=1$ y van hasta la cantidad de nodos. 
-    \item En cada iteración, se hace un if que comprueba si la distancia de i a j es mayor que la distancia de i a k + la distancia de k a j. Si es asi, entonces se actualiza la distancia de i a j.
+    \item En cada iteración, se chequea que si la distancia actual de (ij) es mayor que agregando un nodo intermedio, entonces, la nueva distancia más corta es la de agregando ese nodo intermedio.
+    \begin{itemize}
+        \item Hay 2 casos que chequear al final.
+        \begin{itemize}
+            \item Si existía distancia inicial entre dos nodos y el valor final cambió, significa que se encontró un camino más corto.
+            \item Si existía distancia inicial entre dos nodos y el valor final no cambió, significa que era el camino más corto.
+            \item Si no existía distancia inicial $(\infty)$ y el valor final cambió, significa que se encontró un camino entre esos nodos.
+            \item Si no existía distancia inicial $(\infty)$ y el valor final no cambió, significa que no se encontró un camino entre esos nodos.
+        \end{itemize}
+    \end{itemize}
 \end{itemize}
 
 \section*{Fuerza Bruta}
