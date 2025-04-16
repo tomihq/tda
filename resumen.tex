@@ -312,7 +312,6 @@ Entonces, $ A \rightarrow B \rightarrow C \rightarrow A$ es un ciclo negativo.
 Un Grafo Acíclico Dirigido es un grafo dirigido que no tiene ciclos. Es decir, no existe ningún vértice que es capaz de empezar y terminar un recorrido. \\
 Ej.: Una Single Linked List es un caso particular de un DAG.
 \subsection*{Orden Topológico}
-
 \begin{itemize}
     \item Es una lista de nodos ordenados de forma que, si existe una arista $u \rightarrow v$, entonces $u$ aparece antes que $v$ en la lista.
     \item Es útil para resolver problemas donde ciertas tareas deben ejecutarse antes que otras, como en compiladores, donde un archivo puede depender de otros.
@@ -592,8 +591,11 @@ Cuando la dirección de los argumentos no importa, se puede utilizar ese subprob
 Existen varios conceptos importantes que debemos tener en cuenta para entender el uso de programación dinámica:
 \begin{itemize}
     \item Estado: Representa una subparte del problema original. Se define por las variables mínimas necesarias para describir un subproblema.
-    \item Caso base: Es un estado que no realiza llamadas recursivas.
-    \item Caso recursivo: Es un estado que \textbf{sí} realiza llamadas rción: Cómo se combinan los resultados de los subproblemas para obtener la solución. 
+    \item Caso base: Es la condición inicial del problema. Define cuándo detener la recursión y que valor devolver en ese caso.
+    \item Caso recursivo: Es la definición del problema en función de subproblemas más pequeños. 
+    \item Transición: Es la regla que te lleva de un estado a otro, es decir, cómo se construye una solución a partir de otras. Qué hacés con el llamado recursivo.
+    \item Orden Topológico: Es el orden obligatorio con que se realizan las operaciones.
+
 \end{itemize}
 Veamos un ejemplo de un código real para categorizar los ítems anteriormente mencionados
 \begin{lstlisting}
@@ -607,8 +609,36 @@ Veamos un ejemplo de un código real para categorizar los ítems anteriormente m
     auto state2 = fibo(n-2, memo); //Caso recursivo
     memo[n] = state1 + state2;  //Transición
     return memo[n];
-}
+
+    Orden topológico: calcular fibo(0), luego fibo(1), luego fibo(2), luego fibo(3), ... etc.
+    
+    DAG: Una cadena de dependencias 0 -> 1 -> 2 ... -> n (como resuelve en base al param n)
+
+    }
+\end{lstlisting} 
+Veamos unos ejemplos más
+\begin{lstlisting}
+    vector<long long> fact(n+1, 1);
+    vector<long long> sum(n+1, 0);
+    for(int i=1; i<=n; ++i){
+        fact[i] = i * fact[i-1];
+        sum[i] = sum[i-1] + fact[i];
+    }
+    return sum[n];
+
+    Transición:
+        fact[i] = i * fact[i-1];
+        sum[i] = sum[i-1] + fact[i];
+    (como sum[n] es la respuesta, y sum[i] depende de sum y fact, eso cambia el estado).
+    
+        Orden topológico: primero calculo fact[0..n], y luego sum[0..n].
+    
+    DAG: fact[0] -> sum[0] -> fact[1] -> sum[1] -> fact[2] -> sum[2] ... -> fact[n] -> sum[n]
 \end{lstlisting}
+\begin{lstlisting}
+    
+\end{lstlisting}
+
 \subsection*{Formas de realizar programación dinámica}
 Se puede hacer tanto de forma Top-Down (recursivamente) o Bottom-Up (iterativamente). \\
 En Top-Down hablamos de \textbf{memorización} mientras que en Bottom-Up hablamos de \textbf{tabulación}. 
