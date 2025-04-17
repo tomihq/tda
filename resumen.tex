@@ -413,13 +413,14 @@ Recorrer grafos nos da mucha información acerca de su estructura.
 Breadth-First Search o mejor conocido como BFS es un algoritmo de búsqueda para grafos. \\
 Casos de uso: 
 \begin{itemize}
-    \item Se usa en grafos sin peso.
-    \item Se usa para encontrar el camino más corto desde un nodo a otro. 
+    \item Vale para cualquier tipo de grafo $(*^{1})$
+    \item \textbf{Sirve} para buscar el \textbf{camino mínimo} de un nodo a otro. 
     \item Se usa para asegurarnos que siempre pasamos por todos los nodos del mismo nivel antes de pasar a otro. 
     \item Explora el grafo o árbol nivel a nivel, primero horizontalmente y luego verticalmente. Es decir, primero agarra todos los vecinos, después del primer vecino baja al siguiente nivel, después del segundo vecino baja al siguiente nivel y así sucesivamente. 
     \item A nivel estructura de datos se implementa con una \textbf{queue} (FIFO).
     \item Se almacena en una lista los nodos visitados para no repetirlos. Es decir, que antes de pasar por uno hay que chequear si ya está.
 \end{itemize}
+\textbf{Good to Know $(*^{1})$}: Si usamos BFS en un Grafo G pesado \textbf{NO NOS GARANTIZA} que sea el camino mínimo, porque BFS calcula el camino con menor cantidad de aristas, y no con menor peso. 
 \subsubsection*{Complejidad temporal de BFS}
 La complejidad temporal de BFS es $O(\longitud{V} + \longitud{E})$. 
 \subsection*{DFS}
@@ -428,13 +429,27 @@ Casos de uso:
 \begin{itemize}
     \item Explora todos los nodos a profundidad, primero verticalmente y luego horizontalmente.
     \item A nivel estructura de datos se implementa con un \textbf{stack} (LIFO).
-    \item \textbf{Se usa en grafos no pesados (no tiene peso en aristas).}
+    \item \textbf{NO sirve} para buscar el camino más corto de un nodo al otro. Esto es debido a que ingresa a las ramas en profundidad.
+    \item Vale para cualquier tipo de grafo $(*^{2})$
 \end{itemize}
-Un ejemplo claro de DFS sería buscar la altura de un árbol porque tendrías que buscar la rama más larga.
+Un ejemplo claro de DFS sería buscar la altura de un árbol porque tendrías que buscar la rama más larga. \\
+\textbf{Good to Know $(*^{2})$}: Si usamos DFS en un Grafo G pesado \textbf{NO NOS GARANTIZA} que sea el camino mínimo, porque DFS calcula el camino con menor cantidad de aristas, y no con menor peso. 
 \subsubsection*{Complejidad temporal de DFS}
 La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$.
-\subsection*{Bellman-Ford (Técnica DP)}
-Es un algoritmo que nos permite dado un nodo encontrar el camino mínimo desde ese nodo hasta los demás. \\
+\subsection*{Algoritmos de Búsqueda de Camino Mínimo (Grafos Pesados)}
+\begin{itemize}
+    \item Single-Source-Shortest-Paths: Para encontrar el camino mínimo desde un nodo particular a todos los demás nodos. Resuelve \textbf{uno a muchos}.
+    \begin{itemize}
+        \item Dijkstra, Bellman-Ford
+    \end{itemize}
+    \item All-Pairs-Shortest-Paths: Para encontrar el camino mínimo desde todos los nodos a todos los demás nodos. Resuelve \textbf{muchos a muchos}.
+    \begin{itemize}
+        \item Floyd-Warshall
+    \end{itemize}
+\end{itemize}
+\subsubsection*{Single-Source-Shortest-Paths}
+\subsubsection*{Bellman-Ford (Técnica DP)}
+Es un algoritmo que nos permite \textbf{dado un nodo encontrar el camino mínimo desde ese nodo hasta los demás}. \\
 Este es útil para detectar ciclos negativos en el grafo. \\
 Su complejidad temporal es de $O(N x E)$ y su complejidad espacial es de $O(N + E)$  
 \subsubsection*{Requisitos de uso de Bellman-Ford}
@@ -474,9 +489,9 @@ Su complejidad temporal es de $O(N x E)$ y su complejidad espacial es de $O(N + 
             distance[b] = min(distance[b], distance[a]+w);
         }
     }
-
 \end{lstlisting}
-\subsection*{Floyd-Warshall (Técnica DP)}
+\subsubsection*{All-Pairs-Shortest-Paths}
+\subsubsection*{Floyd-Warshall (Técnica DP)}
 Es un algoritmo que nos permite \textbf{en una sola operación} encontrar el \textbf{camino mínimo entre todos los pares de nodos} en un grafo ponderado. \\
 Su implementación algorítmica es muy simple aunque este método es muy costoso dado que su complejidad temporal es $O(n^{3})$ y su complejidad espacial es $O(n^{2})$ que es el costo de armar la matriz. \\
 ¿Por qué tal complejidad temporal? Bueno... Porque se implementa con 3 for anidados. \\
