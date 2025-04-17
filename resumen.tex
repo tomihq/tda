@@ -291,13 +291,13 @@ Es un árbol que cumple con las siguientes propiedades
     \item Es conexo.
     \item No tiene ciclos. 
 \end{itemize}
-\subsection*{Grafo Pesado (Grafo Ponderado)}
+\subsection*{Grafo Pesado}
 Definimos un Grafo Pesado G como $G = (V, E, W)$ donde W es una función que recibe dos vértices y devuelve el peso. \\
 Ahora, en cada arista almacenamos ambos vértices y el resultado del peso. 
 \[E_{i} = (v_{i}, v_{j}, w(v_{i},v_{j}))\]
-\subsubsection*{Camino en Grafo Pesado (Grafo Ponderado)}
-En grafos ponderados, el camino más corto entre dos nodos u y v es aquel cuya suma de los pesos de las aristas en el camino es la más pequeña posible, independientemente de la cantidad de aristas involucradas. \\
-El número de aristas no importa en este caso, solo el peso total del camino.
+\textbf{Good to Know}: En inglés, decimos \textbf{weighted graphs} mientras que en español también los conocemos por ser \textbf{grafos ponderados}.
+\subsubsection*{Camino en Grafo Pesado}
+En grafos pesados, el camino más corto entre dos nodos u y v es el que tiene la menor suma de pesos en sus aristas, sin importar cuántas aristas lo componen.
 \subsubsection*{Ciclos Negativos en Grafos Pesados}
 Un grafo pesado G tiene un ciclo negativo si la \textbf{suma de los pesos de las aristas} es negativa. 
 \begin{lstlisting}
@@ -413,7 +413,7 @@ Recorrer grafos nos da mucha información acerca de su estructura.
 Breadth-First Search o mejor conocido como BFS es un algoritmo de búsqueda para grafos. \\
 Casos de uso: 
 \begin{itemize}
-    \item Se usa en grafos no ponderados (no tiene peso en aristas).
+    \item Se usa en grafos sin peso.
     \item Se usa para encontrar el camino más corto desde un nodo a otro. 
     \item Se usa para asegurarnos que siempre pasamos por todos los nodos del mismo nivel antes de pasar a otro. 
     \item Explora el grafo o árbol nivel a nivel, primero horizontalmente y luego verticalmente. Es decir, primero agarra todos los vecinos, después del primer vecino baja al siguiente nivel, después del segundo vecino baja al siguiente nivel y así sucesivamente. 
