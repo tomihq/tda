@@ -322,6 +322,7 @@ Ej.: Una Single Linked List es un caso particular de un DAG.
     \]
     \item Esto se debe a que tanto $A$ como $B$ no dependen de ningún otro nodo, por lo que pueden aparecer en cualquier orden. El nodo $C$ depende de ambos, así que debe aparecer después de $A$ y $B$.
 \end{itemize}
+Véase \hyperref[subsubsec:topological_sort]{\textbf{Topological Sort}} para un caso de uso real con DFS y ejemplos. 
 \subsection*{Grafos Bipartito}
 Dado un grafo $G = (V, E)$, G es bipartito si
 \begin{itemize}
@@ -473,10 +474,11 @@ Su complejidad temporal es de $O(V * E)$ y su complejidad espacial es de $O(V + 
     \item Tomamos uno de los vecinos del nodo inicial y calculamos la distancia a todos sus nodos vecinos.
     \item Así sucesivamente, vamos a encontrar el camino más corto (con menos peso) de un nodo a todos los demás nodos.
 \end{itemize}
-\[\begin{minipage}[b]{1\textwidth}
+Bocetos
+\[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/bellman-ford-1.jpg}
 \end{minipage}\]
-\[\begin{minipage}[b]{1\textwidth}
+\[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/bellman-ford-2.jpg}
 \end{minipage}\]
 \subsubsection*{Algoritmo}
@@ -527,10 +529,11 @@ Se basa en el uso de Programación Dinámica de forma bottom-up.
         \end{itemize}
     \end{itemize}
 \end{itemize}
-\[\begin{minipage}[b]{1\textwidth}
+Bocetos
+\[\begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\linewidth]{assets/floyd-warshall-1.jpg}
 \end{minipage}\]
-\[\begin{minipage}[b]{1\textwidth}
+\[\begin{minipage}[b]{0.7\textwidth}
     \includegraphics[width=\linewidth]{assets/floyd-warshall-2.jpg}
 \end{minipage}\]
 \subsubsection*{Algoritmo}
@@ -559,8 +562,8 @@ No obstante, hay casos donde podría servir si no analizamos bien el problema. \
 Ej.: En \textbf{grafos dispersos}, sin \textbf{pesos negativos} es más óptimo usar implementaciones de Dijkstra (Min-Heap, Fibonacci Heap, etc.) $\longitud{V}$ veces antes que Floyd-Warshall. \\
 Ej. 2: Tenemos un \textbf{grafo pesado acíclico} y aristas positivas. Queremos saber el \textbf{mínimo camino de un nodo a otros}. Si usamos Dijkstra la complejidad es \textbf{$O(V^{3})$} y Bellman-Ford es $O(V^{2}E)$. ¿Esto significa que Bellman-Ford es mejor? ¡No! Porque si el grafo fuese denso (no lo sabemos) entonces con Bellman-Ford la complejidad sería $O(V^{4})$
 \subsubsection*{Topological Sort}
+\label{subsubsec:topological_sort}
 Topological Sort es un caso de uso real de DFS. Es un \textbf{ordenamiento lineal} de los nodos de un \textbf{grafo dirigido acíclico (DAG)} tal que, para cada arista $u \rightarrow v$, el nodo $u$ aparece antes que el nodo $v$. \\
-Antes de hablar del Sort en particular, veamos qué es un orden topológico. \\
 
 Un orden topológico nos sirve para asegurarnos de \textbf{qué cosas deben cumplirse antes de que podamos hacer otras}. \\
 Imaginemos que estamos creando un compilador, y tenemos muchos archivos que dependen de diversas librerías. Por ejemplo, una de las librerías es \textbf{Pow}, que depende de \textbf{Math}, y \textbf{Main} también necesita de \textbf{Math} para funcionar correctamente. \\
