@@ -448,56 +448,6 @@ La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
         \item Floyd-Warshall
     \end{itemize}
 \end{itemize}
-\subsubsection*{Topological Sort}
-Topological Sort es un caso de uso real de DFS. Es un \textbf{ordenamiento lineal} de los nodos de un \textbf{grafo dirigido acíclico (DAG)} tal que, para cada arista $u \rightarrow v$, el nodo $u$ aparece antes que el nodo $v$. \\
-Antes de hablar del Sort en particular, veamos qué es un orden topológico. \\
-
-Un orden topológico nos sirve para asegurarnos de \textbf{qué cosas deben cumplirse antes de que podamos hacer otras}. \\
-Imaginemos que estamos creando un compilador, y tenemos muchos archivos que dependen de diversas librerías. Por ejemplo, una de las librerías es \textbf{Pow}, que depende de \textbf{Math}, y \textbf{Main} también necesita de \textbf{Math} para funcionar correctamente. \\
-En este caso, tenemos dos dependencias claras:
-\begin{itemize}
-    \item \textbf{Pow} no funciona sin \textbf{Math}, porque depende de funciones dentro de esa librería. Por lo tanto, primero tenemos que compilar \textbf{Math} antes de poder acceder a \textbf{Pow}.
-    \item \textbf{Main} no funciona sin \textbf{Math}, porque necesita funciones de allí. Así que también tenemos que compilar \textbf{Math} antes de poder acceder a \textbf{Main}.
-\end{itemize}
-\textbf{¿Qué tiene que ver esto con grafos?} Bueno, podemos tratar a las entidades (\textbf{Pow}, \textbf{Math} y \textbf{Main}) como nodos, y las dependencias entre ellas como aristas del grafo. Es decir:
-\[
-V = \{ \text{Pow}, \text{Math}, \text{Main} \}, \quad E = \{ (\text{Math}, \text{Main}), (\text{Math}, \text{Pow}) \}
-\]
-
-Ahora viene la parte interesante: el \textbf{ordenamiento topológico}. ¿Dónde está? La idea es que podemos cambiar el orden de los nodos siempre y cuando respetemos el orden de las dependencias. Es decir, \textbf{Main} no puede ser compilado antes de \textbf{Math}. Sin embargo, no importa si \textbf{Pow} o \textbf{Main} se compilan antes de lo otro, siempre y cuando \textbf{Math} esté compilado primero. \\
-Por lo tanto, tenemos dos posibles representaciones topológicas del problema:
-\begin{itemize}
-    \item $ \text{Math} \rightarrow \text{Pow} \rightarrow \text{Main} $
-    \item $ \text{Math} \rightarrow \text{Main} \rightarrow \text{Pow} $
-\end{itemize}
-Ambas cumplen con la condición de que \textbf{Math} debe compilar antes que \textbf{Pow} y \textbf{Main}, pero no importa si \textbf{Pow} o \textbf{Main} se compilan antes que el otro. \\
-¿Qué pasa si las dependencias cambian? Imaginemos el siguiente conjunto de dependencias:
-\[
-V = \{ \text{Pow}, \text{Math}, \text{Main} \}, \quad E = \{ (\text{Math}, \text{Main}), (\text{Math}, \text{Pow}), (\text{Pow}, \text{Main}) \}
-\]
-En este caso, solo existe \textbf{un único orden topológico válido}:
-\begin{itemize}
-    \item $ \text{Math} \rightarrow \text{Pow} \rightarrow \text{Main} $
-\end{itemize}
-Esto es porque la arista $(\text{Pow}, \text{Main})$ obliga a que \textbf{Pow} se compile antes que \textbf{Main}, eliminando las opciones de reordenar \textbf{Pow} y \textbf{Main}. \\
-\textbf{¿Para qué me sirve esto?} Para asegurarnos de que no hay \textbf{dependencias cíclicas} y que todas las dependencias se resuelven en el orden correcto, manteniendo la integridad de las relaciones entre las entidades. \\
-\textbf{Implementación con DFS}: 
-\begin{lstlisting}
-    topoSort(graph G)
-        for each vertex u in V[G] do
-            state[u] = UNVISITED
-            parent[u] = NULL
-        end for
-        time = 0
-        for each vertex u in V[G] do
-            if state[u] = UNVISITED then
-                TOP_VISIT(u)
-            end if
-        end for
-    end function
-\end{lstlisting}
-\textbf{Good to Know}: Si existen varios nodos que no tienen dependencias entre sí, hay más de una forma válida de realizar el orden topológico. En estos casos, el orden en que aparecen esos nodos no tiene importancia, y puedes elegir su disposición según tus preferencias al implementar el algoritmo. El orden topológico solo se asegura de que los nodos con dependencias se ubiquen en el orden correcto, pero no especifica el orden de los nodos independientes. \\
-La complejidad es la misma que DFS, $\theta(\longitud{V} + \longitud{E})$
 \subsubsection*{Single-Source-Shortest-Paths}
 \subsubsection*{Bellman-Ford (Técnica DP)}
 Es un algoritmo que nos permite \textbf{dado un nodo encontrar el camino mínimo desde ese nodo hasta los demás}. \\
@@ -608,6 +558,56 @@ Es cierto que si tenemos un grafo pesado, podemos encontrar todas las relaciones
 No obstante, hay casos donde podría servir si no analizamos bien el problema. \\
 Ej.: En \textbf{grafos dispersos}, sin \textbf{pesos negativos} es más óptimo usar implementaciones de Dijkstra (Min-Heap, Fibonacci Heap, etc.) $\longitud{V}$ veces antes que Floyd-Warshall. \\
 Ej. 2: Tenemos un \textbf{grafo pesado acíclico} y aristas positivas. Queremos saber el \textbf{mínimo camino de un nodo a otros}. Si usamos Dijkstra la complejidad es \textbf{$O(V^{3})$} y Bellman-Ford es $O(V^{2}E)$. ¿Esto significa que Bellman-Ford es mejor? ¡No! Porque si el grafo fuese denso (no lo sabemos) entonces con Bellman-Ford la complejidad sería $O(V^{4})$
+\subsubsection*{Topological Sort}
+Topological Sort es un caso de uso real de DFS. Es un \textbf{ordenamiento lineal} de los nodos de un \textbf{grafo dirigido acíclico (DAG)} tal que, para cada arista $u \rightarrow v$, el nodo $u$ aparece antes que el nodo $v$. \\
+Antes de hablar del Sort en particular, veamos qué es un orden topológico. \\
+
+Un orden topológico nos sirve para asegurarnos de \textbf{qué cosas deben cumplirse antes de que podamos hacer otras}. \\
+Imaginemos que estamos creando un compilador, y tenemos muchos archivos que dependen de diversas librerías. Por ejemplo, una de las librerías es \textbf{Pow}, que depende de \textbf{Math}, y \textbf{Main} también necesita de \textbf{Math} para funcionar correctamente. \\
+En este caso, tenemos dos dependencias claras:
+\begin{itemize}
+    \item \textbf{Pow} no funciona sin \textbf{Math}, porque depende de funciones dentro de esa librería. Por lo tanto, primero tenemos que compilar \textbf{Math} antes de poder acceder a \textbf{Pow}.
+    \item \textbf{Main} no funciona sin \textbf{Math}, porque necesita funciones de allí. Así que también tenemos que compilar \textbf{Math} antes de poder acceder a \textbf{Main}.
+\end{itemize}
+\textbf{¿Qué tiene que ver esto con grafos?} Bueno, podemos tratar a las entidades (\textbf{Pow}, \textbf{Math} y \textbf{Main}) como nodos, y las dependencias entre ellas como aristas del grafo. Es decir:
+\[
+V = \{ \text{Pow}, \text{Math}, \text{Main} \}, \quad E = \{ (\text{Math}, \text{Main}), (\text{Math}, \text{Pow}) \}
+\]
+
+Ahora viene la parte interesante: el \textbf{ordenamiento topológico}. ¿Dónde está? La idea es que podemos cambiar el orden de los nodos siempre y cuando respetemos el orden de las dependencias. Es decir, \textbf{Main} no puede ser compilado antes de \textbf{Math}. Sin embargo, no importa si \textbf{Pow} o \textbf{Main} se compilan antes de lo otro, siempre y cuando \textbf{Math} esté compilado primero. \\
+Por lo tanto, tenemos dos posibles representaciones topológicas del problema:
+\begin{itemize}
+    \item $ \text{Math} \rightarrow \text{Pow} \rightarrow \text{Main} $
+    \item $ \text{Math} \rightarrow \text{Main} \rightarrow \text{Pow} $
+\end{itemize}
+Ambas cumplen con la condición de que \textbf{Math} debe compilar antes que \textbf{Pow} y \textbf{Main}, pero no importa si \textbf{Pow} o \textbf{Main} se compilan antes que el otro. \\
+¿Qué pasa si las dependencias cambian? Imaginemos el siguiente conjunto de dependencias:
+\[
+V = \{ \text{Pow}, \text{Math}, \text{Main} \}, \quad E = \{ (\text{Math}, \text{Main}), (\text{Math}, \text{Pow}), (\text{Pow}, \text{Main}) \}
+\]
+En este caso, solo existe \textbf{un único orden topológico válido}:
+\begin{itemize}
+    \item $ \text{Math} \rightarrow \text{Pow} \rightarrow \text{Main} $
+\end{itemize}
+Esto es porque la arista $(\text{Pow}, \text{Main})$ obliga a que \textbf{Pow} se compile antes que \textbf{Main}, eliminando las opciones de reordenar \textbf{Pow} y \textbf{Main}. \\
+\textbf{¿Para qué me sirve esto?} Para asegurarnos de que no hay \textbf{dependencias cíclicas} y que todas las dependencias se resuelven en el orden correcto, manteniendo la integridad de las relaciones entre las entidades. \\
+\textbf{Implementación con DFS}: 
+\begin{lstlisting}
+    topoSort(graph G)
+        for each vertex u in V[G] do
+            state[u] = UNVISITED
+            parent[u] = NULL
+        end for
+        time = 0
+        for each vertex u in V[G] do
+            if state[u] = UNVISITED then
+                TOP_VISIT(u)
+            end if
+        end for
+    end function
+\end{lstlisting}
+\textbf{Good to Know}: Si existen varios nodos que no tienen dependencias entre sí, hay más de una forma válida de realizar el orden topológico. En estos casos, el orden en que aparecen esos nodos no tiene importancia, y puedes elegir su disposición según tus preferencias al implementar el algoritmo. El orden topológico solo se asegura de que los nodos con dependencias se ubiquen en el orden correcto, pero no especifica el orden de los nodos independientes. \\
+La complejidad es la misma que DFS, $\theta(\longitud{V} + \longitud{E})$
 \section*{Fuerza Bruta}
 Consiste en analizar y listar todas las posibilidades y quedarme con las que me interesan. \\
 En la fuerza bruta, existen problemas de factibilidad y optimalidad. 
