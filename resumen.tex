@@ -334,15 +334,15 @@ Dado un grafo $G = (V, E)$, G es bipartito si
     \item $e = (u,v) \in E, u \in V_{1}, v \in V_{2}$. Esto significa que el vértice de $V_{1}$ se relaciona con el de $V_{2}$ o en el otro sentido. 
     \item La única restricción es que no podés conectar un vértice de $V_{1}$ con otro de $V_{1}$ ni tampoco uno de $V_{2}$ con otro de $V_{2}$
 \end{itemize}
-\subsection*{Grafo Bipartito Completo}
-Lo mismo que un Grafo Bipartito pero acá todos los vértices de $V_{1}$ están conectados con los de $V_{2}$ y viceversa. \\
-Básicamente, el producto cartesiano.
-\subsubsection*{Cosas a releer / preguntar}
+\textbf{Importante}
 \begin{itemize}
     \item Un grafo es bipartito, $V = (V_{1}, V_{2}) \iff$ no tiene ciclos de longitud impar.
     \item Un grafo es bipartito $\iff$ todas sus c.c. lo son 
     \item Un grafo no tiene ciclos impares $\iff$ cada una de sus c.c. no tienen ciclos impares.
 \end{itemize}
+\subsection*{Grafo Bipartito Completo}
+Lo mismo que un Grafo Bipartito pero acá todos los vértices de $V_{1}$ están conectados con los de $V_{2}$ y viceversa. \\
+Básicamente, el producto cartesiano.
 \subsection*{Isomorfismo de Grafos}
 Dados  $G = (V, E)$ y $G' = (V', E')$. $G$ y $G'$ son isomorfos si existe una función biyectiva $f: V \rightarrow V$ tal que $\forall u,v \in V$ 
 \[(u,v) \in E \iff (f(u), f(v)) \in E'\]
