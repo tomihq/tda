@@ -725,7 +725,7 @@ Se puede hacer tanto de forma Top-Down (recursivamente) o Bottom-Up (iterativame
 En Top-Down hablamos de \textbf{memorización} mientras que en Bottom-Up hablamos de \textbf{tabulación}. 
 \subsubsection*{Bottom-Up vs Top-Down}
 \begin{itemize}
-    \item Top Down (memorización): Usamos recursión, guardamos los resultados en una caché (generalmente diccionario o array). Solo resolvemos los subproblemas que necesitamos.
+    \item Top Down (memorización): Usamos recursión, guardamos los resultados en una caché (generalmente diccionario o array). Solo resolvemos los subproblemas que necesitamos. Normalmente, en espacio, ya ocupa O(n) por la profundidad del stack. Cada llamado recursivo ocupa O(n). 
     \item Bottom Up (tabulación): Usamos un enfoque iterativo, contruimos la solución desde los casos base hacia arriba mientras que llenamos una tabla paso a paso. 
 \end{itemize}
 \[\begin{minipage}[b]{0.8\textwidth}
