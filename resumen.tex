@@ -267,11 +267,11 @@ Una componente conexa es un subgrafo.
 \end{minipage}\]
 Normalmente se consiguen cuando desconectás alguna arista de un grafo conexo. Entonces, te quedan subgrafos. La cantidad de subgrafitos son los componentes conexos.
 \subsubsection*{Grafo fuertemente conexo}
-Un Grafo fuertemente conexo es un grafo dirigido y conexo. Todos los nodos deben tener una relación simétrica entre ellos.
-\begin{itemize}
-    \item $E = \{(A,B)_{\rightarrow}, (B, C)_{\rightarrow}\}$ es un grafo conexo.
-    \item $E = \{(A, B)_{\rightarrow}, (B, C)_{\rightarrow}, (C, B)_{\rightarrow}, (B, A)_{\rightarrow},\}$ es un grafo fuertemente conexo.
-\end{itemize}
+Un Grafo fuertemente conexo es un grafo dirigido y conexo. Es decir, si desde todos los nodos puedo pasar por todos los demás siguiendo la dirección. 
+\[\begin{minipage}[b]{0.9\textwidth}
+    \includegraphics[width=\linewidth]{assets/fuertemente_conexo.jpg}
+\end{minipage}\]
+
 \subsection*{Árboles}
 \subsubsection*{Base}
 Es un grafo conexo, sin ciclos (circuitos simples).
@@ -326,7 +326,7 @@ Ej.: Una Single Linked List es un caso particular de un DAG.
     \item Esto se debe a que tanto $A$ como $B$ no dependen de ningún otro nodo, por lo que pueden aparecer en cualquier orden. El nodo $C$ depende de ambos, así que debe aparecer después de $A$ y $B$.
 \end{itemize}
 Véase \hyperref[subsubsec:topological_sort]{\textbf{Topological Sort}} para un caso de uso real con DFS y ejemplos. 
-\subsection*{Grafos Bipartito}
+\subsection*{Grafo Bipartito}
 Dado un grafo $G = (V, E)$, G es bipartito si
 \begin{itemize}
     \item Existe $V_{1}$ y $V_{2}$ tal que $V_{1} \cup V_{2} = V$
@@ -432,8 +432,7 @@ Casos de uso:
 \subsubsection*{Complejidad temporal de BFS}
 La complejidad temporal de BFS es $O(\longitud{V} + \longitud{E})$. 
 \subsection*{DFS}
-Depth-First Search o mejor conocido como DFS es un algoritmo de búsqueda para grafos. \\
-Casos de uso: 
+Depth-First Search o mejor conocido como DFS es un algoritmo de búsqueda para grafos. 
 \begin{itemize}
     \item Explora todos los nodos a profundidad, primero verticalmente y luego horizontalmente.
     \item A nivel estructura de datos se implementa con un \textbf{stack} (LIFO).
@@ -467,8 +466,10 @@ La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
     \item El grafo es grande pero poco denso. 
     \item Estás haciendo un análisis estructural.
 \end{itemize}
-\textbf{Importante}: Si un grafo G es conexo basta con ejecutar DFS una única vez (a nivel for porque todos serían vecinos indirectos del primer nodo). Si el grafo G NO es conexo, el DFS se ejecutará más de una vez (porque hay una componente aíslada que no está conectada con el resto del grafo).
-
+\textbf{Importante}: Si un grafo G es conexo basta con ejecutar DFS con un único nodo inicial.
+\[\begin{minipage}[b]{0.8\textwidth}
+    \includegraphics[width=\linewidth]{assets/dfs_py.jpg}
+\end{minipage}\]
 \subsection*{Algoritmos de Búsqueda de Camino Mínimo (Grafos Pesados)}
 \begin{itemize}
     \item Single-Source-Shortest-Paths: Para encontrar el camino mínimo desde un nodo particular a todos los demás nodos. Resuelve \textbf{uno a muchos}.
