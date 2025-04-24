@@ -793,7 +793,10 @@ La idea es que dado un array, se diga si existe algún subconjunto de elementos 
 \end{minipage}\]
 Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor, el árbol siempre va a tener el mismo comportamiento para ese valor. Nótese que acá, en este problema particular tampoco nos interesa qué numeros suman nuestro target, sino, simplemente si hay un camino o no.
 \subsection*{Programación Dinámica Bottom-Up}
-
+\subsection*{Demostraciones por Construcción}
+En grafos, las demostraciones por construcción funcionan exhibiendo un ejemplo de que se cumplen todas las cosas que nos piden y, a veces, se nos piden demostrar unicidad. \\
+En estos casos que nos piden unicidad, normalmente, suelen tener que ver con isomorfismo de grafos, es decir, que quizá existe algún otro grafo pero es un isomorfo del original. \\
+Eso quiere decir que podríamos transformar un grafo a otro a través de una función y teóricamente sería el mismo, solo que cambia el nombre de algún vértice. 
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
