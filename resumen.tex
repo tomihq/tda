@@ -288,7 +288,7 @@ Si agrego una arista cualquiera se forma un ciclo (circuito simple).
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/arbol_agregar_arista.png}
 \end{minipage}\]
-\subsection*{Grafo T}
+\subsection*{Árbol T}
 Es un árbol que cumple con las siguientes propiedades
 \begin{itemize}
     \item Es conexo.
@@ -337,6 +337,10 @@ Dado un grafo $G = (V, E)$, G es bipartito si
 \textbf{Importante}
 \begin{itemize}
     \item Un grafo es bipartito, $V = (V_{1}, V_{2}) \iff$ no tiene ciclos de longitud impar.
+    \begin{itemize}
+        \item Imaginemos que tenemos 3 vértices conectados entre sí. Va a suceder, sí o sí que al menos, dos vértices van a pertenecer al mismo conjunto. Eso ya rompe la bipartición. 
+        \item Para poder encontrar si un grafo es bipartito es usar DFS, ir colocreando desde un nodo raíz con sus vecinos adyacentes de color diferente alternando y si nos encontramos dos colores iguales continuos entonces no es bipartito.
+    \end{itemize}
     \item Un grafo es bipartito $\iff$ todas sus c.c. lo son 
     \item Un grafo no tiene ciclos impares $\iff$ cada una de sus c.c. no tienen ciclos impares.
 \end{itemize}
@@ -441,6 +445,30 @@ Un ejemplo claro de DFS sería buscar la altura de un árbol porque tendrías qu
 \subsubsection*{Complejidad temporal de DFS}
 La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
 \textbf{Good to Know}: Pese a que se implementa recursivamente o iterativamente, la complejidad podría parecer que es $O(\longitud{V} * \longitud{E})$ pero es $O(\longitud{V} + \longitud{E})$ porque cada arista se visita una sola vez.
+\subsubsection*{Casos de uso de DFS}
+\begin{itemize}
+    \item Recorrer todos los vértices.
+    \item Detectar si un grafo es bipartito.
+    \item Detectar si el grafo tiene ciclos. 
+    \item Detectar si un grafo es conexo
+    \begin{itemize}
+        \item Si el grafo es dirigido no es tan sencillo con DFS porque se usan otras cosas.
+        \item Si el grafo es NO dirigido si es sencillo de saberlo. 
+    \end{itemize}
+    \item Hallar componentes conexas.
+    \item Construir un árbol DFS. 
+    \item Buscar si hay un camino entre dos vértices.
+    \item En grafos DAG nos da el orden topológico. Se usa para marcar el post orden y luego se invierte ese orden. 
+\end{itemize}
+¿Cuándo usar DFS? 
+\begin{itemize}
+    \item Cuando querés explorar una componente rápidamente.
+    \item No te interesa la distancia mínima (para eso usá BFS).
+    \item El grafo es grande pero poco denso. 
+    \item Estás haciendo un análisis estructural.
+\end{itemize}
+\textbf{Importante}: Si un grafo G es conexo basta con ejecutar DFS una única vez (a nivel for porque todos serían vecinos indirectos del primer nodo). Si el grafo G NO es conexo, el DFS se ejecutará más de una vez (porque hay una componente aíslada que no está conectada con el resto del grafo).
+
 \subsection*{Algoritmos de Búsqueda de Camino Mínimo (Grafos Pesados)}
 \begin{itemize}
     \item Single-Source-Shortest-Paths: Para encontrar el camino mínimo desde un nodo particular a todos los demás nodos. Resuelve \textbf{uno a muchos}.
@@ -794,8 +822,8 @@ La idea es que dado un array, se diga si existe algún subconjunto de elementos 
 Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor, el árbol siempre va a tener el mismo comportamiento para ese valor. Nótese que acá, en este problema particular tampoco nos interesa qué numeros suman nuestro target, sino, simplemente si hay un camino o no.
 \subsection*{Programación Dinámica Bottom-Up}
 \subsection*{Demostraciones por Construcción}
-En grafos, las demostraciones por construcción funcionan exhibiendo un ejemplo de que se cumplen todas las cosas que nos piden y, a veces, se nos piden demostrar unicidad. \\
-En estos casos que nos piden unicidad, normalmente, suelen tener que ver con isomorfismo de grafos, es decir, que quizá existe algún otro grafo pero es un isomorfo del original. \\
+En grafos, las demostraciones por construcción funcionan exhibiendo un ejemplo de que se cumplen todas las cosas que nos piden y, a veces (si se nos pide) demostramos unicidad. \\
+Si la unicidad es necesaria, normalmente, suelen estar relacionadas con hablar de isomorfismo de grafos, es decir, que quizá existe algún otro grafo pero es un isomorfo del original. \\
 Eso quiere decir que podríamos transformar un grafo a otro a través de una función y teóricamente sería el mismo, solo que cambia el nombre de algún vértice. \\
 Ej.: Demostrar en forma constructiva que para cada n existe un \textbf{único} grafo orientado \textbf{cuyos vértices tienen todos grados de salida distintos}. Un grafo orientado es un grafo donde todos sus aristas tienen una orientación pero existe al menos una arista que no es simétrica. \\
 Si todos los vértices tienen grados de salida distintos significa que si tenemos n vértices, tenemos n-1 grados de salida diferentes. \\
