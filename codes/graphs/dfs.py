@@ -16,4 +16,5 @@ def dfs(start, visited, graph):
     for w in graph[start]:
         if w not in visited:
             dfs(w, visited, graph)
-main(graph);
+
+main(graph)
