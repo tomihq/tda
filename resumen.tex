@@ -796,7 +796,17 @@ Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor
 \subsection*{Demostraciones por Construcción}
 En grafos, las demostraciones por construcción funcionan exhibiendo un ejemplo de que se cumplen todas las cosas que nos piden y, a veces, se nos piden demostrar unicidad. \\
 En estos casos que nos piden unicidad, normalmente, suelen tener que ver con isomorfismo de grafos, es decir, que quizá existe algún otro grafo pero es un isomorfo del original. \\
-Eso quiere decir que podríamos transformar un grafo a otro a través de una función y teóricamente sería el mismo, solo que cambia el nombre de algún vértice. 
+Eso quiere decir que podríamos transformar un grafo a otro a través de una función y teóricamente sería el mismo, solo que cambia el nombre de algún vértice. \\
+Ej.: Demostrar en forma constructiva que para cada n existe un \textbf{único} grafo orientado \textbf{cuyos vértices tienen todos grados de salida distintos}. Un grafo orientado es un grafo donde todos sus aristas tienen una orientación pero existe al menos una arista que no es simétrica. \\
+Si todos los vértices tienen grados de salida distintos significa que si tenemos n vértices, tenemos n-1 grados de salida diferentes. \\
+Necesitamos un vértice con grado de salida 0, otro con grado de salida 1, otro con grado de salida 2, etc, etc. \\
+Entonces la idea es que a mayor n, ese se conecte con todos los \textbf{anteriores}. \\
+Es decir, dout(1) = 0, dout(2) = 1, dout(3) = 2, etc, etc. \\
+Entonces ahora sí hagamos la demostración: Sea G = (V, E) un grafo cuyos vértices tienen grados de salida distintos, y existe al menos una arista que no es simétrica. \\
+Definimos $ V = \{V_{1}, V_{2}, V_{3}, ..., V_{n}\}$ como los vértices de nuestro grafo donde le asignaremos los grados de salida de la siguiente manera: $dout(V_{1}) = 0, dout(V_{2}) = 1, \dots, dout(V_{n}) = n-1$ \\
+Luego, las aristas que tendremos en E serán de la forma $e = (V_{i}, V_{j})$ donde si existe e no existirá $e' = (V_{j}, V_{i})$. De lo contrario, podría suceder que no todos los vértices tengan grados de salida diferentes. \\
+Finalmente, este grafo es único porque existe una única forma de conectar los vértices del grafo para que tengan grados de salida diferentes y esto funciona sin colocar simetrías entre las aristas, y también existe una única forma de asignar n grados diferentes entre n vértices. \\
+Finalmente, si existe otro grafo, es un isomorfo de este, es decir, quizá cambian los nombres de los vértices pero la cantidad de aristas es la misma. \\
 \section*{Anexo}
 \subsection*{Demostraciones de Grafos}
 Normalmente se hace inducción sobre las aristas, aunque en algunos casos, optamos sobre los vértices. \\
