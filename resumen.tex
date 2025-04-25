@@ -484,8 +484,7 @@ La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
 \subsubsection*{Single-Source-Shortest-Paths}
 \subsubsection*{Bellman-Ford (Técnica DP)}
 Es un algoritmo que nos permite \textbf{dado un nodo encontrar el camino mínimo desde ese nodo hasta los demás}. \\
-Este es útil para detectar ciclos negativos en el grafo. \\
-Su complejidad temporal es de $O(V * E)$ y su complejidad espacial es de $O(V + E)$  
+El corazón de Bellman-Ford se llama \textbf{relajación}: Es el proceso de actualizar la distancia conocida a un nodo si encontramos un camino más corto hacia él. 
 \subsubsection*{Requisitos de uso de Bellman-Ford}
 \begin{itemize}
     \item \textbf{Grafo ponderado}
@@ -496,7 +495,11 @@ Su complejidad temporal es de $O(V * E)$ y su complejidad espacial es de $O(V + 
 \begin{itemize}
     \item Si el grafo es grande. 
     \item \textbf{Si necesitás el camino más corto desde un nodo particular a todos los demás nodos}. Resuelve \textbf{uno a muchos}.
-    \item Si tenés que detectar ciclos negativos en el grafo.
+    \item Si necesitás detectar ciclos negativos en el grafo.
+    \begin{itemize}
+        \item Después de hacer la relajación V - 1 veces (V = cantidad de nodos), hacés una pasada más por todas las aristas. Si todavía podés relajar alguna arista, entonces hay un ciclo negativo accesible desde el nodo fuente.
+        \item En un grafo sin ciclos negativos, después de V - 1 iteraciones ya tenés los caminos más cortos. Si podés seguir mejorando (relajando), es porque estás dando vueltas en un ciclo que suma negativo.
+    \end{itemize}
     \item Si tenés pesos negativos en las aristas.
 \end{itemize}
 \subsubsection*{Orden de operaciones}
@@ -505,6 +508,11 @@ Su complejidad temporal es de $O(V * E)$ y su complejidad espacial es de $O(V + 
     \item Tomamos los vecinos del primer nodo, y guardamos el peso que hay entre el nodo y sus vecinos.
     \item Tomamos uno de los vecinos del nodo inicial y calculamos la distancia a todos sus nodos vecinos.
     \item Así sucesivamente, vamos a encontrar el camino más corto (con menos peso) de un nodo a todos los demás nodos.
+\end{itemize}
+\subsubsection*{Complejidad de Bellman-Ford}
+\begin{itemize}
+    \item Temporal: O(V * E)
+    \item Espacial: O(V + E)
 \end{itemize}
 Bocetos
 \[\begin{minipage}[b]{0.8\textwidth}
