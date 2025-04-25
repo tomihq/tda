@@ -313,7 +313,11 @@ Un grafo pesado G tiene un ciclo negativo si la \textbf{suma de los pesos de las
 Entonces, $ A \rightarrow B \rightarrow C \rightarrow A$ es un ciclo negativo.
 \subsection*{Grafo Acíclico Dirigido (DAG)}
 Un Grafo Acíclico Dirigido es un grafo dirigido que no tiene ciclos. Es decir, no existe ningún vértice que es capaz de empezar y terminar un recorrido. \\
-Ej.: Una Single Linked List es un caso particular de un DAG.
+Ej.: Una Single Linked List es un caso particular de un DAG. \\
+Script de Python para ver si un grafo dirigido es acíclico 
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/acyclic_graph_py.jpg}
+\end{minipage}\]
 \subsection*{Orden Topológico}
 \begin{itemize}
     \item Es una lista de nodos ordenados de forma que, si existe una arista $u \rightarrow v$, entonces $u$ aparece antes que $v$ en la lista.
@@ -514,25 +518,22 @@ El corazón de Bellman-Ford se llama \textbf{relajación}: Es el proceso de actu
     \item Temporal: O(V * E)
     \item Espacial: O(V + E)
 \end{itemize}
-Bocetos
+Código y bocetos 
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/bellman_ford_py.png}
+\end{minipage}\]
+\begin{itemize}
+    \item Colocamos todas las distancias como infinitas.
+    \item Colocamos la distancia del nodo fuente a si mismo como cero.
+    \item Relajamos V-1 veces en el primer for. El segundo for, toma un nodo de todos y con el tercer for vemos todas las aristas salientes de ese nodo. Así V-1 veces hasta que no se puedan relajar más aristas.
+\end{itemize}
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/bellman-ford-1.jpg}
 \end{minipage}\]
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/bellman-ford-2.jpg}
 \end{minipage}\]
-\subsubsection*{Algoritmo}
-\begin{lstlisting}
-    for (int i = 1; i <= n; i++) distance[i] = INF;
-    distance[x] = 0;
-    for (int i = 1; i <= n-1; i++) {
-        for (auto e : edges) {
-            int a, b, w;
-            tie(a, b, w) = e;
-            distance[b] = min(distance[b], distance[a]+w);
-        }
-    }
-\end{lstlisting}
+
 \subsubsection*{All-Pairs-Shortest-Paths}
 \textbf{Good to Know}: Es posible conseguir el mismo resultado haciendo $\longitud{V}$ operaciones pero con algoritmos de Single-Source-Shortest-Paths. ¿Vale la pena?, depende. Véase \hyperref[subsec:tradeoff_busqueda]{\textbf{Tradeoff entre Algoritmos de Búsqueda de Camino Mínimo}}
 \subsubsection*{Floyd-Warshall (Técnica DP)}

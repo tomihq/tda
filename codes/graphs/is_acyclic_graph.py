@@ -6,8 +6,8 @@
         2. Tengo que hacer un for para recorrer todas las ramas del grafo, no solo con un nodo inicial.
         3. Cada nodo va a estar "en progreso" cuando entra a dfs, y vamos a tener dos casos.
             a. Vamos a recorrer todos los vecinos llamados w. 
-                Si llegue a un vecino que ya estaba en progreso entonces hay un ciclo.
-                Si no está visitado hago dfs y si termina devuelvo true. 
+                Si llegue a un vecino que ya estaba en progreso en la misma rama entonces hay un ciclo.
+                Si el vecino no fue visitado hago dfs, si llegase a dar true entonces hay un ciclo adentro de ese llamado.
         4. Cuando salga del for ponemos que el in progress ahora es false, y que ese nodo ya fue visitado.
 '''
 graph = [[1, 3], [2], [1], [0], [5], [4]]
