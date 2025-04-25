@@ -505,6 +505,7 @@ El corazón de Bellman-Ford se llama \textbf{relajación}: Es el proceso de actu
         \item En un grafo sin ciclos negativos, después de V - 1 iteraciones ya tenés los caminos más cortos. Si podés seguir mejorando (relajando), es porque estás dando vueltas en un ciclo que suma negativo.
     \end{itemize}
     \item Si tenés pesos negativos en las aristas.
+    \item Good to Know: Si tu grafo G no tiene ciclos negativos y necesitás calcular el camino máximo desde un nodo a todos los demás podés multiplicar los pesos de las aristas por -1, ejecutar Bellman Ford, y al resultado multiplicar todo por -1 de vuelta.
 \end{itemize}
 \subsubsection*{Orden de operaciones}
 \begin{itemize}
@@ -533,7 +534,6 @@ Código y bocetos
 \[\begin{minipage}[b]{0.8\textwidth}
     \includegraphics[width=\linewidth]{assets/bellman-ford-2.jpg}
 \end{minipage}\]
-
 \subsubsection*{All-Pairs-Shortest-Paths}
 \textbf{Good to Know}: Es posible conseguir el mismo resultado haciendo $\longitud{V}$ operaciones pero con algoritmos de Single-Source-Shortest-Paths. ¿Vale la pena?, depende. Véase \hyperref[subsec:tradeoff_busqueda]{\textbf{Tradeoff entre Algoritmos de Búsqueda de Camino Mínimo}}
 \subsubsection*{Floyd-Warshall (Técnica DP)}
