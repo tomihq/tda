@@ -449,7 +449,7 @@ Un ejemplo claro de DFS sería buscar la altura de un árbol porque tendrías qu
 \textbf{Good to Know $(*^{2})$}: Si usamos DFS en un Grafo G pesado \textbf{NO NOS GARANTIZA} que sea el camino mínimo, porque DFS calcula el camino con menor cantidad de aristas, y no con menor peso. 
 \subsubsection*{Complejidad temporal de DFS}
 La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
-\textbf{Good to Know}: Pese a que se implementa recursivamente o iterativamente, la complejidad podría parecer que es $O(\longitud{V} * \longitud{E})$ pero es $O(\longitud{V} + \longitud{E})$ porque cada arista se visita una sola vez.
+\textbf{Good to Know}: Pese a que se implementa recursivamente o iterativamente, la complejidad podría parecer que es $O(\longitud{V} * \longitud{E})$ pero es $O(\longitud{V} + \longitud{E})$ porque cada arista se visita una sola vez. \\
 \textbf{Good to Know 2}: A veces, la complejidad de DFS y BFS se presentan como $O(\longitud{E})$, esto porque además de almacenar los nodos visitados y visitar los nodos una vez, en grafos densos (con más aristas que nodos), el costo es $O(\longitud{E})$ porque se sabe que por mucho se le ganan las aristas a los nodos.
 \subsubsection*{Casos de uso de DFS}
 \begin{itemize}
@@ -465,6 +465,9 @@ La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
     \item Construir un árbol DFS. 
     \item Buscar si hay un camino entre dos vértices.
     \item En grafos DAG nos da el orden topológico. Se usa para marcar el post orden y luego se invierte ese orden. 
+    \begin{itemize}
+        \item Un ejemplo bastante claro es cuando necesitamos encontrar el costo minimo de un DAG desde un nodo hasta otro. En vez de hacer Bellman-Ford que es O(V*E) nos conviene hacer Toposort y hacer el cálculo manual de la distancia minima. ¿Por qué? Porque al haber hecho el toposort tenemos la certeza de en qué orden tenemos que ir buscando el camino, y cuando llegamos al 2, sabemos que del 1 al 2 ya el camino es mínimo y el orden es correcto. La complejidad termina siendo O(N+E).
+    \end{itemize}
 \end{itemize}
 ¿Cuándo usar DFS? 
 \begin{itemize}
@@ -640,19 +643,43 @@ Esto es porque la arista $(\text{Pow}, \text{Main})$ obliga a que \textbf{Pow} s
 \textbf{¿Para qué me sirve esto?} Para asegurarnos de que no hay \textbf{dependencias cíclicas} y que todas las dependencias se resuelven en el orden correcto, manteniendo la integridad de las relaciones entre las entidades. \\
 \textbf{Implementación con DFS}: 
 \begin{lstlisting}
-    topoSort(graph G)
-        for each vertex u in V[G] do
-            state[u] = UNVISITED
-            parent[u] = NULL
-        end for
-        time = 0
-        for each vertex u in V[G] do
-            if state[u] = UNVISITED then
-                TOP_VISIT(u)
-            end if
-        end for
-    end function
+    def topological_sort(graph):
+    """
+    Realiza el ordenamiento topológico de un grafo acíclico dirigido (DAG).
+  
+    Args:
+    graph: Un diccionario que representa el grafo donde las claves son los
+    nodos y los valores son listas de nodos adyacentes (vecinos).
+  
+    Returns:
+    Una lista con los nodos en orden topológico.
+    """
+    visited = set()  # Conjunto para rastrear nodos visitados
+    stack = []  # Pila para almacenar el orden topológico
+  
+    def dfs(node):
+    """
+    Función auxiliar para realizar la búsqueda en profundidad (DFS).
+    """
+    visited.add(node)  # Marcar el nodo como visitado
+  
+    # Visitar todos los vecinos del nodo actual
+    for neighbor in graph.get(node, []):
+    if neighbor not in visited:
+    dfs(neighbor)
+  
+    # Agregar el nodo actual a la pila después de visitar a todos sus vecinos
+    stack.append(node)
+  
+    # Para cada nodo en el grafo, iniciar un DFS si no ha sido visitado aún
+    for node in graph:
+    if node not in visited:
+    dfs(node)
+  
+    # Invertir la pila para obtener el orden topológico correcto
+    return stack[::-1]
 \end{lstlisting}
+\textbf{Importante}: El reverse es necesario porque al usar una pila, el primer elemento en el orden topológico sería el ultimo pero nosotros queremos resolver desde el primero hacia el último, no al revés. La idea es obtener el orden topológico correcto, por eso hacemos el reverse. \\
 \textbf{Good to Know}: Si existen varios nodos que no tienen dependencias entre sí, hay más de una forma válida de realizar el orden topológico. En estos casos, el orden en que aparecen esos nodos no tiene importancia, y puedes elegir su disposición según tus preferencias al implementar el algoritmo. El orden topológico solo se asegura de que los nodos con dependencias se ubiquen en el orden correcto, pero no especifica el orden de los nodos independientes. \\
 La complejidad es la misma que DFS, $\theta(\longitud{V} + \longitud{E})$
 \section*{Fuerza Bruta}
