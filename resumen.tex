@@ -358,7 +358,7 @@ Dados  $G = (V, E)$ y $G' = (V', E')$. $G$ y $G'$ son isomorfos si existe una fu
 \[(u,v) \in E \iff (f(u), f(v)) \in E'\]
 Es decir, \textbf{si parto desde E y agarro el par que está en una arista, puedo poner cada componente en una función f y me lo transforma en una arista que está en E'}. \\
 Lo mismo con el caso opuesto. \\
-\textbf{Good to Know}: En nuestro caso, si G y G' son isomorfos los vamos a notar como $G = G'$ porque son lo mismo pero cambian la forma en que se nombran los nodos y el orden de las aristas.
+\textbf{Good to Know}: En nuestro caso, si G y G' \ son isomorfos los vamos a notar como $G = G'$ porque son lo mismo pero cambian la forma en que se nombran los nodos y el orden de las aristas.
 \subsubsection*{Propiedades}
 Si dos grafos $G = (V,E)$ y $G' = (V', E')$ son isomorfos entonces
 \begin{itemize}
@@ -372,7 +372,7 @@ Si dos grafos $G = (V,E)$ y $G' = (V', E')$ son isomorfos entonces
     \includegraphics[width=\linewidth]{assets/isomorfos.png}
 \end{minipage}\]
 \subsection*{Representación de grafos}
-\textbf{Good to Know}: Si busca uso de grafos en la práctica, y cómo representarlos véase \hyperref[subsec:representacion_grafos_practica]{\textbf{anexo}}.
+\textbf{Good to Know}: Si busca uso de grafos en la práctica, y cómo representarlos véase \hyperref[subsec:representacion_grafos_practica]{\textbf{anexo}}. \\
 \textbf{Good to Know}: En las diapositivas se usa la $d$ para representar tanto como el grado de un vértice o la distancia entre dos vértices. Acá, optamos por usar $deg$ para el grado y $d$ para distancia entre dos vértices.
 \subsubsection*{Lista de Adyacencia}
 Es la más común y la más eficiente. \\
@@ -450,6 +450,7 @@ Un ejemplo claro de DFS sería buscar la altura de un árbol porque tendrías qu
 \subsubsection*{Complejidad temporal de DFS}
 La complejidad temporal de DFS es $O(\longitud{V} + \longitud{E})$. \\
 \textbf{Good to Know}: Pese a que se implementa recursivamente o iterativamente, la complejidad podría parecer que es $O(\longitud{V} * \longitud{E})$ pero es $O(\longitud{V} + \longitud{E})$ porque cada arista se visita una sola vez.
+\textbf{Good to Know 2}: A veces, la complejidad de DFS y BFS se presentan como $O(\longitud{E})$, esto porque además de almacenar los nodos visitados y visitar los nodos una vez, en grafos densos (con más aristas que nodos), el costo es $O(\longitud{E})$ porque se sabe que por mucho se le ganan las aristas a los nodos.
 \subsubsection*{Casos de uso de DFS}
 \begin{itemize}
     \item Recorrer todos los vértices.
@@ -988,7 +989,7 @@ Como esto se hace varias veces, sería algo de O(cantVecinosNodo * V) = O(V). \\
     \textbf{Tiempo para Buscar Camino}        & O(N + E) (DFS/BFS)                   & O(N²)                              \\ \hline
     \textbf{Espacio Temporal (Búsqueda)}      & O(N)                                 & O(N)                               \\ \hline
     \textbf{Acceder a la existencia de una Arista} & O(k) (conjunto de vecinos)    & O(1)                               \\ \hline
-    \textbf{Listar vecinos} & O(m)    & O($n^2$)   \\ \hline
+    \textbf{Listar vecinos} & O(m) si el grafo es denso o O(n+m) si no sabés    & O($n^2$)   \\ \hline
     \end{tabular}
     \caption{Comparativa de complejidad temporal y espacial de las representaciones de grafos.}
 \end{table}
