@@ -863,6 +863,24 @@ Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor
 \subsection*{Programación Dinámica Bottom-Up}
 \section*{Programación Greedy}
 Se basa en solucionar problemas de optimización tomando la mejor decisión inmediata (basado en una heurística local,  aka lo que le parezca mejor en el momento). No recalcula decisiones pasadas, una vez que tomó una decisión, no vuelve a preguntarse lo mismo nunca más.
+
+\section*{Dijkstra (Single-Source-Shortest-Paths)}
+Solo funciona para grafos pesados; Al igual que Bellman-Ford trabaja con relajaciones. No funciona con aristas de peso negativo. Asume que son positivos.
+\begin{itemize}
+    \item 1. Selecciona un nodo, seteamos la distancia hacia él mismo como 0 y con sus vecinos. Los no alcanzables desde él son $\infty$.
+    \item 2. Selecciona el vecino a la cual tiene menor distancia y realiza la relajación. 
+    \item 3. Repite el paso 2 hasta que todos los nodos hayan sido tomados.
+\end{itemize}
+Dijkstra es Greedy porque pasa una única vez por cada nodo. En Bellman-Ford se hacen V-1 relajaciones pasando por todos los nodos en cada iteración.
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/dijkstra_1.jpg}
+\end{minipage}\]
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/dijkstra_2.jpg}
+\end{minipage}\]
+\[\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\linewidth]{assets/dijkstra_3.jpg}
+\end{minipage}\]
 \subsection*{Demostraciones por Construcción}
 En grafos, las demostraciones por construcción funcionan exhibiendo un ejemplo de que se cumplen todas las cosas que nos piden y, a veces (si se nos pide) demostramos unicidad. \\
 Si la unicidad es necesaria, normalmente, suelen estar relacionadas con hablar de isomorfismo de grafos, es decir, que quizá existe algún otro grafo pero es un isomorfo del original. \\
