@@ -731,7 +731,7 @@ Consideramos el costo de procesar cada nodo. Cada nodo aparece cada vez que hace
     \end{minipage}\]
 \end{itemize}
 \section*{Programación Dinámica (DP)}
-Se basa en solucionar y memorizar subproblemas que se repetirán para ahorrar tiempo. \\
+Se basa en solucionar problemas de optimización memorizando resultados de subproblemas que se repetirán para ahorrar tiempo. Es una estrategia para resolver problemas de optimización (donde buscamos un máximo o un mínimo). \\
 Esa \textbf{superposición de problemas} es que estamos llamando usando algo que \textbf{ya resolvimos anteriormente}, entonces, para evitar calcular todo nuevamente, usamos la información almacenada en memoria. \\
 Es \textbf{bastante común} usar este tipo de estrategias para afrontar problemas con matrices, o casos recursivos para cosas altamente costosas de calcular. \\
 \textbf{Importante}: ¿Cuándo hay veces que la entrada no es exactamente igual pero vale la memorización para ese subproblema? \\
@@ -861,6 +861,8 @@ La idea es que dado un array, se diga si existe algún subconjunto de elementos 
 \end{minipage}\]
 Algo que siempre hay que tener en cuenta es que, si llegamos a determinado valor, el árbol siempre va a tener el mismo comportamiento para ese valor. Nótese que acá, en este problema particular tampoco nos interesa qué numeros suman nuestro target, sino, simplemente si hay un camino o no.
 \subsection*{Programación Dinámica Bottom-Up}
+\section*{Programación Greedy}
+Se basa en solucionar problemas de optimización tomando la mejor decisión inmediata (basado en una heurística local,  aka lo que le parezca mejor en el momento). No recalcula decisiones pasadas, una vez que tomó una decisión, no vuelve a preguntarse lo mismo nunca más.
 \subsection*{Demostraciones por Construcción}
 En grafos, las demostraciones por construcción funcionan exhibiendo un ejemplo de que se cumplen todas las cosas que nos piden y, a veces (si se nos pide) demostramos unicidad. \\
 Si la unicidad es necesaria, normalmente, suelen estar relacionadas con hablar de isomorfismo de grafos, es decir, que quizá existe algún otro grafo pero es un isomorfo del original. \\
